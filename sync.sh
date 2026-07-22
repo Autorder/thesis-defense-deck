@@ -10,7 +10,7 @@ MSG="${1:-Update defense deck}"
 [ -d "$SRC" ] || { echo "source folder not found: $SRC"; exit 1; }
 
 rsync -a --delete \
-  --exclude '_build/' --exclude '.git/' --exclude '*.bak*' --exclude '*.tex' \
+  --exclude '_build/' --exclude '.git/' --exclude '*bak*' --exclude '*.tex' \
   --exclude '.DS_Store' --exclude 'SPEC.md' \
   --exclude 'sync.sh' --exclude 'robots.txt' --exclude '.nojekyll' \
   --exclude '.github/' \

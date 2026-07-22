@@ -145,12 +145,92 @@
   #help .swatch.grey{background:#141b18;border:1px solid var(--line)}
   #help .hkeys{line-height:2.4}
 
+
+  /* annotated replicas of the real UI — live CSS, never a screenshot to go stale */
+  #help .fig{margin:14px 0 6px;padding:14px 12px;background:#0b100e;border:1px solid var(--line);
+    border-radius:12px;overflow-x:auto;direction:ltr}
+  #help .n{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;
+    border-radius:50%;background:var(--amber);color:#0e1311;font-size:.72rem;font-weight:800;
+    font-style:normal;flex:none}
+  #help .ar{color:var(--amber);font-size:.85rem;line-height:1;font-style:normal}
+  #help .col{display:flex;flex-direction:column;align-items:center;gap:2px}
+  #help .col.grow{flex:1 1 auto;min-width:0}
+  #help .col .mb,#help .col .mpos,#help .col .mrole,#help .col .mttl{margin-top:1px}
+  #help .pair{display:flex;gap:4px}
+  #help .mockbar{display:flex;align-items:center;gap:9px;background:rgba(10,14,12,.92);
+    border-top:1px solid var(--line);border-radius:8px;padding:8px 11px;white-space:nowrap}
+  #help .mockbar.lbl{align-items:flex-end;gap:12px}
+  #help .mockbar.two{margin-top:0;border-top:0;padding-top:4px}
+  #help .mb{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:3px 9px;
+    font-size:.8rem;font-weight:700;color:var(--ink)}
+  #help .mb.on{color:var(--amber);border-color:var(--amber);background:rgba(232,163,16,.14)}
+  #help .mb.i{color:var(--mut)}
+  #help .mpos{font-size:.78rem;color:var(--mut);font-weight:700}
+  #help .mrole{font-size:.62rem;letter-spacing:.08em;font-weight:800;color:#0e1311;
+    background:var(--amber);border-radius:20px;padding:3px 9px}
+  #help .mttl{font-size:.78rem;font-weight:700;color:var(--ink)}
+  #help .mkeys{font-size:.66rem;color:var(--mut);margin-inline-start:auto}
+  #help .mjump{display:inline-flex;gap:5px;background:#1b2521;border:1px solid var(--line);
+    border-inline-start:3px solid var(--teal);border-radius:6px;padding:3px 9px;font-size:.75rem;
+    font-weight:700;color:var(--ink)}
+  #help .mjump b{color:var(--amber);font-size:.68rem}
+  #help .mjump.fade{opacity:.35}
+  #help .cal{display:flex;flex-direction:column;align-items:flex-end;gap:1px;padding-inline-end:6px}
+  #help .cal.up{flex-direction:column-reverse;align-items:flex-start;padding-inline-start:14px}
+  #help .cap{font-size:.95rem;color:#c2d2ca;line-height:1.75;margin:8px 2px 0}
+  #help .cap b{color:var(--amber)}
+  #help .pill.on{color:var(--amber);border-color:var(--amber);background:rgba(232,163,16,.14)}
+  #help .htab td:first-child{white-space:normal}
+  #help .htab .n{margin-inline-end:6px;vertical-align:1px}
+
+  #help .mockmenu{position:relative;display:grid;grid-template-columns:1fr 190px;gap:0;
+    background:rgba(10,14,12,.97);border:1px solid var(--line);border-radius:8px;overflow:hidden;
+    direction:rtl;font-size:.74rem}
+  #help .mm-r2{border-inline-start:1px solid var(--line)}
+  #help .mm-h{padding:7px 11px 4px;font-size:.58rem;letter-spacing:.12em;color:var(--mut);font-weight:800}
+  #help .mockmenu .mm-r{display:flex;gap:9px;padding:5px 11px;color:var(--ink);align-items:center}
+  #help .mockmenu .mm-r span{color:var(--mut);width:16px;flex:none}
+  #help .mockmenu .mm-r b{margin-inline-start:auto;color:var(--mut);font-weight:700}
+  #help .mockmenu .mm-r.cur{background:#1b2521}
+  #help .mockmenu .mm-r.on{background:#1b2521;border-inline-start:3px solid var(--amber);color:#8fd6bd}
+  #help .mockmenu .p1{position:absolute;top:6px;inset-inline-start:40%}
+  #help .mockmenu .p2{position:absolute;top:6px;inset-inline-end:8px}
+
+  #help .mockslide{position:relative;height:132px;background:#f4f2ee;border-radius:8px;
+    border:1px solid #dcd8d0;direction:ltr}
+  #help .mockslide::before{content:'';position:absolute;left:22%;top:0;bottom:0;width:1px;
+    background:#cfcac1}
+  #help .mz{position:absolute;top:50%;transform:translateY(-50%);width:42px;height:42px;
+    border-radius:50%;background:rgba(255,255,255,.9);box-shadow:0 2px 10px rgba(0,0,0,.18);
+    display:flex;align-items:center;justify-content:center;color:#12514A;font-size:1.5rem;
+    font-weight:700}
+  #help .mz.left{left:10px} #help .mz.right{right:10px}
+  #help .mzlab{position:absolute;bottom:9px;font-size:.68rem;font-weight:700;color:#5b6b62;
+    line-height:1.35;text-align:center}
+  #help .mzlab.l{left:0;width:22%} #help .mzlab.r{left:22%;right:0}
+  #help .mocksc{position:relative;background:var(--panel);border:1px solid var(--line);
+    border-radius:10px;padding:9px 12px;direction:rtl;font-size:.78rem}
+  #help .ms-h{color:#cfe3db;font-weight:800;padding-bottom:7px}
+  #help .ms-h em{color:var(--mut);font-size:.66rem;font-style:normal;float:left}
+  #help .ms-w{background:#3a1f1d;border:1px solid #5a2f2c;border-inline-start:3px solid var(--red);
+    border-radius:6px;padding:6px 10px;color:#f3dcd9;margin-bottom:6px}
+  #help .ms-n{background:#141b18;border:1px solid var(--line);border-radius:6px;padding:5px 10px;
+    color:var(--mut);font-weight:700;margin-bottom:8px}
+  #help .ms-l{color:#e6efea;padding:2px 0;font-size:.86rem}
+  #help .mocksc .q1{position:absolute;top:4px;inset-inline-start:8px}
+  #help .mocksc .q2{position:absolute;top:32px;inset-inline-start:8px}
+  #help .mocksc .q3{position:absolute;top:66px;inset-inline-start:8px}
+
   /* ---------- slide menu ---------- */
   /* two panes: the decks on the right, the slides of the chosen deck on the left */
   #menu{position:fixed;left:0;right:0;bottom:43px;z-index:45;display:none;
     grid-template-columns:1fr 320px;direction:rtl;height:56vh;
     background:rgba(10,14,12,.975);border-top:1px solid var(--line);backdrop-filter:blur(10px)}
   body.menuopen #menu{display:grid}
+  #menux{position:absolute;top:8px;inset-inline-end:12px;z-index:3;background:var(--panel);
+    border:1px solid var(--line);border-radius:8px;color:var(--mut);font-size:1.3rem;line-height:1;
+    padding:3px 10px 5px;cursor:pointer;font-family:inherit;}
+  #menux:hover{color:#fff;border-color:var(--teal)}
   #mdecks{grid-column:2;border-inline-start:1px solid var(--line);overflow-y:auto}
   #mslides{grid-column:1;overflow-y:auto}
   #menu .grp{padding:12px 18px 6px;font-size:.7rem;letter-spacing:.13em;text-transform:uppercase;
@@ -187,56 +267,122 @@
 </div>
 
 
-<div id="menu"><div id="mslides"></div><div id="mdecks"></div></div>
+<div id="menu"><button id="menux" title="סגירה (Esc)">&times;</button><div id="mslides"></div><div id="mdecks"></div></div>
 
 <!-- how to drive this thing. Written for a reviewer, not for the presenter. -->
 <div id="help"><div class="hcard">
-  <button id="helpx" title="&#1505;&#1490;&#1497;&#1512;&#1492; (Esc)">&times;</button>
-  <h2>&#1488;&#1497;&#1498; &#1500;&#1492;&#1513;&#1514;&#1502;&#1513; &#1489;&#1502;&#1510;&#1490;&#1514;</h2>
-  <p class="hlead">&#1502;&#1510;&#1490;&#1514; &#1492;&#1492;&#1490;&#1504;&#1492; &#1489;&#1491;&#1508;&#1491;&#1508;&#1503; &#1489;&#1500;&#1489;&#1491;. &#1488;&#1497;&#1503; &#1502;&#1492; &#1500;&#1492;&#1514;&#1511;&#1497;&#1503; &#1493;&#1488;&#1497;&#1503; &#1489;&#1502;&#1492; &#1500;&#1508;&#1514;&#1493;&#1495; &#1488;&#1493;&#1514;&#1492;.</p>
+  <button id="helpx" title="סגירה (Esc)">&times;</button>
+  <h2>איך להשתמש במצגת</h2>
+  <p class="hlead">רצה בדפדפן. אין מה להתקין ואין במה לפתוח אותה.</p>
 
-  <h3>&#1513;&#1504;&#1497; &#1502;&#1510;&#1489;&#1497;&#1501;</h3>
+  <h3>שני מצבים — ושניהם אותו קישור</h3>
+  <div class="fig">
+    <div class="cal"><span class="n">1</span><span class="ar">&darr;</span></div>
+    <div class="mockbar one">
+      <span class="mb">&#9776;</span><span class="mb">&lsaquo;</span><span class="mb">&rsaquo;</span>
+      <span class="mpos">7 / 27</span>
+      <span class="mrole">METHOD &middot; THE SIMULATION</span>
+      <span class="mttl">What actually runs, hour by hour</span>
+      <span class="mkeys">&larr; &rarr; &middot; F fullscreen</span>
+      <span class="mb i">i</span><span class="mb on">script &#10003;</span>
+    </div>
+  </div>
+  <p class="cap"><b>1</b> — הכפתור הזה מחליף בין המצבים. <span class="pill on">script &#10003;</span> בענבר,
+  ועוד קו ענבר דק בראש הבר, פירושם <b>שהסקריפט מוצג</b>. אפור <span class="pill">script</span> — שקפים בלבד,
+  וזו הגרסה שתוצג בבחינה.</p>
+
+  <h3>לנווט מהשקף עצמו</h3>
+  <div class="fig">
+    <div class="mockslide">
+      <span class="mz left">&lsaquo;</span>
+      <span class="mz right">&rsaquo;</span>
+      <span class="mzlab l">22% משמאל<br>שקף אחורה</span>
+      <span class="mzlab r">שאר השטח<br>שקף קדימה</span>
+    </div>
+  </div>
+  <p class="cap">העכבר על השקף מגלה עיגול עם חץ. <b>אין צורך לכוון לכפתורים בבר</b> — לחיצה בכל
+  מקום על השקף מקדמת, ולחיצה ברצועה השמאלית חוזרת אחורה. זו הדרך המהירה לדפדף.</p>
+
+  <h3>הבר התחתון — שורה ראשונה</h3>
+  <div class="fig">
+    <div class="mockbar one lbl">
+      <span class="col"><i class="n">1</i><i class="ar">&darr;</i><span class="mb">&#9776;</span></span>
+      <span class="col"><i class="n">2</i><i class="ar">&darr;</i><span class="pair"><span class="mb">&lsaquo;</span><span class="mb">&rsaquo;</span></span></span>
+      <span class="col"><i class="n">3</i><i class="ar">&darr;</i><span class="mpos">7 / 27</span></span>
+      <span class="col"><i class="n">4</i><i class="ar">&darr;</i><span class="mrole">METHOD &middot; THE SIMULATION</span></span>
+      <span class="col grow"><i class="n">5</i><i class="ar">&darr;</i><span class="mttl">What actually runs, hour by hour</span></span>
+      <span class="col"><i class="n">6</i><i class="ar">&darr;</i><span class="mb i">i</span></span>
+    </div>
+  </div>
   <table class="htab"><tbody>
-    <tr><td><b>&#1506;&#1501; &#1505;&#1511;&#1512;&#1497;&#1508;&#1496;</b></td>
-        <td>&#1502;&#1514;&#1495;&#1514; &#1499;&#1500; &#1513;&#1511;&#1507; &#1502;&#1493;&#1508;&#1497;&#1506; &#1502;&#1492; &#1513;&#1488;&#1489;&#1497; &#1502;&#1514;&#1499;&#1493;&#1493;&#1503; &#1500;&#1493;&#1502;&#1512;, &#1513;&#1493;&#1512;&#1492; &#1488;&#1495;&#1512; &#1513;&#1493;&#1512;&#1492;. <b>&#1494;&#1493; &#1492;&#1490;&#1512;&#1505;&#1492; &#1513;&#1504;&#1513;&#1500;&#1495;&#1492; &#1500;&#1489;&#1497;&#1511;&#1493;&#1512;&#1514;.</b></td></tr>
-    <tr><td><b>&#1500;&#1500;&#1488; &#1505;&#1511;&#1512;&#1497;&#1508;&#1496;</b></td>
-        <td>&#1513;&#1511;&#1508;&#1497;&#1501; &#1489;&#1500;&#1489;&#1491;, &#1502;&#1505;&#1498; &#1502;&#1500;&#1488;. &#1494;&#1493; &#1492;&#1490;&#1512;&#1505;&#1492; &#1513;&#1514;&#1493;&#1510;&#1490; &#1489;&#1489;&#1495;&#1497;&#1504;&#1492; &#1506;&#1510;&#1502;&#1492;.</td></tr>
+    <tr><td><i class="n">1</i> תפריט</td><td>כל השקפים וכל המצגות, בשני חלונות</td></tr>
+    <tr><td><i class="n">2</i> ניווט</td><td>שקף אחורה / קדימה. אפשר גם ללחוץ על השקף עצמו — <b>צד שמאל חוזר, שאר השטח מתקדם</b></td></tr>
+    <tr><td><i class="n">3</i> מיקום</td><td>השקף הנוכחי מתוך 27</td></tr>
+    <tr><td><i class="n">4</i> תפקיד</td><td>על איזו שאלת מחקר השקף עונה, או באיזה חלק הוא נמצא</td></tr>
+    <tr><td><i class="n">5</i> שם השקף</td><td>אותה כותרת שמופיעה על השקף</td></tr>
+    <tr><td><i class="n">6</i> הדף הזה</td><td>או מקש <span class="key">?</span></td></tr>
   </tbody></table>
-  <p class="hnote">&#1492;&#1499;&#1508;&#1514;&#1493;&#1512; <b>script</b> &#1489;&#1508;&#1497;&#1504;&#1514; &#1492;&#1489;&#1512; &#1502;&#1495;&#1500;&#1497;&#1507; &#1489;&#1497;&#1503; &#1492;&#1513;&#1504;&#1497;&#1497;&#1501;. &#1499;&#1513;&#1492;&#1493;&#1488; <span class="pill">script &#10003;</span> &#1489;&#1499;&#1514;&#1493;&#1501; &#1506;&#1504;&#1489;&#1512; &#1493;&#1497;&#1513; &#1511;&#1493; &#1506;&#1504;&#1489;&#1512; &#1489;&#1512;&#1488;&#1513; &#1492;&#1489;&#1512; &#8212; &#1492;&#1505;&#1511;&#1512;&#1497;&#1508;&#1496; &#1502;&#1493;&#1510;&#1490;.</p>
 
-  <h3>&#1492;&#1489;&#1512; &#1492;&#1514;&#1495;&#1514;&#1493;&#1503; &#8212; &#1513;&#1514;&#1497; &#1513;&#1493;&#1512;&#1493;&#1514;</h3>
+  <h3>הבר התחתון — שורה שנייה</h3>
+  <div class="fig">
+    <div class="mockbar two">
+      <span class="mjump"><b>A</b> Load profile</span><span class="mjump"><b>B</b> Parasitic</span>
+      <span class="mjump"><b>C</b> Validation</span><span class="mjump"><b>D</b> PV model</span>
+      <span class="mjump"><b>E</b> Degradation</span><span class="mjump fade"><b>F</b> Economics</span>
+    </div>
+    <div class="cal up"><span class="ar">&uarr;</span><span class="n">7</span></div>
+  </div>
+  <p class="cap"><b>7</b> — מצגות הרחבה <b>לשקף שעל המסך כרגע</b>, ולכן הן מתחלפות משקף לשקף.
+  אם יש יותר ממה שנכנס — הרצועה נגללת הצידה. <b>הן אינן חלק מההרצאה</b>: נפתחות רק אם בוחן ישאל,
+  ומהן חוזרים בכפתור <span class="pill">main deck</span>.</p>
+
+  <h3>התפריט</h3>
+  <div class="fig">
+    <div class="mockmenu">
+      <div class="mm-l"><div class="mm-h">THE PRESENTATION &middot; 27 SLIDES</div>
+        <div class="mm-r"><span>1</span> Sizing Battery Storage&hellip;</div>
+        <div class="mm-r"><span>2</span> What we&rsquo;ll cover today</div>
+        <div class="mm-r cur"><span>7</span> What actually runs, hour by hour</div>
+        <div class="mm-r"><span>8</span> One run, and what it returns</div></div>
+      <div class="mm-r2"><div class="mm-h">THE DEFENCE</div>
+        <div class="mm-r on">The presentation <b>27</b></div>
+        <div class="mm-h">BACKUP DECKS A&ndash;K</div>
+        <div class="mm-r">A &middot; Load profile <b>9</b></div>
+        <div class="mm-r">B &middot; Parasitic <b>8</b></div></div>
+      <i class="n p1">8</i><i class="n p2">9</i>
+    </div>
+  </div>
+  <p class="cap"><b>8</b> — שקפי המצגת שנבחרה. <b>9</b> — רשימת המצגות: המצגת הראשית למעלה,
+  ומתחתיה 11 מצגות ההרחבה עם מספר השקפים בכל אחת. לחיצה על שם מצגת מציגה את השקפים שלה משמאל.</p>
+
+  <h3>מה יש מתחת לכל שקף</h3>
+  <div class="fig">
+    <div class="mocksc">
+      <div class="ms-h">&#9656; מה אני אומר בשקף הזה <em>27 שורות</em></div>
+      <div class="ms-w">&#8226; רק מה שאסור לומר, או מספר שצריך לתקן</div>
+      <div class="ms-n">&#9656; רקע ואימות</div>
+      <div class="ms-l">נעבור לשיטה. זהו החלק הטכני, ואציג אותו בקצרה.</div>
+      <div class="ms-l">השקף הזה הוא כל המודל בתרשים אחד&hellip;</div>
+      <i class="n q1">10</i><i class="n q2">11</i><i class="n q3">12</i>
+    </div>
+  </div>
   <table class="htab"><tbody>
-    <tr><td><span class="key">&#9776;</span></td><td>&#1514;&#1508;&#1512;&#1497;&#1496; &#1502;&#1500;&#1488;. &#1502;&#1497;&#1502;&#1497;&#1503; &#8212; &#1512;&#1513;&#1497;&#1502;&#1514; &#1492;&#1502;&#1510;&#1490;&#1493;&#1514;; &#1502;&#1513;&#1502;&#1488;&#1500; &#8212; &#1492;&#1513;&#1511;&#1508;&#1497;&#1501; &#1513;&#1500; &#1492;&#1502;&#1510;&#1490;&#1514; &#1513;&#1504;&#1489;&#1495;&#1512;&#1492;</td></tr>
-    <tr><td><span class="key">&lsaquo;</span> <span class="key">&rsaquo;</span></td><td>&#1513;&#1511;&#1507; &#1488;&#1495;&#1493;&#1512;&#1492; / &#1511;&#1491;&#1497;&#1502;&#1492;. &#1488;&#1508;&#1513;&#1512; &#1490;&#1501; &#1500;&#1500;&#1495;&#1493;&#1509; &#1506;&#1500; &#1492;&#1513;&#1511;&#1507; &#1506;&#1510;&#1502;&#1493; &#8212; &#1510;&#1491; &#1513;&#1502;&#1488;&#1500; &#1495;&#1493;&#1494;&#1512;, &#1513;&#1488;&#1512; &#1492;&#1513;&#1496;&#1495; &#1502;&#1514;&#1511;&#1491;&#1501;</td></tr>
-    <tr><td><span class="num">14 / 27</span></td><td>&#1502;&#1497;&#1511;&#1493;&#1501; &#1489;&#1502;&#1510;&#1490;&#1514; &#1492;&#1504;&#1493;&#1499;&#1495;&#1497;&#1514;</td></tr>
-    <tr><td><span class="pill amber">Q1 &middot; energy lens</span></td><td>&#1514;&#1508;&#1511;&#1497;&#1491; &#1492;&#1513;&#1511;&#1507; &#8212; &#1506;&#1500; &#1488;&#1497;&#1494;&#1493; &#1513;&#1488;&#1500;&#1514; &#1502;&#1495;&#1511;&#1512; &#1492;&#1493;&#1488; &#1506;&#1493;&#1504;&#1492;</td></tr>
-    <tr><td><span class="key">i</span></td><td>&#1492;&#1491;&#1507; &#1492;&#1494;&#1492;</td></tr>
-    <tr><td><span class="pill">script</span></td><td>&#1502;&#1499;&#1489;&#1492;/&#1502;&#1491;&#1500;&#1497;&#1511; &#1488;&#1514; &#1492;&#1505;&#1511;&#1512;&#1497;&#1508;&#1496;</td></tr>
+    <tr><td><i class="n">10</i> הסקריפט</td><td>מה שאבי מתכוון לומר, שורה אחר שורה. שורה = נשימה.
+        <b>זו הגרסה שנשלחה לביקורת</b></td></tr>
+    <tr><td><i class="n">11</i> <span class="swatch red"></span> אדום</td>
+        <td>רק מה שאסור לומר או מספר שצריך לתקן. קצרה בכוונה</td></tr>
+    <tr><td><i class="n">12</i> <span class="swatch grey"></span> אפור</td>
+        <td>מקופל. מאיפה כל מספר אומת — רק אם רוצים לבדוק</td></tr>
   </tbody></table>
 
-  <h3>&#1492;&#1513;&#1493;&#1512;&#1492; &#1492;&#1513;&#1504;&#1497;&#1497;&#1492; &#8212; &#1502;&#1510;&#1490;&#1493;&#1514; &#1492;&#1512;&#1495;&#1489;&#1492;</h3>
-  <p>&#1500;&#1499;&#1500; &#1513;&#1511;&#1507; &#1497;&#1513; &#1502;&#1510;&#1490;&#1493;&#1514; &#1512;&#1511;&#1506; &#1502;&#1513;&#1500;&#1493;, &#1502;&#1505;&#1493;&#1502;&#1504;&#1493;&#1514; <span class="pill teal">A</span>&ndash;<span class="pill teal">K</span>.
-  &#1500;&#1495;&#1497;&#1510;&#1492; &#1508;&#1493;&#1514;&#1495;&#1514; &#1488;&#1493;&#1514;&#1503; &#8212; &#1502;&#1513;&#1501; &#1495;&#1493;&#1494;&#1512;&#1497;&#1501; &#1489;&#1499;&#1508;&#1514;&#1493;&#1512; <b>main deck</b>.
-  <b>&#1488;&#1500;&#1492; &#1500;&#1488; &#1495;&#1500;&#1511; &#1502;&#1492;&#1512;&#1509;&#1488;&#1492;</b> &#8212; &#1492;&#1503; &#1504;&#1508;&#1514;&#1495;&#1493;&#1514; &#1512;&#1511; &#1488;&#1501; &#1489;&#1493;&#1495;&#1503; &#1497;&#1513;&#1488;&#1500;. &#1488;&#1501; &#1492;&#1512;&#1510;&#1493;&#1506;&#1492; &#1490;&#1500;&#1493;&#1513;&#1514; &#8212; &#1490;&#1500;&#1493;&#1500; &#1488;&#1493;&#1514;&#1492; &#1500;&#1510;&#1491;&#1491;&#1497;&#1501;.</p>
-
-  <h3>&#1502;&#1492; &#1497;&#1513; &#1502;&#1514;&#1495;&#1514; &#1500;&#1499;&#1500; &#1513;&#1511;&#1507;</h3>
-  <table class="htab"><tbody>
-    <tr><td><b>&#1502;&#1492; &#1488;&#1504;&#1497; &#1488;&#1493;&#1502;&#1512; &#1489;&#1513;&#1511;&#1507; &#1492;&#1494;&#1492;</b></td>
-        <td>&#1492;&#1496;&#1511;&#1505;&#1496; &#1513;&#1488;&#1489;&#1497; &#1488;&#1493;&#1502;&#1512;, &#1513;&#1493;&#1512;&#1492; = &#1504;&#1513;&#1497;&#1502;&#1492;. <b>&#1494;&#1492; &#1502;&#1492; &#1513;&#1502;&#1489;&#1511;&#1513;&#1497;&#1501; &#1500;&#1492;&#1506;&#1497;&#1512;.</b></td></tr>
-    <tr><td><span class="swatch red"></span> <b>&#1511;&#1493;&#1508;&#1505;&#1492; &#1488;&#1491;&#1493;&#1502;&#1492;</b></td>
-        <td>&#1512;&#1511; &#1502;&#1492; &#1513;&#1488;&#1505;&#1493;&#1512; &#1500;&#1493;&#1502;&#1512; &#1488;&#1493; &#1502;&#1505;&#1508;&#1512; &#1513;&#1510;&#1512;&#1497;&#1498; &#1500;&#1514;&#1511;&#1503;. &#1511;&#1510;&#1512;&#1492; &#1489;&#1499;&#1493;&#1493;&#1504;&#1492;</td></tr>
-    <tr><td><span class="swatch grey"></span> <b>&#1512;&#1511;&#1506; &#1493;&#1488;&#1497;&#1502;&#1493;&#1514;</b></td>
-        <td>&#1502;&#1511;&#1493;&#1508;&#1500;. &#1502;&#1488;&#1497;&#1508;&#1492; &#1499;&#1500; &#1502;&#1505;&#1508;&#1512; &#1488;&#1493;&#1502;&#1514; &#8212; &#1512;&#1511; &#1488;&#1501; &#1512;&#1493;&#1510;&#1497;&#1501; &#1500;&#1489;&#1491;&#1493;&#1511;</td></tr>
-  </tbody></table>
-
-  <h3>&#1502;&#1511;&#1513;&#1497;&#1501;</h3>
+  <h3>מקשים</h3>
   <p class="hkeys">
-    <span class="key">&larr;</span> <span class="key">&rarr;</span> &#1502;&#1506;&#1489;&#1512; &#1489;&#1497;&#1503; &#1513;&#1511;&#1508;&#1497;&#1501; &nbsp;&middot;&nbsp;
-    <span class="key">M</span> &#1514;&#1508;&#1512;&#1497;&#1496; &nbsp;&middot;&nbsp;
-    <span class="key">S</span> &#1505;&#1511;&#1512;&#1497;&#1508;&#1496; &nbsp;&middot;&nbsp;
-    <span class="key">F</span> &#1502;&#1505;&#1498; &#1502;&#1500;&#1488; &nbsp;&middot;&nbsp;
-    <span class="key">?</span> &#1492;&#1491;&#1507; &#1492;&#1494;&#1492; &nbsp;&middot;&nbsp;
-    <span class="key">Esc</span> &#1505;&#1490;&#1497;&#1512;&#1492;
+    <span class="key">&larr;</span> <span class="key">&rarr;</span> מעבר בין שקפים &nbsp;&middot;&nbsp;
+    <span class="key">M</span> תפריט &nbsp;&middot;&nbsp;
+    <span class="key">S</span> סקריפט &nbsp;&middot;&nbsp;
+    <span class="key">F</span> מסך מלא &nbsp;&middot;&nbsp;
+    <span class="key">?</span> הדף הזה &nbsp;&middot;&nbsp;
+    <span class="key">Esc</span> סגירה
   </p>
 </div></div>
 
@@ -258,7 +404,7 @@
   <div id="jumps"></div>
 </div>
 
-<script src="deck.js?v=1784731280"></script>
+<script src="deck.js?v=1784732281"></script>
 <script>
 (function(){
   "use strict";
@@ -476,6 +622,7 @@
     if (ev.target === this) toggleHelp(false);   // click the backdrop to dismiss
   };
   document.getElementById("menubtn").onclick = function(){ toggleMenu(); };
+  document.getElementById("menux").onclick   = function(){ toggleMenu(false); };
   document.getElementById("modebtn").onclick = toggleScript;
 
   addEventListener("keydown", function(ev){

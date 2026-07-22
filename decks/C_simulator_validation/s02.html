@@ -1,0 +1,140 @@
+<!doctype html><html><head><meta charset="utf-8"><title>The honest worry — and the two-layer answer</title><style>
+  :root{
+    --page-bg:#e9ebe6;--panel:#fff;--page-fg:#1b2622;--cap-fg:#5b665f;--hair:#d3d8d0;
+    --pine:#12514A;--teal:#1F7A5A;--gold:#9C6A15;--amber:#E8A310;--red:#B23A3A;--blue:#2a5a7a;
+    --ground:#f4f5f3;--ink:#16211e;--mut:#68726b;--rowbd:#e4e8e2;
+  }
+  @media (prefers-color-scheme:dark){:root{--page-bg:#12161a;--panel:#1b2027;--page-fg:#e7ebe6;--cap-fg:#9aa39c;--hair:#2a323a;}}
+  :root[data-theme="dark"]{--page-bg:#12161a;--panel:#1b2027;--page-fg:#e7ebe6;--cap-fg:#9aa39c;--hair:#2a323a;}
+  :root[data-theme="light"]{--page-bg:#e9ebe6;--panel:#fff;--page-fg:#1b2622;--cap-fg:#5b665f;--hair:#d3d8d0;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--page-bg);color:var(--page-fg);font-family:system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:1120px;margin:0 auto;padding:36px 24px 80px;}
+  header.top .ey{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);font-weight:700;}
+  header.top h1{font-size:clamp(1.4rem,2.6vw,1.9rem);margin:.3em 0 .2em;text-wrap:balance;}
+  header.top p{margin:.2em 0;color:var(--cap-fg);max-width:70ch;line-height:1.55;}
+  .slidewrap{margin:30px 0;}
+  .slidewrap>.lbl{display:flex;align-items:baseline;gap:10px;margin-bottom:9px;}
+  .slidewrap>.lbl b{font-size:1rem;} .slidewrap>.lbl .st{font-size:.85rem;color:var(--cap-fg);}
+  .slidewrap>.lbl .tag{font-size:.72rem;font-weight:700;color:#fff;border-radius:20px;padding:2px 10px;letter-spacing:.04em;}
+  .tag.new{background:var(--teal);} .tag.fix{background:var(--amber);} .tag.ok{background:#7d8a80;}
+  .slide{container-type:inline-size;position:relative;width:100%;aspect-ratio:16/9;background:var(--ground);color:var(--ink);border-radius:10px;box-shadow:0 6px 26px rgba(0,0,0,.16);overflow:hidden;border:1px solid rgba(0,0,0,.06);}
+  .pad{position:absolute;inset:0;padding:2.9cqw 4.8cqw;display:flex;flex-direction:column;}
+  .kick{font-size:1.75cqw;letter-spacing:.13em;text-transform:uppercase;color:var(--teal);font-weight:800;}
+  .snum{position:absolute;top:4cqw;right:4.6cqw;width:5.2cqw;height:5.2cqw;border-radius:50%;background:var(--amber);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:2.5cqw;}
+  .ttl{font-size:3.7cqw;line-height:1.05;font-weight:800;color:var(--pine);margin:.5cqw 0 0;max-width:88%;}
+  .sub{font-size:1.7cqw;color:var(--mut);margin:.6cqw 0 0;}
+  .lead{font-size:1.95cqw;color:#33403a;line-height:1.36;margin:.9cqw 0 0;max-width:95%;}
+  .body{flex:1;display:flex;flex-direction:column;justify-content:flex-start;margin-top:.9cqw;min-height:0;}
+
+  table.t{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;}
+  table.t th{font-size:1.68cqw;color:var(--mut);text-transform:uppercase;letter-spacing:.03em;font-weight:700;text-align:center;padding:1.05cqw .7cqw;border-bottom:.32cqw solid var(--pine);}
+  table.t th:first-child{text-align:left;}
+  table.t td{font-size:2.35cqw;padding:1.15cqw .7cqw;text-align:center;border-bottom:.16cqw solid #dde3dd;color:var(--ink);font-weight:700;}
+  table.t td:first-child{text-align:left;font-weight:700;color:var(--pine);font-size:1.92cqw;}
+  table.t td.peak{color:var(--red);} table.t td.flat{color:var(--teal);} table.t td.pos{color:var(--teal);}
+  table.t tr.totrow td{background:#eef2ec;border-top:.24cqw solid var(--pine);}
+  table.t tr.ctrlrow td{background:#eaf0f5;}
+  table.t tr.hotrow td{background:#fbeed2;}
+  .tnote{font-size:1.55cqw;color:var(--mut);margin-top:.9cqw;line-height:1.32;}
+  .tsm td{font-size:2.15cqw;padding:1cqw .6cqw;} .tsm td:first-child{font-size:1.72cqw;} .tsm th{font-size:1.5cqw;padding:.85cqw .5cqw;}
+
+  .cards{display:grid;gap:1.45cqw;margin-top:1.45cqw;}
+  .g2{grid-template-columns:1fr 1fr;} .g3{grid-template-columns:1fr 1fr 1fr;}
+  .rc{background:#fff;border:1px solid var(--rowbd);border-left:.8cqw solid var(--accent,var(--pine));border-radius:1.3cqw;padding:1.35cqw 1.7cqw;box-shadow:0 1px 3px rgba(0,0,0,.05);}
+  .rc h5{font-size:2.05cqw;font-weight:800;color:var(--pine);margin:0;line-height:1.08;}
+  .rc p{font-size:1.72cqw;color:#33403a;margin:.5cqw 0 0;line-height:1.32;}
+  .rc p.mono{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:1.6cqw;color:#2a3a34;}
+  .rc.teal{--accent:#1f7a5a;} .rc.gold{--accent:#9c6a15;} .rc.red{--accent:#b23a3a;} .rc.blue{--accent:#2a5a7a;} .rc.pine{--accent:#12514A;}
+  .rc.teal h5{color:#1f7a5a;} .rc.red h5{color:#b23a3a;} .rc.gold h5{color:#9c6a15;} .rc.blue h5{color:#2a5a7a;}
+
+  .ratios{display:flex;gap:1.1cqw;margin-top:1.05cqw;}
+  .rb{flex:1;border-radius:1.2cqw;padding:.82cqw;text-align:center;background:var(--rbb);color:var(--rbf);border:1px solid var(--rbb2);}
+  .rb b{display:block;font-size:2.35cqw;font-weight:800;line-height:1.05;} .rb span{font-size:1.4cqw;font-weight:700;}
+  .rb.g{--rbb:#e2f0ea;--rbf:#1f7a5a;--rbb2:#cfe3d8;} .rb.o{--rbb:#fbeed2;--rbf:#9c6a15;--rbb2:#eddcb4;} .rb.b{--rbb:#eaf0f5;--rbf:#2a5a7a;--rbb2:#d3e0ea;}
+
+  .strip{margin-top:auto;background:var(--pine);color:#f4cd78;border-radius:1.5cqw;padding:1.4cqw 2.1cqw;font-size:1.98cqw;font-weight:800;line-height:1.3;}
+  .strip b{color:#fff;}
+  .strip.big{font-size:1.82cqw;}
+
+  /* cover */
+  .cover{background:linear-gradient(135deg,#0d3f39,#12514A 55%,#17635a);color:#fff;}
+  .cover .pad{justify-content:center;}
+  .cover .gtag{font-size:1.6cqw;letter-spacing:.14em;text-transform:uppercase;color:#bfe0d6;font-weight:800;}
+  .cover h2{font-size:5cqw;font-weight:800;margin:1cqw 0 .2cqw;}
+  .cover .csub{font-size:2cqw;color:#cfe0da;font-weight:600;}
+  .qbox{margin-top:2.2cqw;display:flex;gap:2cqw;align-items:flex-start;}
+  .qbox .q{width:5.4cqw;height:5.4cqw;border-radius:50%;background:var(--amber);color:#fff;flex:none;display:flex;align-items:center;justify-content:center;font-size:3cqw;font-weight:800;}
+  .qbox .qt .ql{font-size:1.5cqw;font-weight:800;color:#f4cd78;text-transform:uppercase;letter-spacing:.08em;}
+  .qbox .qt p{margin:.5cqw 0 0;font-size:2.05cqw;line-height:1.32;font-weight:600;color:#eaf4f0;max-width:94%;}
+  .brief{margin-top:2cqw;background:rgba(255,255,255,.09);border-left:.6cqw solid var(--amber);border-radius:1cqw;padding:1.3cqw 1.7cqw;}
+  .brief .bl{font-size:1.4cqw;font-weight:800;color:#f4cd78;text-transform:uppercase;letter-spacing:.06em;}
+  .brief p{margin:.5cqw 0 0;font-size:1.62cqw;line-height:1.38;color:#eaf4f0;}
+  .brief p b{color:#fff;}
+
+  /* two-layer (slide 2) */
+  .layers{display:grid;grid-template-columns:1fr 1fr;gap:1.3cqw;margin-top:1cqw;}
+  .lay{border-radius:1.4cqw;padding:1.15cqw 1.45cqw;color:#fff;position:relative;}
+  .lay.one{background:linear-gradient(135deg,#155f52,#1F7A5A);}
+  .lay.two{background:linear-gradient(135deg,#7c5410,#9C6A15);}
+  .lay .ln{font-size:1.45cqw;font-weight:800;letter-spacing:.06em;text-transform:uppercase;opacity:.9;}
+  .lay h4{font-size:2.2cqw;font-weight:800;margin:.3cqw 0 .5cqw;line-height:1.05;}
+  .lay p{font-size:1.62cqw;line-height:1.32;margin:0;color:#eef6f2;}
+  .lay .res{margin-top:.7cqw;font-size:2.55cqw;font-weight:800;color:#fff;}
+  .lay .res small{font-size:1.42cqw;font-weight:700;opacity:.85;}
+
+  /* image layout (slide 4) */
+  .limg{flex:1;display:grid;grid-template-columns:1.55fr 0.85fr;gap:1.8cqw;align-items:stretch;min-height:0;margin-top:.8cqw;}
+  .limg .gwrap{background:#fff;border:1px solid var(--rowbd);border-radius:1.2cqw;padding:.7cqw;height:100%;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 3px rgba(0,0,0,.05);overflow:hidden;}
+  .limg .gwrap img{max-width:100%;max-height:100%;object-fit:contain;}
+  .sidecards{display:flex;flex-direction:column;gap:1.1cqw;justify-content:space-between;min-height:0;}
+  .sidecards .rc{padding:1.05cqw 1.4cqw;}
+  .sidecards .rc h5{font-size:1.92cqw;} .sidecards .rc p{font-size:1.55cqw;margin-top:.45cqw;}
+
+  /* two tables (slide 8) */
+  .twocol{display:grid;grid-template-columns:1fr 1fr;gap:1.8cqw;margin-top:.6cqw;}
+  .tblbox{background:#fff;border:1px solid var(--rowbd);border-radius:1.2cqw;padding:1.1cqw 1.3cqw;box-shadow:0 1px 3px rgba(0,0,0,.05);}
+  .tblbox .th2{font-size:1.5cqw;font-weight:800;color:var(--pine);text-transform:uppercase;letter-spacing:.04em;margin-bottom:.5cqw;}
+  .tblbox .th2 span{color:var(--mut);font-weight:700;text-transform:none;letter-spacing:0;}
+
+  /* code layout (slide 9) */
+  .l9{flex:1;display:grid;grid-template-columns:1.12fr 0.88fr;gap:1.8cqw;align-items:stretch;min-height:0;margin-top:.8cqw;}
+  .codeblk{background:#0f1a17;border-radius:1.3cqw;padding:1.05cqw 1.45cqw;font-family:ui-monospace,Menlo,Consolas,monospace;color:#d7e5df;font-size:1.29cqw;line-height:1.42;display:flex;flex-direction:column;justify-content:center;overflow:hidden;}
+  .codeblk .cm{color:#63b593;font-weight:700;display:block;margin-top:.55cqw;}
+  .codeblk .cm:first-child{margin-top:0;}
+  .codeblk .th{color:#8fd0ff;} .codeblk .pw{color:#f4cd78;}
+  .codeblk .sp{display:block;height:.2cqw;}
+  .m3{display:flex;flex-direction:column;gap:.9cqw;justify-content:center;}
+
+  .cap{margin-top:12px;font-size:.9rem;color:var(--cap-fg);line-height:1.55;background:var(--panel);border:1px solid var(--hair);border-radius:8px;padding:13px 16px;}
+  .cap b{color:var(--page-fg);} .cap ul{margin:.5em 0 0;padding-inline-start:1.2em;} .cap li{margin:.28em 0;}
+  footer{margin-top:44px;color:var(--cap-fg);font-size:.85rem;text-align:center;line-height:1.6;}
+
+
+/* ---- v3 render override: one slide, exactly 1920x1080 ---- */
+html,body{margin:0;padding:0;width:1920px;height:1080px;overflow:hidden;background:#ffffff;}
+#rstage{width:1920px;height:1080px;position:relative;}
+#rstage .slide{width:1920px;height:1080px;border-radius:0;box-shadow:none;border:0;margin:0;}
+#hud,.slidewrap>.lbl{display:none !important;}
+</style></head><body><div id="rstage"><div class="slide"><div class="pad">
+      <div class="kick">Start from the concern</div><div class="snum">2</div>
+      <h1 class="ttl">The honest worry — and the two-layer answer</h1>
+      <div class="body">
+        <div class="lead">The thesis rests on the simulated production — so are the numbers <b>physically correct</b>, and is checking them against an engine tuned to my own assumptions circular? I split it in two.</div>
+        <div class="layers">
+          <div class="lay one">
+            <div class="ln">Layer 1 · is the math correct?</div>
+            <h4>Correctness of the implementation</h4>
+            <p>vs <b>pvlib</b>, tuned to share every assumption — same isotropic sky, same NOCT thermal. Its residual gap can only be implementation.</p>
+            <div class="res">&lt; 0.4% <small>annual, all 4 cities</small></div>
+          </div>
+          <div class="lay two">
+            <div class="ln">Layer 2 · what do they cost?</div>
+            <h4>Significance of the assumptions</h4>
+            <p>vs <b>PVWatts</b>, with genuinely different sub-models. The gap isn't a bug — it's the price of simplicity, quantified.</p>
+            <div class="res">0.6–2.0% <small>the measured cost</small></div>
+          </div>
+        </div>
+        <div class="strip"><b>pvlib</b> checks the math; <b>PVWatts</b> measures what the simplifications cost — and a non-circular control (slide 7) settles the circularity worry.</div>
+      </div>
+    </div></div></div></body></html>

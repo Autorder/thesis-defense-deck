@@ -1,0 +1,79 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Tel Aviv — Battery sweep</title><style>
+:root{--pine:#12514A;--teal:#1F7A5A;--gold:#9C6A15;--amber:#E8A310;--red:#B23A3A;--blue:#2a5c8f;
+  --ground:#f4f5f3;--ink:#16211e;--mut:#68726b;--rowbd:#e4e8e2;--page-bg:#e9ebe6;--cap-fg:#5b665f;--panel:#fff;--hair:#d3d8d0;}
+@media (prefers-color-scheme:dark){:root{--page-bg:#12161a;--panel:#1b2027;--cap-fg:#9aa39c;--hair:#2a323a;}}
+:root[data-theme="dark"]{--page-bg:#12161a;--panel:#1b2027;--cap-fg:#9aa39c;--hair:#2a323a;}
+:root[data-theme="light"]{--page-bg:#e9ebe6;--panel:#fff;--cap-fg:#5b665f;--hair:#d3d8d0;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page-bg);color:#1b2622;font-family:system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;}
+.wrap{max-width:1180px;margin:0 auto;padding:28px 20px 90px;}
+header.top{max-width:1180px;margin:0 auto;padding:6px 20px 0;}
+header.top .ey{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);font-weight:800;}
+header.top h1{font-size:clamp(1.4rem,2.6vw,1.9rem);margin:.3em 0 .2em;color:var(--pine);}
+header.top p{margin:.2em 0;color:var(--cap-fg);max-width:70ch;line-height:1.55;}
+.slidewrap{margin:34px 0;}
+.slide{container-type:inline-size;position:relative;width:100%;aspect-ratio:16/9;background:var(--ground);color:var(--ink);
+  border-radius:10px;box-shadow:0 6px 26px rgba(0,0,0,.16);overflow:hidden;border:1px solid rgba(0,0,0,.06);}
+.pad{position:absolute;inset:0;padding:3.1cqw 4cqw;display:flex;flex-direction:column;}
+.kick{font-size:1.6cqw;letter-spacing:.13em;text-transform:uppercase;color:var(--teal);font-weight:800;}
+.kick.tealk{color:var(--teal);} .kick.goldk{color:var(--gold);} .kick.bluek{color:var(--blue);} .kick.redk{color:var(--red);}
+.snum{position:absolute;top:3.1cqw;right:4cqw;width:5cqw;height:5cqw;border-radius:50%;background:var(--amber);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-weight:800;font-size:2.5cqw;}
+.ttl{font-size:3.7cqw;line-height:1.03;font-weight:800;color:var(--pine);margin:.4cqw 0 0;max-width:86%;}
+.sub{font-size:1.68cqw;color:var(--mut);margin:.45cqw 0 0;}
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;min-height:0;margin-top:1cqw;}
+table.idx{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;}
+table.idx th{font-size:1.7cqw;color:var(--mut);font-weight:700;text-align:center;padding:1cqw .6cqw;border-bottom:.34cqw solid var(--pine);line-height:1.15;}
+table.idx th span{font-size:1.2cqw;color:#9aa39c;font-weight:600;}
+table.idx th:first-child{text-align:left;}
+table.idx td{text-align:center;padding:1.15cqw .6cqw;border-bottom:.16cqw solid #dde3dd;}
+table.idx td.c{text-align:left;font-size:2.3cqw;font-weight:800;color:var(--pine);}
+table.idx td a{display:inline-block;min-width:4.8cqw;padding:.55cqw 0;border-radius:.8cqw;background:#fff;border:1px solid var(--rowbd);
+  color:var(--teal);text-decoration:none;font-size:2.5cqw;font-weight:800;box-shadow:0 1px 2px rgba(0,0,0,.05);}
+table.idx td a:hover{background:var(--amber);color:#fff;}
+.idxnote{font-size:1.55cqw;color:#33403a;line-height:1.42;background:#eef2ee;border:1px solid #dbe4dd;border-radius:1.1cqw;padding:1.15cqw 1.5cqw;margin-top:1.7cqw;}
+.idxnote b{color:var(--pine);}
+.kbody{flex:1;display:grid;grid-template-columns:1.32fr 1fr;gap:2.2cqw;margin-top:1.2cqw;min-height:0;align-items:center;}
+.kchart{background:#fff;border:1px solid var(--rowbd);border-radius:1.5cqw;padding:1.4cqw 1.6cqw 1cqw;box-shadow:0 1px 3px rgba(0,0,0,.05);}
+.kchart svg{width:100%;height:auto;display:block;}
+.kcap{font-size:1.35cqw;color:var(--mut);font-style:italic;text-align:center;margin-top:.7cqw;line-height:1.3;}
+.kcards{display:flex;flex-direction:column;gap:1.15cqw;}
+.rc{background:#fff;border:1px solid var(--rowbd);border-left:.8cqw solid var(--accent,var(--pine));border-radius:1.25cqw;padding:1.15cqw 1.5cqw;box-shadow:0 1px 3px rgba(0,0,0,.05);}
+.rc h5{font-size:2cqw;font-weight:800;color:var(--pine);margin:0;line-height:1.08;}
+.rc p{font-size:1.62cqw;color:#33403a;margin:.5cqw 0 0;line-height:1.32;}
+.rc.teal{--accent:#1f7a5a;} .rc.gold{--accent:#9c6a15;} .rc.red{--accent:#b23a3a;} .rc.blue{--accent:#2a5c8f;}
+.rc.teal h5{color:#1f7a5a;} .rc.gold h5{color:#9c6a15;} .rc.red h5{color:#b23a3a;} .rc.blue h5{color:#2a5c8f;}
+.cover{background:linear-gradient(135deg,#0d3f39,#12514A 55%,#17635a);color:#fff;}
+.cover .pad{justify-content:center;}
+.cover .deg{font-size:1.7cqw;letter-spacing:.14em;text-transform:uppercase;color:#bfe0d6;font-weight:800;}
+.cover h2{font-size:6cqw;line-height:1.05;font-weight:800;margin:1.2cqw 0 0;}
+.cover .tag{font-size:2.15cqw;color:#d7e8e2;margin:1.6cqw 0 0;max-width:74%;line-height:1.4;}
+.cover .cbadges{display:flex;gap:1cqw;flex-wrap:wrap;margin-top:2.6cqw;}
+.cover .cbadges span{background:rgba(255,255,255,.12);color:#eaf4ef;font-size:1.6cqw;font-weight:700;border-radius:2cqw;padding:.7cqw 1.7cqw;}
+.cap{margin-top:14px;background:var(--panel);border:1px solid var(--hair);border-left:4px solid var(--teal);border-radius:10px;padding:16px 20px;direction:rtl;}
+.cap .sl{display:block;font-size:.82rem;font-weight:800;letter-spacing:.05em;color:var(--teal);text-transform:uppercase;margin-bottom:.5em;}
+.cap p{margin:.5em 0;font-size:1.06rem;line-height:1.65;color:#1b2622;}
+@media (prefers-color-scheme:dark){.cap p{color:#e7ebe6;}}
+:root[data-theme="dark"] .cap p{color:#e7ebe6;}
+
+
+/* ---- v3 render override: one slide, exactly 1920x1080 ---- */
+html,body{margin:0;padding:0;width:1920px;height:1080px;overflow:hidden;background:#ffffff;}
+#rstage{width:1920px;height:1080px;position:relative;}
+#rstage .slide{width:1920px;height:1080px;border-radius:0;box-shadow:none;border:0;margin:0;}
+#hud,.slidewrap>.lbl{display:none !important;}
+</style></head><body><div id="rstage"><div class="slide" id="s13">
+  <div class="pad">
+    <div class="kick bluek">Tel Aviv · Battery</div>
+    <div class="snum">13</div>
+    <h1 class="ttl">Tel Aviv — Battery sweep</h1>
+    <div class="sub">Conf. 2 · 40 m² · 2 turbines · 12,000 kWh/yr · Year 0</div>
+    <div class="kbody">
+      <div class="kchart">
+        <svg viewBox="0 0 1000 776" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,Segoe UI,Helvetica,Arial,sans-serif"><text x="6" y="32" font-size="21" font-weight="800" fill="#68726b">% of demand</text><rect x="226.0" y="14" width="23" height="23" rx="4" fill="#1F7A5A"/><text x="257.0" y="32" font-size="22" font-weight="700" fill="#3d4a43">self-supply</text><rect x="424.2" y="14" width="23" height="23" rx="4" fill="#E8A310"/><text x="455.2" y="32" font-size="22" font-weight="700" fill="#3d4a43">+ storage</text><rect x="598.0" y="14" width="23" height="23" rx="4" fill="#cdd4ce"/><text x="629.0" y="32" font-size="22" font-weight="700" fill="#3d4a43">from grid</text><text x="6" y="70" font-size="21" font-weight="800" fill="#68726b">% of generation</text><rect x="226.0" y="52" width="23" height="23" rx="4" fill="#7FBBA3"/><text x="257.0" y="70" font-size="22" font-weight="700" fill="#3d4a43">used on-site</text><rect x="436.4" y="52" width="23" height="23" rx="4" fill="#b9c2bb"/><text x="467.4" y="70" font-size="22" font-weight="700" fill="#3d4a43">exported</text><text x="190" y="158" text-anchor="end" font-size="30" font-weight="800" fill="#12514A">0 kWh</text><rect x="210.00" y="108.0" width="330.09" height="46" fill="#1F7A5A"/><text x="375.0" y="140.0" text-anchor="middle" font-size="25" font-weight="800" fill="#fff">48.4</text><rect x="540.09" y="108.0" width="0.00" height="46" fill="#E8A310"/><rect x="540.09" y="108.0" width="351.91" height="46" fill="#cdd4ce"/><text x="716.0" y="140.0" text-anchor="middle" font-size="25" font-weight="800" fill="#3d4a43">51.6</text><line x1="540.09" y1="102.0" x2="540.09" y2="160.0" stroke="#12514A" stroke-width="4"/><text x="906" y="141.0" font-size="34" font-weight="800" fill="#12514A">48.4%</text><rect x="210.00" y="170.0" width="263.50" height="46" fill="#7FBBA3"/><text x="341.8" y="202.0" text-anchor="middle" font-size="25" font-weight="800" fill="#0f3d31">39%</text><rect x="473.50" y="170.0" width="418.50" height="46" fill="#b9c2bb"/><text x="682.8" y="202.0" text-anchor="middle" font-size="25" font-weight="800" fill="#2c352f">61%</text><text x="190" y="290" text-anchor="end" font-size="30" font-weight="800" fill="#12514A">5 kWh</text><rect x="210.00" y="240.0" width="330.09" height="46" fill="#1F7A5A"/><text x="375.0" y="272.0" text-anchor="middle" font-size="25" font-weight="800" fill="#fff">48.4</text><rect x="540.09" y="240.0" width="67.52" height="46" fill="#E8A310"/><text x="573.8" y="272.0" text-anchor="middle" font-size="25" font-weight="800" fill="#fff">9.9</text><rect x="607.61" y="240.0" width="284.39" height="46" fill="#cdd4ce"/><text x="749.8" y="272.0" text-anchor="middle" font-size="25" font-weight="800" fill="#3d4a43">41.7</text><line x1="607.61" y1="234.0" x2="607.61" y2="292.0" stroke="#12514A" stroke-width="4"/><text x="906" y="273.0" font-size="34" font-weight="800" fill="#12514A">58.3%</text><rect x="210.00" y="302.0" width="331.73" height="46" fill="#7FBBA3"/><text x="375.9" y="334.0" text-anchor="middle" font-size="25" font-weight="800" fill="#0f3d31">49%</text><rect x="541.73" y="302.0" width="350.27" height="46" fill="#b9c2bb"/><text x="716.9" y="334.0" text-anchor="middle" font-size="25" font-weight="800" fill="#2c352f">51%</text><text x="190" y="422" text-anchor="end" font-size="30" font-weight="800" fill="#12514A">10 kWh</text><rect x="210.00" y="372.0" width="330.09" height="46" fill="#1F7A5A"/><text x="375.0" y="404.0" text-anchor="middle" font-size="25" font-weight="800" fill="#fff">48.4</text><rect x="540.09" y="372.0" width="129.58" height="46" fill="#E8A310"/><text x="604.9" y="404.0" text-anchor="middle" font-size="25" font-weight="800" fill="#fff">19.0</text><rect x="669.67" y="372.0" width="222.33" height="46" fill="#cdd4ce"/><text x="780.8" y="404.0" text-anchor="middle" font-size="25" font-weight="800" fill="#3d4a43">32.6</text><line x1="669.67" y1="366.0" x2="669.67" y2="424.0" stroke="#12514A" stroke-width="4"/><text x="906" y="405.0" font-size="34" font-weight="800" fill="#12514A">67.4%</text><rect x="210.00" y="434.0" width="385.40" height="46" fill="#7FBBA3"/><text x="402.7" y="466.0" text-anchor="middle" font-size="25" font-weight="800" fill="#0f3d31">57%</text><rect x="595.40" y="434.0" width="296.60" height="46" fill="#b9c2bb"/><text x="743.7" y="466.0" text-anchor="middle" font-size="25" font-weight="800" fill="#2c352f">43%</text><text x="190" y="554" text-anchor="end" font-size="30" font-weight="800" fill="#12514A">15 kWh</text><rect x="210.00" y="504.0" width="330.09" height="46" fill="#1F7A5A"/><text x="375.0" y="536.0" text-anchor="middle" font-size="25" font-weight="800" fill="#fff">48.4</text><rect x="540.09" y="504.0" width="169.82" height="46" fill="#E8A310"/><text x="625.0" y="536.0" text-anchor="middle" font-size="25" font-weight="800" fill="#fff">24.9</text><rect x="709.91" y="504.0" width="182.09" height="46" fill="#cdd4ce"/><text x="801.0" y="536.0" text-anchor="middle" font-size="25" font-weight="800" fill="#3d4a43">26.7</text><line x1="709.91" y1="498.0" x2="709.91" y2="556.0" stroke="#12514A" stroke-width="4"/><text x="906" y="537.0" font-size="34" font-weight="800" fill="#12514A">73.3%</text><rect x="210.00" y="566.0" width="420.51" height="46" fill="#7FBBA3"/><text x="420.3" y="598.0" text-anchor="middle" font-size="25" font-weight="800" fill="#0f3d31">62%</text><rect x="630.51" y="566.0" width="261.49" height="46" fill="#b9c2bb"/><text x="761.3" y="598.0" text-anchor="middle" font-size="25" font-weight="800" fill="#2c352f">38%</text><text x="190" y="686" text-anchor="end" font-size="30" font-weight="800" fill="#12514A">20 kWh</text><rect x="210.00" y="636.0" width="330.09" height="46" fill="#1F7A5A"/><text x="375.0" y="668.0" text-anchor="middle" font-size="25" font-weight="800" fill="#fff">48.4</text><rect x="540.09" y="636.0" width="196.42" height="46" fill="#E8A310"/><text x="638.3" y="668.0" text-anchor="middle" font-size="25" font-weight="800" fill="#fff">28.8</text><rect x="736.50" y="636.0" width="155.50" height="46" fill="#cdd4ce"/><text x="814.3" y="668.0" text-anchor="middle" font-size="25" font-weight="800" fill="#3d4a43">22.8</text><line x1="736.50" y1="630.0" x2="736.50" y2="688.0" stroke="#12514A" stroke-width="4"/><text x="906" y="669.0" font-size="34" font-weight="800" fill="#12514A">77.2%</text><rect x="210.00" y="698.0" width="443.42" height="46" fill="#7FBBA3"/><text x="431.7" y="730.0" text-anchor="middle" font-size="25" font-weight="800" fill="#0f3d31">65%</text><rect x="653.42" y="698.0" width="238.58" height="46" fill="#b9c2bb"/><text x="772.7" y="730.0" text-anchor="middle" font-size="25" font-weight="800" fill="#2c352f">35%</text></svg>
+        <div class="kcap">Battery 0 → 20 kWh · includes 2 turbines</div>
+      </div>
+      <div class="kcards"><div class="rc teal"><h5>The fastest saturation</h5><p>Steps 9.9 / 9.1 / 5.9 / 3.9 — the battery tires quickest here.</p></div><div class="rc red"><h5>The last 5 kWh barely helps</h5><p>+3.9 points, and export moves only 38% → 35%.</p></div><div class="rc gold"><h5>Lowest ceiling of the strong cities</h5><p>77.2% at 20 kWh — 5.9 points below Beer-Sheva.</p></div></div>
+    </div>
+  </div>
+  </div></div></body></html>

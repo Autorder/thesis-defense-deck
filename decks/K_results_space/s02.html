@@ -1,0 +1,78 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Jump to any chart</title><style>
+:root{--pine:#12514A;--teal:#1F7A5A;--gold:#9C6A15;--amber:#E8A310;--red:#B23A3A;--blue:#2a5c8f;
+  --ground:#f4f5f3;--ink:#16211e;--mut:#68726b;--rowbd:#e4e8e2;--page-bg:#e9ebe6;--cap-fg:#5b665f;--panel:#fff;--hair:#d3d8d0;}
+@media (prefers-color-scheme:dark){:root{--page-bg:#12161a;--panel:#1b2027;--cap-fg:#9aa39c;--hair:#2a323a;}}
+:root[data-theme="dark"]{--page-bg:#12161a;--panel:#1b2027;--cap-fg:#9aa39c;--hair:#2a323a;}
+:root[data-theme="light"]{--page-bg:#e9ebe6;--panel:#fff;--cap-fg:#5b665f;--hair:#d3d8d0;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page-bg);color:#1b2622;font-family:system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;}
+.wrap{max-width:1180px;margin:0 auto;padding:28px 20px 90px;}
+header.top{max-width:1180px;margin:0 auto;padding:6px 20px 0;}
+header.top .ey{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);font-weight:800;}
+header.top h1{font-size:clamp(1.4rem,2.6vw,1.9rem);margin:.3em 0 .2em;color:var(--pine);}
+header.top p{margin:.2em 0;color:var(--cap-fg);max-width:70ch;line-height:1.55;}
+.slidewrap{margin:34px 0;}
+.slide{container-type:inline-size;position:relative;width:100%;aspect-ratio:16/9;background:var(--ground);color:var(--ink);
+  border-radius:10px;box-shadow:0 6px 26px rgba(0,0,0,.16);overflow:hidden;border:1px solid rgba(0,0,0,.06);}
+.pad{position:absolute;inset:0;padding:3.1cqw 4cqw;display:flex;flex-direction:column;}
+.kick{font-size:1.6cqw;letter-spacing:.13em;text-transform:uppercase;color:var(--teal);font-weight:800;}
+.kick.tealk{color:var(--teal);} .kick.goldk{color:var(--gold);} .kick.bluek{color:var(--blue);} .kick.redk{color:var(--red);}
+.snum{position:absolute;top:3.1cqw;right:4cqw;width:5cqw;height:5cqw;border-radius:50%;background:var(--amber);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-weight:800;font-size:2.5cqw;}
+.ttl{font-size:3.7cqw;line-height:1.03;font-weight:800;color:var(--pine);margin:.4cqw 0 0;max-width:86%;}
+.sub{font-size:1.68cqw;color:var(--mut);margin:.45cqw 0 0;}
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;min-height:0;margin-top:1cqw;}
+table.idx{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;}
+table.idx th{font-size:1.7cqw;color:var(--mut);font-weight:700;text-align:center;padding:1cqw .6cqw;border-bottom:.34cqw solid var(--pine);line-height:1.15;}
+table.idx th span{font-size:1.2cqw;color:#9aa39c;font-weight:600;}
+table.idx th:first-child{text-align:left;}
+table.idx td{text-align:center;padding:1.15cqw .6cqw;border-bottom:.16cqw solid #dde3dd;}
+table.idx td.c{text-align:left;font-size:2.3cqw;font-weight:800;color:var(--pine);}
+table.idx td a{display:inline-block;min-width:4.8cqw;padding:.55cqw 0;border-radius:.8cqw;background:#fff;border:1px solid var(--rowbd);
+  color:var(--teal);text-decoration:none;font-size:2.5cqw;font-weight:800;box-shadow:0 1px 2px rgba(0,0,0,.05);}
+table.idx td a:hover{background:var(--amber);color:#fff;}
+.idxnote{font-size:1.55cqw;color:#33403a;line-height:1.42;background:#eef2ee;border:1px solid #dbe4dd;border-radius:1.1cqw;padding:1.15cqw 1.5cqw;margin-top:1.7cqw;}
+.idxnote b{color:var(--pine);}
+.kbody{flex:1;display:grid;grid-template-columns:1.32fr 1fr;gap:2.2cqw;margin-top:1.2cqw;min-height:0;align-items:center;}
+.kchart{background:#fff;border:1px solid var(--rowbd);border-radius:1.5cqw;padding:1.4cqw 1.6cqw 1cqw;box-shadow:0 1px 3px rgba(0,0,0,.05);}
+.kchart svg{width:100%;height:auto;display:block;}
+.kcap{font-size:1.35cqw;color:var(--mut);font-style:italic;text-align:center;margin-top:.7cqw;line-height:1.3;}
+.kcards{display:flex;flex-direction:column;gap:1.15cqw;}
+.rc{background:#fff;border:1px solid var(--rowbd);border-left:.8cqw solid var(--accent,var(--pine));border-radius:1.25cqw;padding:1.15cqw 1.5cqw;box-shadow:0 1px 3px rgba(0,0,0,.05);}
+.rc h5{font-size:2cqw;font-weight:800;color:var(--pine);margin:0;line-height:1.08;}
+.rc p{font-size:1.62cqw;color:#33403a;margin:.5cqw 0 0;line-height:1.32;}
+.rc.teal{--accent:#1f7a5a;} .rc.gold{--accent:#9c6a15;} .rc.red{--accent:#b23a3a;} .rc.blue{--accent:#2a5c8f;}
+.rc.teal h5{color:#1f7a5a;} .rc.gold h5{color:#9c6a15;} .rc.red h5{color:#b23a3a;} .rc.blue h5{color:#2a5c8f;}
+.cover{background:linear-gradient(135deg,#0d3f39,#12514A 55%,#17635a);color:#fff;}
+.cover .pad{justify-content:center;}
+.cover .deg{font-size:1.7cqw;letter-spacing:.14em;text-transform:uppercase;color:#bfe0d6;font-weight:800;}
+.cover h2{font-size:6cqw;line-height:1.05;font-weight:800;margin:1.2cqw 0 0;}
+.cover .tag{font-size:2.15cqw;color:#d7e8e2;margin:1.6cqw 0 0;max-width:74%;line-height:1.4;}
+.cover .cbadges{display:flex;gap:1cqw;flex-wrap:wrap;margin-top:2.6cqw;}
+.cover .cbadges span{background:rgba(255,255,255,.12);color:#eaf4ef;font-size:1.6cqw;font-weight:700;border-radius:2cqw;padding:.7cqw 1.7cqw;}
+.cap{margin-top:14px;background:var(--panel);border:1px solid var(--hair);border-left:4px solid var(--teal);border-radius:10px;padding:16px 20px;direction:rtl;}
+.cap .sl{display:block;font-size:.82rem;font-weight:800;letter-spacing:.05em;color:var(--teal);text-transform:uppercase;margin-bottom:.5em;}
+.cap p{margin:.5em 0;font-size:1.06rem;line-height:1.65;color:#1b2622;}
+@media (prefers-color-scheme:dark){.cap p{color:#e7ebe6;}}
+:root[data-theme="dark"] .cap p{color:#e7ebe6;}
+
+
+/* ---- v3 render override: one slide, exactly 1920x1080 ---- */
+html,body{margin:0;padding:0;width:1920px;height:1080px;overflow:hidden;background:#ffffff;}
+#rstage{width:1920px;height:1080px;position:relative;}
+#rstage .slide{width:1920px;height:1080px;border-radius:0;box-shadow:none;border:0;margin:0;}
+#hud,.slidewrap>.lbl{display:none !important;}
+</style></head><body><div id="rstage"><div class="slide">
+  <div class="pad">
+    <div class="kick">Backup K · Results space</div>
+    <div class="snum">2</div>
+    <h1 class="ttl">Jump to any chart</h1>
+    <div class="body">
+      <table class="idx">
+        <thead><tr><th>City</th><th>Consumption<br><span>8/12/20k</span></th><th>PV area<br><span>20&ndash;80 m²</span></th><th>Battery<br><span>0&ndash;20 kWh</span></th><th>Turbines<br><span>0&ndash;4</span></th></tr></thead>
+        <tbody><tr><td class="c">Beer-Sheva</td><td><a href="../../index.html?deck=K_results_space#K_results_space-3" target="_top"><b>3</b></a></td><td><a href="../../index.html?deck=K_results_space#K_results_space-4" target="_top"><b>4</b></a></td><td><a href="../../index.html?deck=K_results_space#K_results_space-5" target="_top"><b>5</b></a></td><td><a href="../../index.html?deck=K_results_space#K_results_space-6" target="_top"><b>6</b></a></td></tr><tr><td class="c">Jerusalem</td><td><a href="../../index.html?deck=K_results_space#K_results_space-7" target="_top"><b>7</b></a></td><td><a href="../../index.html?deck=K_results_space#K_results_space-8" target="_top"><b>8</b></a></td><td><a href="../../index.html?deck=K_results_space#K_results_space-9" target="_top"><b>9</b></a></td><td><a href="../../index.html?deck=K_results_space#K_results_space-10" target="_top"><b>10</b></a></td></tr><tr><td class="c">Tel Aviv</td><td><a href="../../index.html?deck=K_results_space#K_results_space-11" target="_top"><b>11</b></a></td><td><a href="../../index.html?deck=K_results_space#K_results_space-12" target="_top"><b>12</b></a></td><td><a href="../../index.html?deck=K_results_space#K_results_space-13" target="_top"><b>13</b></a></td><td><a href="../../index.html?deck=K_results_space#K_results_space-14" target="_top"><b>14</b></a></td></tr><tr><td class="c">Haifa</td><td><a href="../../index.html?deck=K_results_space#K_results_space-15" target="_top"><b>15</b></a></td><td><a href="../../index.html?deck=K_results_space#K_results_space-16" target="_top"><b>16</b></a></td><td><a href="../../index.html?deck=K_results_space#K_results_space-17" target="_top"><b>17</b></a></td><td><a href="../../index.html?deck=K_results_space#K_results_space-18" target="_top"><b>18</b></a></td></tr></tbody>
+      </table>
+      <div class="idxnote">Every chart shares slide 14a&rsquo;s grammar: the <b>upper bar</b> is the share of demand covered (self-supply / +&nbsp;storage / grid), the <b>lower bar</b> is where generation goes (used on-site / exported). Battery is the only sweep that includes wind.</div>
+    </div>
+  </div>
+</div></div></body></html>

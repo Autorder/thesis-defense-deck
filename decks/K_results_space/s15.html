@@ -1,0 +1,79 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Haifa — Consumption sweep</title><style>
+:root{--pine:#12514A;--teal:#1F7A5A;--gold:#9C6A15;--amber:#E8A310;--red:#B23A3A;--blue:#2a5c8f;
+  --ground:#f4f5f3;--ink:#16211e;--mut:#68726b;--rowbd:#e4e8e2;--page-bg:#e9ebe6;--cap-fg:#5b665f;--panel:#fff;--hair:#d3d8d0;}
+@media (prefers-color-scheme:dark){:root{--page-bg:#12161a;--panel:#1b2027;--cap-fg:#9aa39c;--hair:#2a323a;}}
+:root[data-theme="dark"]{--page-bg:#12161a;--panel:#1b2027;--cap-fg:#9aa39c;--hair:#2a323a;}
+:root[data-theme="light"]{--page-bg:#e9ebe6;--panel:#fff;--cap-fg:#5b665f;--hair:#d3d8d0;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page-bg);color:#1b2622;font-family:system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;}
+.wrap{max-width:1180px;margin:0 auto;padding:28px 20px 90px;}
+header.top{max-width:1180px;margin:0 auto;padding:6px 20px 0;}
+header.top .ey{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);font-weight:800;}
+header.top h1{font-size:clamp(1.4rem,2.6vw,1.9rem);margin:.3em 0 .2em;color:var(--pine);}
+header.top p{margin:.2em 0;color:var(--cap-fg);max-width:70ch;line-height:1.55;}
+.slidewrap{margin:34px 0;}
+.slide{container-type:inline-size;position:relative;width:100%;aspect-ratio:16/9;background:var(--ground);color:var(--ink);
+  border-radius:10px;box-shadow:0 6px 26px rgba(0,0,0,.16);overflow:hidden;border:1px solid rgba(0,0,0,.06);}
+.pad{position:absolute;inset:0;padding:3.1cqw 4cqw;display:flex;flex-direction:column;}
+.kick{font-size:1.6cqw;letter-spacing:.13em;text-transform:uppercase;color:var(--teal);font-weight:800;}
+.kick.tealk{color:var(--teal);} .kick.goldk{color:var(--gold);} .kick.bluek{color:var(--blue);} .kick.redk{color:var(--red);}
+.snum{position:absolute;top:3.1cqw;right:4cqw;width:5cqw;height:5cqw;border-radius:50%;background:var(--amber);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-weight:800;font-size:2.5cqw;}
+.ttl{font-size:3.7cqw;line-height:1.03;font-weight:800;color:var(--pine);margin:.4cqw 0 0;max-width:86%;}
+.sub{font-size:1.68cqw;color:var(--mut);margin:.45cqw 0 0;}
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;min-height:0;margin-top:1cqw;}
+table.idx{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;}
+table.idx th{font-size:1.7cqw;color:var(--mut);font-weight:700;text-align:center;padding:1cqw .6cqw;border-bottom:.34cqw solid var(--pine);line-height:1.15;}
+table.idx th span{font-size:1.2cqw;color:#9aa39c;font-weight:600;}
+table.idx th:first-child{text-align:left;}
+table.idx td{text-align:center;padding:1.15cqw .6cqw;border-bottom:.16cqw solid #dde3dd;}
+table.idx td.c{text-align:left;font-size:2.3cqw;font-weight:800;color:var(--pine);}
+table.idx td a{display:inline-block;min-width:4.8cqw;padding:.55cqw 0;border-radius:.8cqw;background:#fff;border:1px solid var(--rowbd);
+  color:var(--teal);text-decoration:none;font-size:2.5cqw;font-weight:800;box-shadow:0 1px 2px rgba(0,0,0,.05);}
+table.idx td a:hover{background:var(--amber);color:#fff;}
+.idxnote{font-size:1.55cqw;color:#33403a;line-height:1.42;background:#eef2ee;border:1px solid #dbe4dd;border-radius:1.1cqw;padding:1.15cqw 1.5cqw;margin-top:1.7cqw;}
+.idxnote b{color:var(--pine);}
+.kbody{flex:1;display:grid;grid-template-columns:1.32fr 1fr;gap:2.2cqw;margin-top:1.2cqw;min-height:0;align-items:center;}
+.kchart{background:#fff;border:1px solid var(--rowbd);border-radius:1.5cqw;padding:1.4cqw 1.6cqw 1cqw;box-shadow:0 1px 3px rgba(0,0,0,.05);}
+.kchart svg{width:100%;height:auto;display:block;}
+.kcap{font-size:1.35cqw;color:var(--mut);font-style:italic;text-align:center;margin-top:.7cqw;line-height:1.3;}
+.kcards{display:flex;flex-direction:column;gap:1.15cqw;}
+.rc{background:#fff;border:1px solid var(--rowbd);border-left:.8cqw solid var(--accent,var(--pine));border-radius:1.25cqw;padding:1.15cqw 1.5cqw;box-shadow:0 1px 3px rgba(0,0,0,.05);}
+.rc h5{font-size:2cqw;font-weight:800;color:var(--pine);margin:0;line-height:1.08;}
+.rc p{font-size:1.62cqw;color:#33403a;margin:.5cqw 0 0;line-height:1.32;}
+.rc.teal{--accent:#1f7a5a;} .rc.gold{--accent:#9c6a15;} .rc.red{--accent:#b23a3a;} .rc.blue{--accent:#2a5c8f;}
+.rc.teal h5{color:#1f7a5a;} .rc.gold h5{color:#9c6a15;} .rc.red h5{color:#b23a3a;} .rc.blue h5{color:#2a5c8f;}
+.cover{background:linear-gradient(135deg,#0d3f39,#12514A 55%,#17635a);color:#fff;}
+.cover .pad{justify-content:center;}
+.cover .deg{font-size:1.7cqw;letter-spacing:.14em;text-transform:uppercase;color:#bfe0d6;font-weight:800;}
+.cover h2{font-size:6cqw;line-height:1.05;font-weight:800;margin:1.2cqw 0 0;}
+.cover .tag{font-size:2.15cqw;color:#d7e8e2;margin:1.6cqw 0 0;max-width:74%;line-height:1.4;}
+.cover .cbadges{display:flex;gap:1cqw;flex-wrap:wrap;margin-top:2.6cqw;}
+.cover .cbadges span{background:rgba(255,255,255,.12);color:#eaf4ef;font-size:1.6cqw;font-weight:700;border-radius:2cqw;padding:.7cqw 1.7cqw;}
+.cap{margin-top:14px;background:var(--panel);border:1px solid var(--hair);border-left:4px solid var(--teal);border-radius:10px;padding:16px 20px;direction:rtl;}
+.cap .sl{display:block;font-size:.82rem;font-weight:800;letter-spacing:.05em;color:var(--teal);text-transform:uppercase;margin-bottom:.5em;}
+.cap p{margin:.5em 0;font-size:1.06rem;line-height:1.65;color:#1b2622;}
+@media (prefers-color-scheme:dark){.cap p{color:#e7ebe6;}}
+:root[data-theme="dark"] .cap p{color:#e7ebe6;}
+
+
+/* ---- v3 render override: one slide, exactly 1920x1080 ---- */
+html,body{margin:0;padding:0;width:1920px;height:1080px;overflow:hidden;background:#ffffff;}
+#rstage{width:1920px;height:1080px;position:relative;}
+#rstage .slide{width:1920px;height:1080px;border-radius:0;box-shadow:none;border:0;margin:0;}
+#hud,.slidewrap>.lbl{display:none !important;}
+</style></head><body><div id="rstage"><div class="slide" id="s15">
+  <div class="pad">
+    <div class="kick redk">Haifa · Consumption</div>
+    <div class="snum">15</div>
+    <h1 class="ttl">Haifa — Consumption sweep</h1>
+    <div class="sub">40 m² PV · 15 kWh · no wind · Year 0</div>
+    <div class="kbody">
+      <div class="kchart">
+        <svg viewBox="0 0 1000 680" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,Segoe UI,Helvetica,Arial,sans-serif"><text x="6" y="32" font-size="21" font-weight="800" fill="#68726b">% of demand</text><rect x="226.0" y="14" width="23" height="23" rx="4" fill="#1F7A5A"/><text x="257.0" y="32" font-size="22" font-weight="700" fill="#3d4a43">self-supply</text><rect x="424.2" y="14" width="23" height="23" rx="4" fill="#E8A310"/><text x="455.2" y="32" font-size="22" font-weight="700" fill="#3d4a43">+ storage</text><rect x="598.0" y="14" width="23" height="23" rx="4" fill="#cdd4ce"/><text x="629.0" y="32" font-size="22" font-weight="700" fill="#3d4a43">from grid</text><text x="6" y="70" font-size="21" font-weight="800" fill="#68726b">% of generation</text><rect x="226.0" y="52" width="23" height="23" rx="4" fill="#7FBBA3"/><text x="257.0" y="70" font-size="22" font-weight="700" fill="#3d4a43">used on-site</text><rect x="436.4" y="52" width="23" height="23" rx="4" fill="#b9c2bb"/><text x="467.4" y="70" font-size="22" font-weight="700" fill="#3d4a43">exported</text><text x="190" y="186" text-anchor="end" font-size="30" font-weight="800" fill="#12514A">8,000</text><rect x="210.00" y="132.0" width="273.48" height="50" fill="#1F7A5A"/><text x="346.7" y="166.0" text-anchor="middle" font-size="25" font-weight="800" fill="#fff">40.1</text><rect x="483.48" y="132.0" width="204.60" height="50" fill="#E8A310"/><text x="585.8" y="166.0" text-anchor="middle" font-size="25" font-weight="800" fill="#fff">30.0</text><rect x="688.08" y="132.0" width="203.92" height="50" fill="#cdd4ce"/><text x="790.0" y="166.0" text-anchor="middle" font-size="25" font-weight="800" fill="#3d4a43">29.9</text><line x1="688.08" y1="126.0" x2="688.08" y2="188.0" stroke="#12514A" stroke-width="4"/><text x="906" y="167.0" font-size="34" font-weight="800" fill="#12514A">70.1%</text><rect x="210.00" y="198.0" width="288.29" height="50" fill="#7FBBA3"/><text x="354.1" y="232.0" text-anchor="middle" font-size="25" font-weight="800" fill="#0f3d31">42%</text><rect x="498.29" y="198.0" width="393.71" height="50" fill="#b9c2bb"/><text x="695.1" y="232.0" text-anchor="middle" font-size="25" font-weight="800" fill="#2c352f">58%</text><text x="190" y="374" text-anchor="end" font-size="30" font-weight="800" fill="#12514A">12,000</text><rect x="210.00" y="320.0" width="238.70" height="50" fill="#1F7A5A"/><text x="329.4" y="354.0" text-anchor="middle" font-size="25" font-weight="800" fill="#fff">35.0</text><rect x="448.70" y="320.0" width="162.32" height="50" fill="#E8A310"/><text x="529.9" y="354.0" text-anchor="middle" font-size="25" font-weight="800" fill="#fff">23.8</text><rect x="611.02" y="320.0" width="280.98" height="50" fill="#cdd4ce"/><text x="751.5" y="354.0" text-anchor="middle" font-size="25" font-weight="800" fill="#3d4a43">41.2</text><line x1="611.02" y1="314.0" x2="611.02" y2="376.0" stroke="#12514A" stroke-width="4"/><text x="906" y="355.0" font-size="34" font-weight="800" fill="#12514A">58.8%</text><rect x="210.00" y="386.0" width="359.32" height="50" fill="#7FBBA3"/><text x="389.7" y="420.0" text-anchor="middle" font-size="25" font-weight="800" fill="#0f3d31">53%</text><rect x="569.32" y="386.0" width="322.68" height="50" fill="#b9c2bb"/><text x="730.7" y="420.0" text-anchor="middle" font-size="25" font-weight="800" fill="#2c352f">47%</text><text x="190" y="562" text-anchor="end" font-size="30" font-weight="800" fill="#12514A">20,000</text><rect x="210.00" y="508.0" width="197.78" height="50" fill="#1F7A5A"/><text x="308.9" y="542.0" text-anchor="middle" font-size="25" font-weight="800" fill="#fff">29.0</text><rect x="407.78" y="508.0" width="109.12" height="50" fill="#E8A310"/><text x="462.3" y="542.0" text-anchor="middle" font-size="25" font-weight="800" fill="#fff">16.0</text><rect x="516.90" y="508.0" width="375.10" height="50" fill="#cdd4ce"/><text x="704.5" y="542.0" text-anchor="middle" font-size="25" font-weight="800" fill="#3d4a43">55.0</text><line x1="516.90" y1="502.0" x2="516.90" y2="564.0" stroke="#12514A" stroke-width="4"/><text x="906" y="543.0" font-size="34" font-weight="800" fill="#12514A">45.0%</text><rect x="210.00" y="574.0" width="453.48" height="50" fill="#7FBBA3"/><text x="436.7" y="608.0" text-anchor="middle" font-size="25" font-weight="800" fill="#0f3d31">66%</text><rect x="663.48" y="574.0" width="228.52" height="50" fill="#b9c2bb"/><text x="777.7" y="608.0" text-anchor="middle" font-size="25" font-weight="800" fill="#2c352f">34%</text></svg>
+        <div class="kcap">Household demand 8,000 / 12,000 / 20,000 kWh/yr · generation fixed</div>
+      </div>
+      <div class="kcards"><div class="rc red"><h5>The outlier city</h5><p>70 / 59 / 45 — far below the others at every demand level.</p></div><div class="rc gold"><h5>Not a quantity problem</h5><p>Haifa generates within 6% of Beer-Sheva yet lands 20 points lower — a profile mismatch.</p></div><div class="rc teal"><h5>Worst of both bars at 8k</h5><p>57.7% exported and still 2,502 kWh bought from the grid.</p></div></div>
+    </div>
+  </div>
+  </div></div></body></html>

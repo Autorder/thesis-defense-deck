@@ -109,6 +109,42 @@
   .lines p b{color:#fff}
   .lines p em{font-style:normal;color:var(--amber)}
 
+  /* ---------- help sheet ---------- */
+  #help{position:fixed;inset:0;z-index:60;display:none;direction:rtl;
+    background:rgba(6,9,8,.72);backdrop-filter:blur(4px);overflow-y:auto;padding:34px 18px 60px;}
+  body.helpopen #help{display:block}
+  #help .hcard{position:relative;max-width:760px;margin:0 auto;background:var(--panel);
+    border:1px solid var(--line);border-radius:16px;padding:30px 34px 34px;
+    box-shadow:0 20px 60px rgba(0,0,0,.5);}
+  #helpx{position:absolute;inset-inline-end:16px;top:14px;background:none;border:0;color:var(--mut);
+    font-size:1.7rem;line-height:1;cursor:pointer;padding:4px 8px;font-family:inherit;}
+  #helpx:hover{color:var(--ink)}
+  #help h2{margin:0 0 6px;font-size:1.6rem;color:#fff}
+  #help h3{margin:26px 0 10px;font-size:1.05rem;color:var(--amber);
+    letter-spacing:.02em;border-top:1px solid var(--line);padding-top:18px}
+  #help h3:first-of-type{border-top:0}
+  #help p{margin:0 0 10px;font-size:1.02rem;line-height:1.8;color:#d7e3dd}
+  #help .hlead{color:var(--mut);font-size:.98rem;margin-bottom:4px}
+  #help .hnote{background:#161f1b;border-inline-start:3px solid var(--teal);
+    border-radius:8px;padding:11px 15px;font-size:.98rem;margin-top:12px}
+  #help .htab{width:100%;border-collapse:collapse;font-size:1.0rem}
+  #help .htab td{padding:9px 4px;border-bottom:1px solid #1e2723;vertical-align:top;
+    line-height:1.65;color:#d7e3dd}
+  #help .htab td:first-child{width:34%;white-space:nowrap;color:#fff}
+  #help .htab tr:last-child td{border-bottom:0}
+  #help .key{display:inline-block;min-width:26px;text-align:center;background:#1b2521;
+    border:1px solid var(--line);border-radius:6px;padding:2px 8px;font-weight:700;font-size:.9rem}
+  #help .num{font-variant-numeric:tabular-nums;color:var(--mut);font-weight:700}
+  #help .pill{display:inline-block;background:#1b2521;border:1px solid var(--line);
+    border-radius:7px;padding:2px 9px;font-size:.86rem;font-weight:700}
+  #help .pill.amber{background:var(--amber);color:#0e1311;border-color:var(--amber);
+    border-radius:20px;font-size:.76rem}
+  #help .pill.teal{border-inline-start:3px solid var(--teal)}
+  #help .swatch{display:inline-block;width:13px;height:13px;border-radius:3px;vertical-align:-1px}
+  #help .swatch.red{background:#3a1f1d;border:1px solid var(--red)}
+  #help .swatch.grey{background:#141b18;border:1px solid var(--line)}
+  #help .hkeys{line-height:2.4}
+
   /* ---------- slide menu ---------- */
   /* two panes: the decks on the right, the slides of the chosen deck on the left */
   #menu{position:fixed;left:0;right:0;bottom:43px;z-index:45;display:none;
@@ -153,6 +189,57 @@
 
 <div id="menu"><div id="mslides"></div><div id="mdecks"></div></div>
 
+<!-- how to drive this thing. Written for a reviewer, not for the presenter. -->
+<div id="help"><div class="hcard">
+  <button id="helpx" title="&#1505;&#1490;&#1497;&#1512;&#1492; (Esc)">&times;</button>
+  <h2>&#1488;&#1497;&#1498; &#1500;&#1492;&#1513;&#1514;&#1502;&#1513; &#1489;&#1502;&#1510;&#1490;&#1514;</h2>
+  <p class="hlead">&#1502;&#1510;&#1490;&#1514; &#1492;&#1492;&#1490;&#1504;&#1492; &#1489;&#1491;&#1508;&#1491;&#1508;&#1503; &#1489;&#1500;&#1489;&#1491;. &#1488;&#1497;&#1503; &#1502;&#1492; &#1500;&#1492;&#1514;&#1511;&#1497;&#1503; &#1493;&#1488;&#1497;&#1503; &#1489;&#1502;&#1492; &#1500;&#1508;&#1514;&#1493;&#1495; &#1488;&#1493;&#1514;&#1492;.</p>
+
+  <h3>&#1513;&#1504;&#1497; &#1502;&#1510;&#1489;&#1497;&#1501;</h3>
+  <table class="htab"><tbody>
+    <tr><td><b>&#1506;&#1501; &#1505;&#1511;&#1512;&#1497;&#1508;&#1496;</b></td>
+        <td>&#1502;&#1514;&#1495;&#1514; &#1499;&#1500; &#1513;&#1511;&#1507; &#1502;&#1493;&#1508;&#1497;&#1506; &#1502;&#1492; &#1513;&#1488;&#1489;&#1497; &#1502;&#1514;&#1499;&#1493;&#1493;&#1503; &#1500;&#1493;&#1502;&#1512;, &#1513;&#1493;&#1512;&#1492; &#1488;&#1495;&#1512; &#1513;&#1493;&#1512;&#1492;. <b>&#1494;&#1493; &#1492;&#1490;&#1512;&#1505;&#1492; &#1513;&#1504;&#1513;&#1500;&#1495;&#1492; &#1500;&#1489;&#1497;&#1511;&#1493;&#1512;&#1514;.</b></td></tr>
+    <tr><td><b>&#1500;&#1500;&#1488; &#1505;&#1511;&#1512;&#1497;&#1508;&#1496;</b></td>
+        <td>&#1513;&#1511;&#1508;&#1497;&#1501; &#1489;&#1500;&#1489;&#1491;, &#1502;&#1505;&#1498; &#1502;&#1500;&#1488;. &#1494;&#1493; &#1492;&#1490;&#1512;&#1505;&#1492; &#1513;&#1514;&#1493;&#1510;&#1490; &#1489;&#1489;&#1495;&#1497;&#1504;&#1492; &#1506;&#1510;&#1502;&#1492;.</td></tr>
+  </tbody></table>
+  <p class="hnote">&#1492;&#1499;&#1508;&#1514;&#1493;&#1512; <b>script</b> &#1489;&#1508;&#1497;&#1504;&#1514; &#1492;&#1489;&#1512; &#1502;&#1495;&#1500;&#1497;&#1507; &#1489;&#1497;&#1503; &#1492;&#1513;&#1504;&#1497;&#1497;&#1501;. &#1499;&#1513;&#1492;&#1493;&#1488; <span class="pill">script &#10003;</span> &#1489;&#1499;&#1514;&#1493;&#1501; &#1506;&#1504;&#1489;&#1512; &#1493;&#1497;&#1513; &#1511;&#1493; &#1506;&#1504;&#1489;&#1512; &#1489;&#1512;&#1488;&#1513; &#1492;&#1489;&#1512; &#8212; &#1492;&#1505;&#1511;&#1512;&#1497;&#1508;&#1496; &#1502;&#1493;&#1510;&#1490;.</p>
+
+  <h3>&#1492;&#1489;&#1512; &#1492;&#1514;&#1495;&#1514;&#1493;&#1503; &#8212; &#1513;&#1514;&#1497; &#1513;&#1493;&#1512;&#1493;&#1514;</h3>
+  <table class="htab"><tbody>
+    <tr><td><span class="key">&#9776;</span></td><td>&#1514;&#1508;&#1512;&#1497;&#1496; &#1502;&#1500;&#1488;. &#1502;&#1497;&#1502;&#1497;&#1503; &#8212; &#1512;&#1513;&#1497;&#1502;&#1514; &#1492;&#1502;&#1510;&#1490;&#1493;&#1514;; &#1502;&#1513;&#1502;&#1488;&#1500; &#8212; &#1492;&#1513;&#1511;&#1508;&#1497;&#1501; &#1513;&#1500; &#1492;&#1502;&#1510;&#1490;&#1514; &#1513;&#1504;&#1489;&#1495;&#1512;&#1492;</td></tr>
+    <tr><td><span class="key">&lsaquo;</span> <span class="key">&rsaquo;</span></td><td>&#1513;&#1511;&#1507; &#1488;&#1495;&#1493;&#1512;&#1492; / &#1511;&#1491;&#1497;&#1502;&#1492;. &#1488;&#1508;&#1513;&#1512; &#1490;&#1501; &#1500;&#1500;&#1495;&#1493;&#1509; &#1506;&#1500; &#1492;&#1513;&#1511;&#1507; &#1506;&#1510;&#1502;&#1493; &#8212; &#1510;&#1491; &#1513;&#1502;&#1488;&#1500; &#1495;&#1493;&#1494;&#1512;, &#1513;&#1488;&#1512; &#1492;&#1513;&#1496;&#1495; &#1502;&#1514;&#1511;&#1491;&#1501;</td></tr>
+    <tr><td><span class="num">14 / 27</span></td><td>&#1502;&#1497;&#1511;&#1493;&#1501; &#1489;&#1502;&#1510;&#1490;&#1514; &#1492;&#1504;&#1493;&#1499;&#1495;&#1497;&#1514;</td></tr>
+    <tr><td><span class="pill amber">Q1 &middot; energy lens</span></td><td>&#1514;&#1508;&#1511;&#1497;&#1491; &#1492;&#1513;&#1511;&#1507; &#8212; &#1506;&#1500; &#1488;&#1497;&#1494;&#1493; &#1513;&#1488;&#1500;&#1514; &#1502;&#1495;&#1511;&#1512; &#1492;&#1493;&#1488; &#1506;&#1493;&#1504;&#1492;</td></tr>
+    <tr><td><span class="key">i</span></td><td>&#1492;&#1491;&#1507; &#1492;&#1494;&#1492;</td></tr>
+    <tr><td><span class="pill">script</span></td><td>&#1502;&#1499;&#1489;&#1492;/&#1502;&#1491;&#1500;&#1497;&#1511; &#1488;&#1514; &#1492;&#1505;&#1511;&#1512;&#1497;&#1508;&#1496;</td></tr>
+  </tbody></table>
+
+  <h3>&#1492;&#1513;&#1493;&#1512;&#1492; &#1492;&#1513;&#1504;&#1497;&#1497;&#1492; &#8212; &#1502;&#1510;&#1490;&#1493;&#1514; &#1492;&#1512;&#1495;&#1489;&#1492;</h3>
+  <p>&#1500;&#1499;&#1500; &#1513;&#1511;&#1507; &#1497;&#1513; &#1502;&#1510;&#1490;&#1493;&#1514; &#1512;&#1511;&#1506; &#1502;&#1513;&#1500;&#1493;, &#1502;&#1505;&#1493;&#1502;&#1504;&#1493;&#1514; <span class="pill teal">A</span>&ndash;<span class="pill teal">K</span>.
+  &#1500;&#1495;&#1497;&#1510;&#1492; &#1508;&#1493;&#1514;&#1495;&#1514; &#1488;&#1493;&#1514;&#1503; &#8212; &#1502;&#1513;&#1501; &#1495;&#1493;&#1494;&#1512;&#1497;&#1501; &#1489;&#1499;&#1508;&#1514;&#1493;&#1512; <b>main deck</b>.
+  <b>&#1488;&#1500;&#1492; &#1500;&#1488; &#1495;&#1500;&#1511; &#1502;&#1492;&#1512;&#1509;&#1488;&#1492;</b> &#8212; &#1492;&#1503; &#1504;&#1508;&#1514;&#1495;&#1493;&#1514; &#1512;&#1511; &#1488;&#1501; &#1489;&#1493;&#1495;&#1503; &#1497;&#1513;&#1488;&#1500;. &#1488;&#1501; &#1492;&#1512;&#1510;&#1493;&#1506;&#1492; &#1490;&#1500;&#1493;&#1513;&#1514; &#8212; &#1490;&#1500;&#1493;&#1500; &#1488;&#1493;&#1514;&#1492; &#1500;&#1510;&#1491;&#1491;&#1497;&#1501;.</p>
+
+  <h3>&#1502;&#1492; &#1497;&#1513; &#1502;&#1514;&#1495;&#1514; &#1500;&#1499;&#1500; &#1513;&#1511;&#1507;</h3>
+  <table class="htab"><tbody>
+    <tr><td><b>&#1502;&#1492; &#1488;&#1504;&#1497; &#1488;&#1493;&#1502;&#1512; &#1489;&#1513;&#1511;&#1507; &#1492;&#1494;&#1492;</b></td>
+        <td>&#1492;&#1496;&#1511;&#1505;&#1496; &#1513;&#1488;&#1489;&#1497; &#1488;&#1493;&#1502;&#1512;, &#1513;&#1493;&#1512;&#1492; = &#1504;&#1513;&#1497;&#1502;&#1492;. <b>&#1494;&#1492; &#1502;&#1492; &#1513;&#1502;&#1489;&#1511;&#1513;&#1497;&#1501; &#1500;&#1492;&#1506;&#1497;&#1512;.</b></td></tr>
+    <tr><td><span class="swatch red"></span> <b>&#1511;&#1493;&#1508;&#1505;&#1492; &#1488;&#1491;&#1493;&#1502;&#1492;</b></td>
+        <td>&#1512;&#1511; &#1502;&#1492; &#1513;&#1488;&#1505;&#1493;&#1512; &#1500;&#1493;&#1502;&#1512; &#1488;&#1493; &#1502;&#1505;&#1508;&#1512; &#1513;&#1510;&#1512;&#1497;&#1498; &#1500;&#1514;&#1511;&#1503;. &#1511;&#1510;&#1512;&#1492; &#1489;&#1499;&#1493;&#1493;&#1504;&#1492;</td></tr>
+    <tr><td><span class="swatch grey"></span> <b>&#1512;&#1511;&#1506; &#1493;&#1488;&#1497;&#1502;&#1493;&#1514;</b></td>
+        <td>&#1502;&#1511;&#1493;&#1508;&#1500;. &#1502;&#1488;&#1497;&#1508;&#1492; &#1499;&#1500; &#1502;&#1505;&#1508;&#1512; &#1488;&#1493;&#1502;&#1514; &#8212; &#1512;&#1511; &#1488;&#1501; &#1512;&#1493;&#1510;&#1497;&#1501; &#1500;&#1489;&#1491;&#1493;&#1511;</td></tr>
+  </tbody></table>
+
+  <h3>&#1502;&#1511;&#1513;&#1497;&#1501;</h3>
+  <p class="hkeys">
+    <span class="key">&larr;</span> <span class="key">&rarr;</span> &#1502;&#1506;&#1489;&#1512; &#1489;&#1497;&#1503; &#1513;&#1511;&#1508;&#1497;&#1501; &nbsp;&middot;&nbsp;
+    <span class="key">M</span> &#1514;&#1508;&#1512;&#1497;&#1496; &nbsp;&middot;&nbsp;
+    <span class="key">S</span> &#1505;&#1511;&#1512;&#1497;&#1508;&#1496; &nbsp;&middot;&nbsp;
+    <span class="key">F</span> &#1502;&#1505;&#1498; &#1502;&#1500;&#1488; &nbsp;&middot;&nbsp;
+    <span class="key">?</span> &#1492;&#1491;&#1507; &#1492;&#1494;&#1492; &nbsp;&middot;&nbsp;
+    <span class="key">Esc</span> &#1505;&#1490;&#1497;&#1512;&#1492;
+  </p>
+</div></div>
+
 <div id="bar">
   <div id="barmain">
     <button id="menubtn" title="All slides (M)">&#9776;</button>
@@ -165,12 +252,13 @@
     <span class="ttl" id="ttl"></span>
     <span class="keys">&#8592; &#8594; &middot; F fullscreen</span>
     <a class="btn" id="tomain" href="#" hidden>main deck</a>
+    <button id="helpbtn" title="&#1488;&#1497;&#1498; &#1500;&#1492;&#1513;&#1514;&#1502;&#1513; (?)">i</button>
     <button id="modebtn" title="Toggle presenter script (S)">script<span class="tick">&nbsp;&#10003;</span></button>
   </div>
   <div id="jumps"></div>
 </div>
 
-<script src="deck.js?v=1784730629"></script>
+<script src="deck.js?v=1784731280"></script>
 <script>
 (function(){
   "use strict";
@@ -376,6 +464,17 @@
 
   document.getElementById("next").onclick = function(){ show(idx + 1); };
   document.getElementById("prev").onclick = function(){ show(idx - 1); };
+  function toggleHelp(on){
+    document.body.classList.toggle("helpopen",
+      on === undefined ? !document.body.classList.contains("helpopen") : on);
+    if (document.body.classList.contains("helpopen")) toggleMenu(false);
+    wake();
+  }
+  document.getElementById("helpbtn").onclick = function(){ toggleHelp(); };
+  document.getElementById("helpx").onclick   = function(){ toggleHelp(false); };
+  document.getElementById("help").onclick    = function(ev){
+    if (ev.target === this) toggleHelp(false);   // click the backdrop to dismiss
+  };
   document.getElementById("menubtn").onclick = function(){ toggleMenu(); };
   document.getElementById("modebtn").onclick = toggleScript;
 
@@ -385,7 +484,8 @@
     else if (ev.key === "Home"){ show(0); ev.preventDefault(); }
     else if (ev.key === "End"){ show(SLIDES.length - 1); ev.preventDefault(); }
     else if (ev.key === "m" || ev.key === "M"){ toggleMenu(); }
-    else if (ev.key === "Escape"){ toggleMenu(false); }
+    else if (ev.key === "?" || ev.key === "/"){ toggleHelp(); ev.preventDefault(); }
+    else if (ev.key === "Escape"){ toggleHelp(false); toggleMenu(false); }
     /* S switches the script on and off. No button in the exam link, so the
        examiners never see the affordance — but it is always one key away. */
     else if (ev.key === "s" || ev.key === "S"){ toggleScript(); }

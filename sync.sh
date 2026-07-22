@@ -13,6 +13,7 @@ rsync -a --delete \
   --exclude '_build/' --exclude '.git/' --exclude '*.bak*' --exclude '*.tex' \
   --exclude '.DS_Store' --exclude 'SPEC.md' \
   --exclude 'sync.sh' --exclude 'robots.txt' --exclude '.nojekyll' \
+  --exclude '.github/' \
   "$SRC/" "$DST/"
 
 cd "$DST"

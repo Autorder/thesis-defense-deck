@@ -3,8 +3,8 @@
 # Usage:  ~/Thesis-Defense-Deck/sync.sh  ["optional commit message"]
 set -e
 
-SRC="/Users/avihaviv/אוניברסיטה/עבודת תיזה/Presentation version 3"
-DST="$HOME/Thesis-Defense-Deck"
+SRC="/Users/avihaviv/Projects/Thesis/Documentation/Thesis-Main/Presentation version 3"
+DST="$HOME/Projects/Thesis/Presentation/Thesis-Defense-Deck"
 MSG="${1:-Update defense deck}"
 
 [ -d "$SRC" ] || { echo "source folder not found: $SRC"; exit 1; }

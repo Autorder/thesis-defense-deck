@@ -468,7 +468,8 @@ html,body{margin:0;padding:0;width:1920px;height:1080px;overflow:hidden;backgrou
 .critline{font-size:1.75cqw;font-weight:800;color:var(--mut);text-align:center;margin-top:auto;
   letter-spacing:.03em;text-transform:uppercase;}
 .critline b{color:var(--pine);}
-.crits{display:grid;grid-template-columns:repeat(7,1fr);gap:1.2cqw;margin-top:2.2cqw;align-items:stretch;}
+.crits{display:grid;grid-template-columns:repeat(5,1fr) .3cqw repeat(2,1fr);gap:1.2cqw;margin-top:2.2cqw;align-items:stretch;}
+.csep{border-left:.3cqw dashed #9aa39c;margin:1cqw 0;}
 .crit{background:#fff;border:1px solid var(--rowbd);border-top:.9cqw solid var(--ac,#8a938c);
   border-radius:1.6cqw;padding:3.2cqw .6cqw 2.8cqw;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,.05);
   display:flex;flex-direction:column;justify-content:center;}
@@ -477,9 +478,11 @@ html,body{margin:0;padding:0;width:1920px;height:1080px;overflow:hidden;backgrou
 .crit .cd{font-size:1.6cqw;font-weight:700;color:var(--mut);margin-top:.15cqw;}
 .crit .cl{font-size:1.72cqw;font-weight:700;color:#33403a;margin-top:.85cqw;line-height:1.15;}
 .crits .crit:nth-child(1){--ac:#1f7a5a;} .crits .crit:nth-child(2){--ac:#2f7a63;}
-.crits .crit:nth-child(3){--ac:#2f7a63;} .crits .crit:nth-child(4){--ac:#9c6a15;}
-.crits .crit:nth-child(5){--ac:#b07a1a;} .crits .crit:nth-child(6){--ac:#b07a1a;}
-.crit.zero{--ac:#B23A3A;background:#fbeceb;border-color:#e8c6c2;}
+.crits .crit:nth-child(3){--ac:#2f7a63;} .crits .crit:nth-child(4){--ac:#b07a1a;}
+.crits .crit:nth-child(5){--ac:#b07a1a;}
+.crit.concl{--ac:#2a5a7a;background:#eaf1f6;border-color:#c6d6e2;border-top-color:var(--ac);}
+.crit.concl .cl{color:#2a5a7a;font-weight:800;}
+.crit.zero{--ac:#B23A3A;background:#fbeceb;border-color:#e8c6c2;border-top-color:var(--ac);}
 .crit.zero .cn{font-size:7.6cqw;}
 .crit.zero .cl{color:#B23A3A;font-weight:800;}
 .strip{margin-top:2.4cqw !important;margin-bottom:auto;font-size:2.1cqw !important;}
@@ -488,16 +491,17 @@ html,body{margin:0;padding:0;width:1920px;height:1080px;overflow:hidden;backgrou
         <div class="kick">Literature Review</div>
         <div class="snum">5</div>
         <h1 class="ttl">What the literature already covers</h1>
-        <div class="critline">Six criteria &mdash; tick or nothing &middot; <b>15 reviewed studies</b></div>
+        <div class="critline">Five criteria &mdash; tick or nothing &middot; <b>15 reviewed studies</b></div>
         <div class="crits">
           <div class="crit"><div class="cn">11</div><div class="cd">/15</div><div class="cl">One home</div></div>
           <div class="crit"><div class="cn">7</div><div class="cd">/15</div><div class="cl">Hourly</div></div>
           <div class="crit"><div class="cn">7</div><div class="cd">/15</div><div class="cl">10 yr+</div></div>
-          <div class="crit"><div class="cn">2</div><div class="cd">/15</div><div class="cl">In Israel</div></div>
           <div class="crit"><div class="cn">1</div><div class="cd">/15</div><div class="cl">Degradation</div></div>
           <div class="crit"><div class="cn">1</div><div class="cd">/15</div><div class="cl">Wind</div></div>
-          <div class="crit zero"><div class="cn">0</div><div class="cd">/15</div><div class="cl">all six</div></div>
+          <div class="csep" aria-hidden="true"></div>
+          <div class="crit concl"><div class="cn">2</div><div class="cd">/15</div><div class="cl">In Israel</div></div>
+          <div class="crit zero"><div class="cn">0</div><div class="cd">/15</div><div class="cl">all five</div></div>
         </div>
-        <div class="strip">Common on their own &mdash; <b>never together</b>. Not one of the fifteen carries all six.</div>
+        <div class="strip">Common on their own &mdash; <b>never together</b>. Not one of the fifteen carries all five.</div>
       </div>
     </div></div></body></html>

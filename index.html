@@ -397,10 +397,9 @@
     <div class="mocksc">
       <div class="ms-h">&#9656; מה אני אומר בשקף הזה <em>27 שורות</em></div>
       <div class="ms-w praconly">&#8226; רק מה שאסור לומר, או מספר שצריך לתקן</div>
-      <div class="ms-n praconly">&#9656; רקע ואימות</div>
       <div class="ms-l">נעבור לשיטה. זהו החלק הטכני, ואציג אותו בקצרה.</div>
       <div class="ms-l">השקף הזה הוא כל המודל בתרשים אחד&hellip;</div>
-      <i class="n q1">10</i><i class="n q2 praconly">11</i><i class="n q3 praconly">12</i>
+      <i class="n q1">10</i><i class="n q2 praconly">11</i>
     </div>
   </div>
   <table class="htab"><tbody>
@@ -408,8 +407,6 @@
         <b>זו הגרסה שנשלחה לביקורת</b></td></tr>
     <tr class="praconly"><td><i class="n">11</i> <span class="swatch red"></span> אדום</td>
         <td>רק מה שאסור לומר או מספר שצריך לתקן. קצרה בכוונה</td></tr>
-    <tr class="praconly"><td><i class="n">12</i> <span class="swatch grey"></span> אפור</td>
-        <td>מקופל. מאיפה כל מספר אומת — רק אם רוצים לבדוק</td></tr>
   </tbody></table>
 
   <h3>שלט מצגות (Logitech R400) — בלי עכבר</h3>
@@ -456,7 +453,7 @@
   <div id="jumps"></div>
 </div>
 
-<script src="deck.js?v=1793206943"></script>
+<script src="deck.js?v=1793207082"></script>
 <script>
 (function(){
   "use strict";
@@ -555,7 +552,9 @@
       /* red is for what changes what he says. Everything else — provenance,
          verification, delivery coaching — sits folded away underneath. */
       if (sc.warn && !READ) html += '<p class="warn"><b>שים לב:</b> ' + sc.warn + "</p>";
-      if (sc.notes && !READ) html += '<details class="notes"><summary>רקע ואימות</summary>' +
+      /* sc.notes (provenance, verification) stay in scripts_source.json for the builder;
+         they are not shown — Avi doesn't use them */
+      if (false) html += '<details class="notes"><summary>רקע ואימות</summary>' +
                             "<div>" + sc.notes + "</div></details>";
       html += '<div class="lines">' +
               sc.lines.map(function(l){ return "<p>" + l + "</p>"; }).join("") +

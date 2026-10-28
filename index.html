@@ -29,6 +29,10 @@
     box-shadow:0 2px 10px rgba(0,0,0,.18);font-weight:700;}
   #zprev .hint{left:14px} #znext .hint{right:14px}
   .zone:hover .hint{opacity:.9}
+  #focuspill{position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:50;display:none;
+    background:#B4471F;color:#fff;font:600 15px/1.3 system-ui,sans-serif;padding:8px 16px;
+    border-radius:20px;box-shadow:0 2px 10px rgba(0,0,0,.25);direction:rtl;pointer-events:none}
+  body.nofocus #focuspill{display:block}
 
   body.present #app{height:100vh;}
   body.present #stagewrap{flex:1;background:#000;}
@@ -290,6 +294,7 @@
 </style>
 </head>
 <body>
+<div id="focuspill">השלט לא מחובר למצגת — לחץ פעם אחת על השקף (הלחיצה לא תעביר שקף)</div>
 <div id="app">
   <div id="stagewrap"><div id="stage"></div></div>
   <div id="review"></div>
@@ -497,11 +502,22 @@
   }
   addEventListener("resize", fit);
 
+  /* keys (and the clicker) reach the deck only while the page has focus; a click that
+     brings the focus back must not also advance the slide */
+  var focusedAt = 0;
+  function focusState(){ document.body.classList.toggle("nofocus", !document.hasFocus()); }
+  addEventListener("focus", function(){ focusedAt = Date.now(); focusState(); });
+  addEventListener("blur", focusState);
+  setInterval(focusState, 1000);
+
   function zone(id, glyph, step){
     var d = document.createElement("div");
     d.className = "zone"; d.id = id;
     d.innerHTML = '<span class="hint">' + glyph + "</span>";
-    d.onclick = function(){ show(idx + step); };
+    d.onclick = function(){
+      if (Date.now() - focusedAt < 600) return;   // this click only took the focus back from another panel
+      show(idx + step);
+    };
     return d;
   }
 

@@ -39,6 +39,9 @@
   body.present #bar:hover{opacity:1;}
 
   body.review #stagewrap{padding:18px 18px 0;}
+  /* with the script on, the bar stays up, so the slide is sized to end above it (--barh is
+     the bar's measured height) and is never covered */
+  body.review #stage{max-width:calc((100vh - var(--barh, 96px) - 26px) * 16 / 9);}
   #review{max-width:calc(100vh * 16 / 9);width:100%;margin:0 auto;padding:14px 18px 80px;}
 
   /* two declared rows: controls never wrap, the deck links scroll sideways instead */
@@ -514,6 +517,10 @@
     tm.href = "index.html" + q + (ORIGIN ? "#" + ORIGIN : "");
   }
   deckChrome();
+
+  var bar = document.getElementById("bar");
+  function barHeight(){ document.documentElement.style.setProperty("--barh", bar.offsetHeight + "px"); fit(); }
+  if (window.ResizeObserver) new ResizeObserver(barHeight).observe(bar);
 
   function fit(){
     var f = stage.querySelector("iframe");

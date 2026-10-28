@@ -453,7 +453,9 @@
   <div id="jumps"></div>
 </div>
 
-<script src="deck.js?v=1793207082"></script>
+<!-- GitHub Pages caches pages for 10 minutes; deck.js carries the build stamp that versions
+     every slide and script URL, so it is always fetched fresh -->
+<script>document.write('<script src="deck.js?t=' + Date.now() + '"><\/script>');</script>
 <script>
 (function(){
   "use strict";

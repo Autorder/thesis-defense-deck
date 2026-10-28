@@ -108,6 +108,15 @@
   .lines p{margin:0 0 .62em;font-size:1.42rem;line-height:1.95;color:#e6efea;text-wrap:pretty}
   .lines p b{color:#fff}
   .lines p em{font-style:normal;color:var(--amber)}
+  /* expected examiner questions — rehearsal material, open so a reader can see all of it */
+  .qa{margin-top:14px}
+  .qitem{border-top:1px solid var(--line);padding:14px 0 12px}
+  .qitem:first-child{border-top:0;padding-top:4px}
+  .qitem .q{font-size:1.18rem;font-weight:800;color:var(--amber);line-height:1.6;margin:0 0 6px}
+  .qitem .a{font-size:1.08rem;line-height:1.85;color:#d6e3dd;margin:0}
+  .qitem .a b{color:#fff}
+  .qitem .go{display:inline-block;margin-top:8px;font-size:.85rem;font-weight:700;color:var(--mut);
+    border:1px solid var(--line);border-radius:999px;padding:2px 11px}
 
   /* ---------- help sheet ---------- */
   #help{position:fixed;inset:0;z-index:60;display:none;direction:rtl;
@@ -404,7 +413,7 @@
   <div id="jumps"></div>
 </div>
 
-<script src="deck.js?v=1793194643"></script>
+<script src="deck.js?v=1793196341"></script>
 <script>
 (function(){
   "use strict";
@@ -476,6 +485,15 @@
       html += '<div class="lines">' +
               sc.lines.map(function(l){ return "<p>" + l + "</p>"; }).join("") +
               "</div></div></details>";
+      if (sc.qa && sc.qa.length){
+        html += '<details class="sc qa" open><summary>שאלות צפויות של הבוחנים' +
+                '<span class="n">' + sc.qa.length + " שאלות</span></summary>" +
+                '<div class="scbody">' +
+                sc.qa.map(function(x){
+                  return '<div class="qitem"><p class="q">' + x.q + '</p><p class="a">' + x.a + "</p>" +
+                         (x.go ? '<span class="go">' + x.go + "</span>" : "") + "</div>";
+                }).join("") + "</div></details>";
+      }
     } else {
       html += '<details class="sc"><summary>אין עדיין סקריפט לשקף הזה' +
               '<span class="n">חסר</span></summary></details>';

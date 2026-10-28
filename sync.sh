@@ -38,7 +38,7 @@ git add -A
 git -c user.name="Avi Haviv" -c user.email="autorderart@gmail.com" \
     commit -q -m "$MSG
 
-Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>"
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
 git push -q origin main
 
 echo "Pushed. Live in ~1 minute at:"

@@ -549,13 +549,9 @@
       html += '<details class="sc" open><summary>מה אני אומר בשקף הזה' +
               '<span class="n">' + sc.lines.length + " שורות</span></summary>" +
               '<div class="scbody">';
-      /* red is for what changes what he says. Everything else — provenance,
-         verification, delivery coaching — sits folded away underneath. */
+      /* red is for what changes what he says. sc.notes (provenance, verification) stay in
+         scripts_source.json for the builder and are not shown — Avi doesn't use them. */
       if (sc.warn && !READ) html += '<p class="warn"><b>שים לב:</b> ' + sc.warn + "</p>";
-      /* sc.notes (provenance, verification) stay in scripts_source.json for the builder;
-         they are not shown — Avi doesn't use them */
-      if (false) html += '<details class="notes"><summary>רקע ואימות</summary>' +
-                            "<div>" + sc.notes + "</div></details>";
       html += '<div class="lines">' +
               sc.lines.map(function(l){ return "<p>" + l + "</p>"; }).join("") +
               "</div></div></details>";

@@ -522,6 +522,30 @@
   function barHeight(){ document.documentElement.style.setProperty("--barh", bar.offsetHeight + "px"); fit(); }
   if (window.ResizeObserver) new ResizeObserver(barHeight).observe(bar);
 
+  /* safety net: if a slide's text runs past the bottom (a wider font on another computer,
+     a long line), shrink that slide's content just enough to fit — never clip it */
+  function guard(f){
+    var d; try { d = f.contentDocument; } catch (e) { return; }   /* file:// — nothing to do */
+    var pad = d && d.querySelector(".pad");
+    if (!pad) return;
+    function measure(){
+      pad.style.transform = "";
+      var max = 0, w = d.createTreeWalker(d.body, NodeFilter.SHOW_TEXT), n, r = d.createRange();
+      while ((n = w.nextNode())){
+        if (!n.textContent.trim() || !n.parentElement || n.parentElement.closest("script,style")) continue;
+        r.selectNodeContents(n);
+        var rs = r.getClientRects();
+        for (var i = 0; i < rs.length; i++) if (rs[i].height > 0 && rs[i].bottom > max) max = rs[i].bottom;
+      }
+      var limit = 1080 - 22;
+      if (max > limit){
+        pad.style.transformOrigin = "top center";
+        pad.style.transform = "scale(" + (limit / max).toFixed(4) + ")";
+      }
+    }
+    (d.fonts && d.fonts.ready ? d.fonts.ready : Promise.resolve()).then(measure);
+  }
+
   function fit(){
     var f = stage.querySelector("iframe");
     if (f) f.style.transform = "scale(" + (stage.clientWidth / 1920) + ")";
@@ -660,7 +684,7 @@
     var f = document.createElement("iframe");
     f.setAttribute("scrolling", "no");
     f.src = s.path + (window.BUILD ? "?v=" + BUILD : "");
-    f.onload = fit;
+    f.onload = function(){ fit(); guard(f); };
     stage.appendChild(f);
     stage.appendChild(zone("zprev", "‹", -1));
     stage.appendChild(zone("znext", "›", +1));

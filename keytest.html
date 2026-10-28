@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="he" dir="rtl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Clicker Test</title>
+<style>
+  body{margin:0;font:18px/1.5 system-ui,sans-serif;background:#f4f4f1;color:#1b2622;padding:24px}
+  h1{margin:0 0 6px;font-size:26px}
+  #state{display:inline-block;padding:6px 14px;border-radius:16px;color:#fff;font-weight:700;margin:10px 0}
+  .on{background:#1f7a52} .off{background:#B4471F}
+  #big{font-size:64px;font-weight:800;margin:18px 0;min-height:80px;direction:ltr;text-align:center}
+  table{border-collapse:collapse;width:100%;max-width:720px;background:#fff;direction:ltr}
+  td,th{border:1px solid #d3d8d0;padding:6px 10px;text-align:left}
+  .ok{color:#1f7a52;font-weight:700}
+</style></head><body>
+<h1>בדיקת שלט</h1>
+<div>לחץ פעם אחת על הדף, ואז לחץ על כל כפתור בשלט. כל מקש שהמחשב מקבל יופיע כאן.</div>
+<div id="state"></div>
+<div id="big">—</div>
+<table><thead><tr><th>#</th><th>key</th><th>code</th><th>deck action</th></tr></thead><tbody id="log"></tbody></table>
+<script>
+  var ACT = {PageDown:"next",ArrowRight:"next",ArrowDown:"next"," ":"next",
+             PageUp:"previous",ArrowLeft:"previous",ArrowUp:"previous",
+             b:"backup decks",B:"backup decks",".":"backup decks",w:"backup decks",W:"backup decks",
+             F5:"back",Escape:"back",Backspace:"back"};
+  var n = 0, log = document.getElementById("log"), st = document.getElementById("state");
+  function focusState(){
+    var f = document.hasFocus();
+    st.className = f ? "on" : "off";
+    st.textContent = f ? "הדף בפוקוס — מוכן לקבל מקשים" : "הדף לא בפוקוס — לחץ פעם אחת על הדף";
+  }
+  addEventListener("focus", focusState); addEventListener("blur", focusState); setInterval(focusState, 500); focusState();
+  addEventListener("keydown", function(e){
+    e.preventDefault();
+    n++;
+    var a = ACT[e.key] || "(not used by the deck)";
+    document.getElementById("big").textContent = e.key === " " ? "Space" : e.key;
+    var tr = document.createElement("tr");
+    tr.innerHTML = "<td>"+n+"</td><td>"+(e.key===" "?"Space":e.key)+"</td><td>"+e.code+"</td><td class='"+(ACT[e.key]?"ok":"")+"'>"+a+"</td>";
+    log.insertBefore(tr, log.firstChild);
+  });
+</script>
+</body></html>

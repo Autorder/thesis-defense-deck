@@ -537,6 +537,16 @@
         var rs = r.getClientRects();
         for (var i = 0; i < rs.length; i++) if (rs[i].height > 0 && rs[i].bottom > max) max = rs[i].bottom;
       }
+      /* painted boxes too (cards, strips, images) — their padding/border can pass the edge while the text still fits */
+      pad.querySelectorAll("*").forEach(function(e){
+        var cs = d.defaultView.getComputedStyle(e);
+        if (cs.position === "absolute" || cs.position === "fixed" || cs.display === "none" || cs.visibility === "hidden") return;
+        var painted = e.tagName === "IMG" || e.tagName.toLowerCase() === "svg" || cs.backgroundImage !== "none" ||
+                      (cs.backgroundColor !== "rgba(0, 0, 0, 0)" && cs.backgroundColor !== "transparent") || parseFloat(cs.borderBottomWidth) > 0;
+        if (!painted) return;
+        var b = e.getBoundingClientRect();
+        if (b.height > 0 && b.bottom + 8 > max) max = b.bottom + 8;
+      });
       var limit = 1080 - 22;
       if (max > limit){
         pad.style.transformOrigin = "top center";

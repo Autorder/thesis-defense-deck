@@ -80,6 +80,11 @@
   body.review #bar #modebtn{opacity:1;color:var(--amber);border-color:var(--amber);
     background:rgba(232,163,16,.14);}
   #modebtn .tick{display:none;font-weight:900;}
+  /* the red warnings can be hidden in practice (A, or ?warn=0 in the link) */
+  #warnbtn{display:none;flex:none;color:var(--red);border-color:var(--red);background:rgba(200,70,60,.14);}
+  body.review:not(.readmode) #warnbtn{display:inline-block;}
+  body.nowarn #warnbtn{color:var(--mut);border-color:var(--line);background:none;opacity:.72;}
+  body.nowarn .warn{display:none;}
   body.review #modebtn .tick{display:inline;}
   @media (max-width:820px){ #bar .keys{display:none} }
   @media (max-width:620px){ #bar .ttl{display:none} }
@@ -429,6 +434,7 @@
     <span class="key">&larr;</span> <span class="key">&rarr;</span> מעבר בין שקפים &nbsp;&middot;&nbsp;
     <span class="key">M</span> תפריט &nbsp;&middot;&nbsp;
     <span class="key">S</span> סקריפט &nbsp;&middot;&nbsp;
+    <span class="key praconly">A</span><span class="praconly"> אזהרות אדומות &nbsp;&middot;&nbsp;</span>
     <span class="key">F</span> מסך מלא &nbsp;&middot;&nbsp;
     <span class="key">?</span> הדף הזה &nbsp;&middot;&nbsp;
     <span class="key">Esc</span> סגירה
@@ -448,6 +454,7 @@
     <span class="keys">&#8592; &#8594; &middot; F fullscreen</span>
     <a class="btn" id="tomain" href="#" hidden>main deck</a>
     <button id="helpbtn" title="&#1488;&#1497;&#1498; &#1500;&#1492;&#1513;&#1514;&#1502;&#1513; (?)">i</button>
+    <button id="warnbtn" title="הצגה / הסתרה של האזהרות האדומות (A)">&#9888;</button>
     <button id="modebtn" title="Toggle presenter script (S)">script<span class="tick">&nbsp;&#10003;</span></button>
   </div>
   <div id="jumps"></div>
@@ -475,13 +482,17 @@
   function fail(msg){ document.body.innerHTML = '<div id="err">' + msg + "</div>"; }
   if (!window.DECKS){ return fail("deck.js לא נטען. הרץ python3 _build/build.py"); }
 
-  var q = EXAM ? "?exam=1" : "?" + [READ ? "read=1" : "", REVIEW ? "script=1" : ""].filter(Boolean).join("&");
-  if (q === "?") q = "";
+  var NOWARN  = P.get("warn") === "0";
+  function modeQ(){
+    var m = EXAM ? ["exam=1"] : [READ ? "read=1" : "", REVIEW ? "script=1" : "", NOWARN ? "warn=0" : ""].filter(Boolean);
+    return m.length ? "?" + m.join("&") : "";
+  }
+  var q = modeQ();
   if (EXAM) document.getElementById("modebtn").hidden = true;
 
   var SLIDES = (DECKS[DECK]||{}).slides;
   if (!SLIDES || !SLIDES.length) return fail("אין שקפים במצגת «" + DECK + "».");
-  document.body.className = (REVIEW ? "review" : "present") + (READ ? " readmode" : "");
+  document.body.className = (REVIEW ? "review" : "present") + (READ ? " readmode" : "") + (NOWARN ? " nowarn" : "");
 
   /* the main-deck slide a backup deck was opened from — where "back" returns to */
   var ORIGIN = P.get("from") || "";
@@ -490,6 +501,7 @@
     var p = [];
     if (READ) p.push("read=1");
     if (REVIEW) p.push("script=1");
+    if (NOWARN) p.push("warn=0");
     if (EXAM) p.push("exam=1");
     if (DECK !== "main") p.push("deck=" + DECK);
     if (DECK !== "main" && ORIGIN) p.push("from=" + encodeURIComponent(ORIGIN));
@@ -717,6 +729,17 @@
   document.getElementById("menux").onclick   = function(){ toggleMenu(false); };
   document.getElementById("modebtn").onclick = toggleScript;
 
+  function toggleWarn(){
+    if (!REVIEW || READ) return;
+    NOWARN = !NOWARN;
+    document.body.classList.toggle("nowarn", NOWARN);
+    var p = new URLSearchParams(location.search);
+    if (NOWARN) p.set("warn", "0"); else p.delete("warn");
+    q = modeQ();
+    history.replaceState(null, "", location.pathname + "?" + p.toString() + location.hash);
+  }
+  document.getElementById("warnbtn").onclick = toggleWarn;
+
   /* ---------- switching decks in place, so fullscreen survives the jump ---------- */
   function switchTo(name, i){
     DECK = name;
@@ -889,6 +912,7 @@
     /* S switches the script on and off. No button in the exam link, so the
        examiners never see the affordance — but it is always one key away. */
     else if (k === "s" || k === "S"){ toggleScript(); }
+    else if (k === "a" || k === "A"){ toggleWarn(); }
     else if (k === "f" || k === "F"){
       if (document.fullscreenElement) document.exitFullscreen();
       else document.documentElement.requestFullscreen().then(function(){

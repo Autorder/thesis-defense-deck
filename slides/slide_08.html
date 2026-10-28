@@ -456,24 +456,26 @@ html,body{margin:0;padding:0;width:1920px;height:1080px;overflow:hidden;backgrou
 #rstage{width:1920px;height:1080px;position:relative;}
 #rstage .slide{width:1920px;height:1080px;border-radius:0;box-shadow:none;border:0;}
 #hud{display:none !important;}
+.detpills{position:absolute;top:10cqw;right:4.6cqw;display:flex;flex-direction:column;align-items:flex-end;gap:.55cqw;z-index:2;}
+.detpills .dp{font-size:1.3cqw;font-weight:800;color:var(--pine);border:.16cqw solid var(--pine);border-radius:2cqw;
+  padding:.3cqw 1cqw;background:#fff;white-space:nowrap;letter-spacing:.02em;}
+.detpills .dp.on{background:var(--pine);color:#fff;letter-spacing:.08em;}
 </style></head><body><div id="rstage"><div class="slide">
       <div class="pad">
         <div class="kick">Methodology</div>
         <div class="snum">8</div>
+        <div class="detpills"><span class="dp on">DETERMINISTIC</span><span class="dp">Same input &rarr; same output</span><span class="dp">Fully reproducible</span></div>
         <h1 class="ttl">One run, and what it returns</h1>
-        <div class="svgwrap"><svg viewBox="0 0 1540 572" preserveAspectRatio="xMidYMid meet"
+        <div class="svgwrap"><svg viewBox="0 0 1540 572" preserveAspectRatio="xMidYMax meet"
   font-family="system-ui,-apple-system,Segoe UI,Helvetica,Arial,sans-serif">
 
 <!-- ══ the horizon, as arithmetic ══════════════════════════ -->
-<rect x="0" y="0" width="372" height="142" rx="14" fill="#EEF1EE" stroke="#7B857E" stroke-width="2.6"/><text x="186.0" y="80" text-anchor="middle" font-size="74" font-weight="800" fill="#12514A">8,760</text><text x="186.0" y="116" text-anchor="middle" font-size="21" fill="#5C665F">hours in a year</text>
-<text x="404" y="82" text-anchor="middle" font-size="46" font-weight="800" fill="#7B857E">×</text>
-<rect x="436" y="0" width="312" height="142" rx="14" fill="#EEF1EE" stroke="#7B857E" stroke-width="2.6"/><text x="592.0" y="80" text-anchor="middle" font-size="74" font-weight="800" fill="#12514A">10</text><text x="592.0" y="116" text-anchor="middle" font-size="21" fill="#5C665F">years in sequence</text>
-<text x="780" y="82" text-anchor="middle" font-size="46" font-weight="800" fill="#7B857E">=</text>
-<rect x="812" y="0" width="458" height="142" rx="14" fill="#12514A"/><text x="1041.0" y="80" text-anchor="middle" font-size="74" font-weight="800" fill="#FFFFFF">87,600</text><text x="1041.0" y="116" text-anchor="middle" font-size="21" fill="#BCD8CF">hourly steps, every run</text>
+<rect x="0.0" y="0" width="451.1" height="142" rx="14" fill="#EEF1EE" stroke="#7B857E" stroke-width="3.2"/><text x="225.5" y="80" text-anchor="middle" font-size="74" font-weight="800" fill="#12514A">8,760</text><text x="225.5" y="116" text-anchor="middle" font-size="21" fill="#5C665F">hours in a year</text>
+<text x="489.9" y="82" text-anchor="middle" font-size="46" font-weight="800" fill="#7B857E">×</text>
+<rect x="528.7" y="0" width="378.3" height="142" rx="14" fill="#EEF1EE" stroke="#7B857E" stroke-width="3.2"/><text x="717.9" y="80" text-anchor="middle" font-size="74" font-weight="800" fill="#12514A">10</text><text x="717.9" y="116" text-anchor="middle" font-size="21" fill="#5C665F">years in sequence</text>
+<text x="945.8" y="82" text-anchor="middle" font-size="46" font-weight="800" fill="#7B857E">=</text>
+<rect x="984.6" y="0" width="555.4" height="142" rx="14" fill="#12514A"/><text x="1262.3" y="80" text-anchor="middle" font-size="74" font-weight="800" fill="#FFFFFF">87,600</text><text x="1262.3" y="116" text-anchor="middle" font-size="21" fill="#BCD8CF">hourly steps, every run</text>
 
-<text x="1540" y="58" text-anchor="end" font-size="20" font-weight="800" fill="#7B857E" letter-spacing="1.1">DETERMINISTIC</text>
-<text x="1540" y="88" text-anchor="end" font-size="17" fill="#5C665F">same inputs, same outputs —</text>
-<text x="1540" y="112" text-anchor="end" font-size="17" fill="#5C665F">every number is reproducible</text>
 
 <!-- ══ what each run produces ══════════════════════════════ -->
 <text x="0" y="206" font-size="22" font-weight="800" fill="#9C6A15" letter-spacing="1.6">THE THREE METRICS</text>

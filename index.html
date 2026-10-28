@@ -267,6 +267,26 @@
   .jump a .k{font-size:.7rem;font-weight:800;color:var(--amber);letter-spacing:.06em}
 
   #err{padding:40px;color:#ffb4ad;font-size:1rem;direction:rtl;text-align:center}
+
+  /* ---------- backup-deck chooser: driven by the clicker, never needs a mouse ---------- */
+  #chooser{position:fixed;inset:0;z-index:55;display:none;align-items:center;justify-content:center;
+    background:rgba(6,9,8,.62);backdrop-filter:blur(3px);}
+  body.chooseropen #chooser{display:flex}
+  #chooser .ccard{width:min(620px,92vw);max-height:86vh;overflow-y:auto;background:var(--panel);
+    border:1px solid var(--line);border-radius:16px;padding:18px 0 12px;box-shadow:0 20px 60px rgba(0,0,0,.55);}
+  #chooser .chead{padding:0 24px 10px;font-size:.78rem;letter-spacing:.13em;text-transform:uppercase;
+    font-weight:800;color:var(--mut)}
+  #chooser .cgrp{padding:12px 24px 4px;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;
+    font-weight:800;color:var(--mut);border-top:1px solid var(--line);margin-top:6px}
+  #chooser .crow{display:flex;align-items:center;gap:14px;padding:10px 24px;cursor:pointer;
+    border-inline-start:4px solid transparent;font-size:1.12rem;font-weight:700;color:var(--ink)}
+  #chooser .crow .ck{width:28px;height:28px;flex:none;display:flex;align-items:center;justify-content:center;
+    border-radius:7px;background:#1b2521;color:var(--amber);font-size:.9rem;font-weight:800}
+  #chooser .crow .cn{margin-inline-start:auto;font-size:.8rem;color:var(--mut);font-variant-numeric:tabular-nums}
+  #chooser .crow.sel{background:#1f2c27;border-inline-start-color:var(--amber);color:#fff}
+  #chooser .crow.home .ck{color:#7fc9b4}
+  #chooser .chint{padding:12px 24px 2px;font-size:.76rem;color:var(--mut);border-top:1px solid var(--line);
+    margin-top:8px}
 </style>
 </head>
 <body>
@@ -275,6 +295,12 @@
   <div id="review"></div>
 </div>
 
+
+<div id="chooser"><div class="ccard">
+  <div class="chead">Backup decks</div>
+  <div id="clist"></div>
+  <div class="chint">&lsaquo; &rsaquo; choose &nbsp;&middot;&nbsp; hold &rsaquo; or B open &nbsp;&middot;&nbsp; hold &lsaquo; or Esc close</div>
+</div></div>
 
 <div id="menu"><button id="menux" title="סגירה (Esc)">&times;</button><div id="mslides"></div><div id="mdecks"></div></div>
 
@@ -343,7 +369,7 @@
   </div>
   <p class="cap"><b>7</b> — מצגות הרחבה <b>לשקף שעל המסך כרגע</b>, ולכן הן מתחלפות משקף לשקף.
   אם יש יותר ממה שנכנס — הרצועה נגללת הצידה. <b>הן אינן חלק מההרצאה</b>: נפתחות רק אם בוחן ישאל,
-  ומהן חוזרים בכפתור <span class="pill">main deck</span>.</p>
+  ומהן חוזרים בכפתור <span class="pill">main deck</span> — לשקף שממנו נכנסת.</p>
 
   <h3>התפריט</h3>
   <div class="fig">
@@ -383,6 +409,14 @@
     <tr><td><i class="n">12</i> <span class="swatch grey"></span> אפור</td>
         <td>מקופל. מאיפה כל מספר אומת — רק אם רוצים לבדוק</td></tr>
   </tbody></table>
+
+  <h3>שלט מצגות — בלי עכבר</h3>
+  <table class="htab"><tbody>
+    <tr><td><span class="key">&rsaquo;</span> <span class="key">&lsaquo;</span> לחיצה</td><td>שקף קדימה / אחורה. בשקף האחרון של מצגת הרחבה, קדימה חוזר לשקף שממנו נכנסת</td></tr>
+    <tr><td><span class="key">B</span> מסך שחור<br>או החזקת <span class="key">&rsaquo;</span></td><td>פותח את רשימת מצגות ההרחבה: קודם אלה של השקף הנוכחי, ואחריהן כל השאר. <span class="key">&rsaquo;</span> <span class="key">&lsaquo;</span> בוחרים, ולחיצה נוספת על <span class="key">B</span> (או החזקת <span class="key">&rsaquo;</span>) פותחת</td></tr>
+    <tr><td><span class="key">F5</span>/<span class="key">Esc</span> כפתור המצגת<br>או החזקת <span class="key">&lsaquo;</span></td><td>סוגר את הרשימה, או מחזיר ממצגת הרחבה <b>לשקף שממנו נכנסת</b></td></tr>
+  </tbody></table>
+  <p class="hnote">המעבר בין מצגות קורה בתוך אותו דף, ולכן מסך מלא (<span class="key">F</span>) נשמר. במקלדת: <span class="key">1</span>&ndash;<span class="key">9</span> פותחים שורה ברשימה, <span class="key">Backspace</span> חוזר.</p>
 
   <h3>מקשים</h3>
   <p class="hkeys">
@@ -433,11 +467,23 @@
   if (!SLIDES || !SLIDES.length) return fail("אין שקפים במצגת «" + DECK + "».");
   document.body.className = REVIEW ? "review" : "present";
 
-  if (DECK !== "main"){
-    var tm = document.getElementById("tomain");
-    tm.hidden = false;
-    tm.href = "index.html" + q;
+  /* the main-deck slide a backup deck was opened from — where "back" returns to */
+  var ORIGIN = P.get("from") || "";
+
+  function deckSearch(){
+    var p = [];
+    if (REVIEW) p.push("script=1");
+    if (DECK !== "main") p.push("deck=" + DECK);
+    if (DECK !== "main" && ORIGIN) p.push("from=" + encodeURIComponent(ORIGIN));
+    return p.length ? "?" + p.join("&") : "";
   }
+
+  function deckChrome(){
+    var tm = document.getElementById("tomain");
+    tm.hidden = DECK === "main";
+    tm.href = "index.html" + q + (ORIGIN ? "#" + ORIGIN : "");
+  }
+  deckChrome();
 
   function fit(){
     var f = stage.querySelector("iframe");
@@ -464,7 +510,9 @@
   addEventListener("keydown", wake);
 
   function linkHref(L){
-    return "index.html" + (q ? q + "&" : "?") + "deck=" + L.target;
+    var from = DECK === "main" ? SLIDES[idx].id : ORIGIN;
+    return "index.html" + (q ? q + "&" : "?") + "deck=" + L.target +
+           (from ? "&from=" + encodeURIComponent(from) : "");
   }
 
   function renderReview(s){
@@ -536,9 +584,10 @@
     mslides.querySelectorAll("a").forEach(function(a){
       a.onclick = function(){
         var i = +a.dataset.i;
-        if (browsing === DECK){ show(i); toggleMenu(false); }
-        else location.href = "index.html" + (q ? q + "&" : "?") + "deck=" + browsing +
-                             "#" + DECKS[browsing].slides[i].id;
+        if (browsing === DECK) show(i);
+        else if (browsing === "main") toMain(i);
+        else enterDeck(browsing, i);
+        toggleMenu(false);
       };
     });
   }
@@ -581,7 +630,7 @@
     var jw = document.getElementById("jumps");
     jw.innerHTML = (s.links || []).filter(function(L){ return DECKS[L.target]; })
       .map(function(L){
-        return '<a href="' + linkHref(L) + '" title="' + L.label + '">' +
+        return '<a href="' + linkHref(L) + '" data-deck="' + L.target + '" title="' + L.label + '">' +
                "<b>" + (L.key || "\u2192") + "</b>" + L.label + "</a>";
       }).join("");
     jw.scrollLeft = 0;
@@ -643,21 +692,201 @@
   document.getElementById("menux").onclick   = function(){ toggleMenu(false); };
   document.getElementById("modebtn").onclick = toggleScript;
 
+  /* ---------- switching decks in place, so fullscreen survives the jump ---------- */
+  function switchTo(name, i){
+    DECK = name;
+    SLIDES = DECKS[name].slides;
+    browsing = name;
+    history.replaceState(null, "", location.pathname + deckSearch());
+    deckChrome();
+    buildSlides();
+    show(i);
+  }
+
+  function enterDeck(name, i){
+    if (!DECKS[name]) return;
+    if (DECK === "main") ORIGIN = SLIDES[idx].id;   // a deck opened from a deck keeps the first origin
+    switchTo(name, i || 0);
+  }
+
+  function toMain(i){
+    if (i === undefined){
+      i = SLIDES.length && DECK === "main" ? idx : 0;
+      if (ORIGIN){
+        var k = DECKS.main.slides.findIndex(function(s){ return s.id === ORIGIN; });
+        if (k >= 0) i = k;
+      }
+    }
+    ORIGIN = "";
+    switchTo("main", i);
+  }
+
+  document.getElementById("jumps").addEventListener("click", function(ev){
+    var a = ev.target.closest("a[data-deck]");
+    if (!a || ev.metaKey || ev.ctrlKey || ev.shiftKey) return;   // modified clicks open a tab as before
+    ev.preventDefault();
+    enterDeck(a.dataset.deck, 0);
+  });
+  document.getElementById("tomain").addEventListener("click", function(ev){
+    if (ev.metaKey || ev.ctrlKey || ev.shiftKey) return;
+    ev.preventDefault();
+    toMain();
+  });
+
+  /* ---------- the chooser: the slide's own backup decks first, then every other ---------- */
+  var chooser = { rows: [], sel: 0 };
+  var clist = document.getElementById("clist");
+
+  function chooserOpen(){ return document.body.classList.contains("chooseropen"); }
+
+  function openChooser(){
+    var rows = [], here = {}, html = "";
+    function row(r){
+      r.i = rows.length; rows.push(r);
+      return '<div class="crow' + (r.home ? " home" : "") + '" data-i="' + r.i + '"><span class="ck">' +
+             r.key + '</span><span>' + r.label + "</span>" +
+             (r.deck ? '<span class="cn">' + DECKS[r.deck].slides.length + "</span>" : "") + "</div>";
+    }
+    if (DECK !== "main"){
+      var o = DECKS.main.slides.findIndex(function(s){ return s.id === ORIGIN; });
+      html += row({ home: true, key: "↩",
+                    label: "Back to the presentation" + (o >= 0 ? " · slide " + (o + 1) : "") });
+    }
+    var cur = DECK === "main" ? SLIDES[idx] : null;
+    var mine = ((cur && cur.links) || []).filter(function(L){ return DECKS[L.target]; });
+    mine.forEach(function(L){ here[L.target] = 1; });
+    var rest = Object.keys(DECKS).filter(function(dk){
+      return DECKS[dk].kind === "backup" && !here[dk] && dk !== DECK;
+    });
+    if (mine.length){
+      html += '<div class="cgrp">For this slide</div>';
+      mine.forEach(function(L){ html += row({ deck: L.target, key: L.key || "→", label: DECKS[L.target].label }); });
+    }
+    html += '<div class="cgrp">' + (mine.length ? "All other backup decks" : "All backup decks") + "</div>";
+    rest.forEach(function(dk){
+      html += row({ deck: dk, key: dk.charAt(0), label: DECKS[dk].label });
+    });
+    clist.innerHTML = html;
+    chooser.rows = rows;
+    chooser.sel = 0;
+    clist.querySelectorAll(".crow").forEach(function(el){
+      el.onclick = function(){ chooser.sel = +el.dataset.i; pickChooser(); };
+    });
+    toggleHelp(false); toggleMenu(false);
+    document.body.classList.add("chooseropen");
+    markChooser();
+  }
+
+  function markChooser(){
+    clist.querySelectorAll(".crow").forEach(function(el){
+      var on = +el.dataset.i === chooser.sel;
+      el.classList.toggle("sel", on);
+      if (on) el.scrollIntoView({ block: "nearest" });
+    });
+  }
+
+  function moveChooser(step){
+    var n = chooser.rows.length;
+    chooser.sel = (chooser.sel + step + n) % n;
+    markChooser();
+  }
+
+  function closeChooser(){ document.body.classList.remove("chooseropen"); }
+
+  function pickChooser(){
+    var r = chooser.rows[chooser.sel];
+    closeChooser();
+    if (!r) return;
+    if (r.home) toMain(); else enterDeck(r.deck, 0);
+  }
+
+  /* ---------- keys. A presentation clicker is a keyboard: › sends PageDown or →,
+     ‹ sends PageUp or ←, "blank screen" sends B or ".", "slideshow" sends F5 / Esc.
+     A press shorter than HOLD_MS is a step; holding it is the second function,
+     so a two-button clicker still reaches every backup deck. ---------- */
+  var HOLD_MS = 650;
+  var held = null;
+
+  function navKind(k){
+    if (k === "ArrowRight" || k === "PageDown") return "next";
+    if (k === "ArrowLeft" || k === "PageUp") return "prev";
+    return "";
+  }
+
+  function step(kind){
+    if (chooserOpen()){ moveChooser(kind === "next" ? 1 : -1); return; }
+    if (kind === "next"){
+      if (idx === SLIDES.length - 1 && DECK !== "main") toMain();   // past the end of a backup deck: home
+      else show(idx + 1);
+    } else show(idx - 1);
+  }
+
+  function hold(kind){
+    if (kind === "next"){ if (chooserOpen()) pickChooser(); else openChooser(); }
+    else { if (chooserOpen()) closeChooser(); else if (DECK !== "main") toMain(); }
+  }
+
+  function goBack(){
+    if (document.body.classList.contains("helpopen") ||
+        document.body.classList.contains("menuopen")){ toggleHelp(false); toggleMenu(false); }
+    else if (chooserOpen()) closeChooser();
+    else if (DECK !== "main") toMain();
+  }
+
   addEventListener("keydown", function(ev){
-    if (ev.key === "ArrowRight" || ev.key === "PageDown"){ show(idx + 1); ev.preventDefault(); }
-    else if (ev.key === "ArrowLeft" || ev.key === "PageUp"){ show(idx - 1); ev.preventDefault(); }
-    else if (ev.key === "Home"){ show(0); ev.preventDefault(); }
-    else if (ev.key === "End"){ show(SLIDES.length - 1); ev.preventDefault(); }
-    else if (ev.key === "m" || ev.key === "M"){ toggleMenu(); }
-    else if (ev.key === "?" || ev.key === "/"){ toggleHelp(); ev.preventDefault(); }
-    else if (ev.key === "Escape"){ toggleHelp(false); toggleMenu(false); }
+    var k = ev.key, kind = navKind(k);
+    if (kind){
+      ev.preventDefault();
+      if (ev.repeat || held) return;
+      held = { kind: kind, done: false };
+      held.timer = setTimeout(function(){
+        if (held && !held.done){ held.done = true; hold(held.kind); }
+      }, HOLD_MS);
+      return;
+    }
+    if (k === "b" || k === "B" || k === "." || k === "w" || k === "W"){
+      ev.preventDefault();
+      if (!ev.repeat){ if (chooserOpen()) pickChooser(); else openChooser(); }
+    }
+    else if (k === "Escape" || k === "F5" || k === "Backspace"){
+      ev.preventDefault();                       // F5 must never reload the deck mid-exam
+      if (!ev.repeat) goBack();
+    }
+    else if (k === "Enter" && chooserOpen()){ ev.preventDefault(); pickChooser(); }
+    else if (/^[1-9]$/.test(k) && chooserOpen()){
+      var n = +k - 1;
+      if (n < chooser.rows.length){ chooser.sel = n; pickChooser(); }
+    }
+    else if (k === "Home"){ show(0); ev.preventDefault(); }
+    else if (k === "End"){ show(SLIDES.length - 1); ev.preventDefault(); }
+    else if (k === "m" || k === "M"){ closeChooser(); toggleMenu(); }
+    else if (k === "?" || k === "/"){ closeChooser(); toggleHelp(); ev.preventDefault(); }
     /* S switches the script on and off. No button in the exam link, so the
        examiners never see the affordance — but it is always one key away. */
-    else if (ev.key === "s" || ev.key === "S"){ toggleScript(); }
-    else if (ev.key === "f" || ev.key === "F"){
+    else if (k === "s" || k === "S"){ toggleScript(); }
+    else if (k === "f" || k === "F"){
       if (document.fullscreenElement) document.exitFullscreen();
-      else document.documentElement.requestFullscreen();
+      else document.documentElement.requestFullscreen().then(function(){
+        /* Chrome: let Esc reach the deck (the clicker's slideshow button sends it);
+           holding Esc still leaves fullscreen */
+        if (navigator.keyboard && navigator.keyboard.lock)
+          navigator.keyboard.lock(["Escape"]).catch(function(){});
+      }).catch(function(){});
     }
+  });
+
+  addEventListener("keyup", function(ev){
+    var kind = navKind(ev.key);
+    if (!kind || !held || held.kind !== kind) return;
+    clearTimeout(held.timer);
+    var h = held; held = null;
+    if (!h.done) step(kind);
+  });
+  /* a key released while another window had focus must not leave a hold pending */
+  addEventListener("blur", function(){ if (held){ clearTimeout(held.timer); held = null; } });
+
+  document.getElementById("chooser").addEventListener("click", function(ev){
+    if (ev.target === this) closeChooser();
   });
 
   var start = 0;

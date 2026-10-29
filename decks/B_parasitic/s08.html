@@ -88,17 +88,10 @@ html,body{margin:0;padding:0;width:1920px;height:1080px;overflow:hidden;backgrou
 #rstage .slide{width:1920px;height:1080px;border-radius:0;box-shadow:none;border:0;margin:0;}
 #hud,.slidewrap>.lbl{display:none !important;}
 </style></head><body><div id="rstage"><div class="slide"><div class="pad">
-   <div class="kick">Fairness &amp; closing</div><div class="snum">8</div>
+   <div class="kick">Fairness &amp; closing</div><div class="snum">7</div>
    <h1 class="ttl">Every scenario judged against its own load</h1>
    <div class="body" style="justify-content:flex-start;gap:0;">
-     <div style="display:grid;grid-template-columns:1.05fr .95fr;gap:1.8cqw;align-items:start;">
-       <div class="formula">
-         <div class="fl" style="font-size:1.75cqw"><b>&eta;<sub>EI</sub></b> = ( 1 <span class="c">&minus;</span> G<sub>buy</sub> / E<sub>load</sub> ) &middot; 100</div>
-         <div class="fl" style="font-size:1.75cqw"><b>E<sub>load</sub></b> = 12,000 <span class="c">+</span> 459 = <span style="color:#ff9d7a">12,459</span> <span class="cm">(with battery)</span></div>
-         <div class="fl" style="font-size:1.55cqw;margin-top:.5cqw"><b>Savings</b> = C<sub>base</sub> <span class="c">&minus;</span> Buy<sub>cost</sub> <span class="c">+</span> Sell<sub>rev</sub></div>
-         <div class="fl" style="font-size:1.4cqw;margin-top:.5cqw"><span class="cm">C<sub>base</sub> = tariff &middot; 12,000&nbsp;&nbsp;(no battery &rArr; no parasitic)</span></div>
-         <div class="fl" style="font-size:1.45cqw"><span class="cm">Buy-cost carried on 12,459 (battery pays the +459)</span></div>
-       </div>
+     <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.8cqw;align-items:start;">
        <table class="t">
          <thead><tr><th>Baseline</th><th>Load · kWh/y</th></tr></thead>
          <tbody>
@@ -107,11 +100,11 @@ html,body{margin:0;padding:0;width:1920px;height:1080px;overflow:hidden;backgrou
            <tr class="totrow"><td>Parasitic addition</td><td>459 &nbsp;&asymp;&nbsp;3.8%</td></tr>
          </tbody>
        </table>
+       <div class="cards" style="grid-template-columns:1fr">
+         <div class="rc gold"><h5>Only the battery carries it</h5><p>The 459 lowers the battery&rsquo;s independence and savings &mdash; never the baseline&rsquo;s.</p></div>
+         <div class="rc blue"><h5>Big home, small battery</h5><p>Beer-Sheva, 40 m&sup2;, 20,000 kWh (parasitic 619): a 5 kWh battery &rarr; <b>&minus;32 &#8362;/yr</b>. Saves ~460 on purchases, gives up ~490 of export.</p></div>
+       </div>
      </div>
-     <div class="cards g2" style="margin-top:1.4cqw">
-       <div class="rc blue"><h5>Clean baseline</h5><p>With BESS = 0 there's no battery — the cost baseline sits on 12,000 kWh, without the parasitic.</p></div>
-       <div class="rc gold"><h5>Only storage carries it</h5><p>The 459 enters the independence denominator (12,459) and grid purchases for storage only — lowering their independence &amp; savings, never the baseline's.</p></div>
-     </div>
-     <div class="strip" style="margin-top:1.3cqw">Deliberate and conservative: the 459 kWh is charged <b>only where it is physically incurred</b> — a battery covers its own cooling before net savings, so it never flatters storage.</div>
+     <div class="strip">Deliberate and conservative: the 459 kWh is charged <b>only where it is physically incurred</b> — a battery covers its own cooling before net savings, so it never flatters storage.</div>
    </div>
  </div></div></div></body></html>

@@ -1,4 +1,4 @@
-<!doctype html><html><head><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;800;900&display=swap"><meta charset="utf-8"><title>Feed-in, dispatch &amp; metrics</title><style>
+<!doctype html><html><head><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;800;900&display=swap"><meta charset="utf-8"><title>Feed-in &amp; dispatch</title><style>
   :root{
     --page-bg:#e9ebe6;--panel:#fff;--page-fg:#1b2622;--cap-fg:#5b665f;--hair:#d3d8d0;
     --pine:#12514A;--teal:#1F7A5A;--gold:#9C6A15;--amber:#E8A310;--red:#B23A3A;--blue:#2a5a7a;
@@ -92,32 +92,14 @@ html,body{margin:0;padding:0;width:1920px;height:1080px;overflow:hidden;backgrou
 #rstage{width:1920px;height:1080px;position:relative;}
 #rstage .slide{width:1920px;height:1080px;border-radius:0;box-shadow:none;border:0;margin:0;}
 #hud,.slidewrap>.lbl{display:none !important;}
+  .cards.tall{margin-top:2cqw;} .cards.tall .rc{padding:2.2cqw 2.4cqw;} .cards.tall .rc h5{font-size:2.6cqw;} .cards.tall .rc p{font-size:2.1cqw;margin-top:1cqw;}
 </style></head><body><div id="rstage"><div class="slide"><div class="pad">
-      <div class="kick">Sale, dispatch &amp; metrics · Appendix V.3</div><div class="snum">4</div>
-      <h1 class="ttl">Feed-in, dispatch &amp; metrics</h1>
+      <div class="kick">Sale &amp; dispatch · Appendix V.3</div><div class="snum">3</div>
+      <h1 class="ttl">Feed-in &amp; dispatch</h1>
       <div class="body">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:2cqw;">
-          <table class="t">
-            <thead><tr><th>Tariff (agorot/kWh)</th><th>Value</th></tr></thead>
-            <tbody>
-              <tr><td>Sale / feed-in · all hours</td><td class="flat">35.40</td></tr>
-              <tr><td>Purchase · off-peak (reminder)</td><td>44.6–52.8</td></tr>
-              <tr><td>Purchase · evening peak (reminder)</td><td class="peak">49.8–168.95</td></tr>
-            </tbody>
-          </table>
-          <div style="display:flex;flex-direction:column;gap:1.1cqw;justify-content:center;">
-            <div class="rc gold"><h5>Sale 35.40 — flat</h5><p>Below every purchase band. Reduced feed-in &mdash; <b>not</b> net-metering.</p></div>
-            <div class="rc teal"><h5>Dispatch — 5 fixed stages</h5><p>supply → charge → export → discharge → buy.<br><b>No price-based scheduling.</b></p></div>
-          </div>
-        </div>
-        <div class="metricsbox">
-          <div class="ttl2">Performance metrics</div>
-          <div class="row">
-            <span>Energy independence</span>
-            <span>Import cost</span>
-            <span>Export revenue</span>
-            <span>Cumulative saving</span>
-          </div>
+        <div class="cards g2 tall">
+          <div class="rc gold"><h5>Sale 35.40 — flat</h5><p>One price for every hour, below every purchase price. Reduced feed-in &mdash; <b>not</b> net-metering.</p></div>
+          <div class="rc teal"><h5>Dispatch — 5 fixed stages</h5><p>supply → charge → export → discharge → buy.<br><b>No price-based scheduling.</b></p></div>
         </div>
         <div class="strip">The peak saving is <b>emergent</b> — a by-product of self-consumption, never scheduled.</div>
       </div>

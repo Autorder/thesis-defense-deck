@@ -1,4 +1,4 @@
-<!doctype html><html><head><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;800;900&display=swap"><meta charset="utf-8"><title>Purchase tariff — weekdays</title><style>
+<!doctype html><html><head><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;800;900&display=swap"><meta charset="utf-8"><title>Purchase tariff</title><style>
   :root{
     --page-bg:#e9ebe6;--panel:#fff;--page-fg:#1b2622;--cap-fg:#5b665f;--hair:#d3d8d0;
     --pine:#12514A;--teal:#1F7A5A;--gold:#9C6A15;--amber:#E8A310;--red:#B23A3A;--blue:#2a5a7a;
@@ -92,27 +92,25 @@ html,body{margin:0;padding:0;width:1920px;height:1080px;overflow:hidden;backgrou
 #rstage{width:1920px;height:1080px;position:relative;}
 #rstage .slide{width:1920px;height:1080px;border-radius:0;box-shadow:none;border:0;margin:0;}
 #hud,.slidewrap>.lbl{display:none !important;}
+  table.t td .hr{font-size:1.55cqw;color:var(--mut);font-weight:600;}
+  table.t td span.peak{color:var(--red);}
 </style></head><body><div id="rstage"><div class="slide"><div class="pad">
-      <div class="kick">ToU structure · Appendix V.1</div><div class="snum">2</div>
-      <h1 class="ttl">Purchase tariff — weekdays</h1>
+      <div class="kick">ToU structure · Appendix V.1–V.2</div><div class="snum">2</div>
+      <h1 class="ttl">Purchase tariff</h1>
       <div class="body">
         <table class="t">
-          <thead><tr><th>Band · Hours</th><th>Winter</th><th>Transition</th><th>Summer</th></tr></thead>
+          <thead><tr><th>Day · Hours</th><th>Winter</th><th>Transition</th><th>Summer</th></tr></thead>
           <tbody>
-            <tr><td>Off-peak / base · 00–16, 22–23 †</td><td>45.57</td><td>44.60</td><td>52.83</td></tr>
-            <tr class="peakrow"><td>Evening peak · 17–21 <span style="color:#b23a3a">(17–22 in summer)</span></td><td class="peak">120.71</td><td class="peak">49.77</td><td class="peak">168.95</td></tr>
+            <tr class="peakrow"><td>Weekday · peak 17–21 <span style="color:#b23a3a">(summer to 22)</span></td><td class="peak">120.71</td><td class="peak">49.77</td><td class="peak">168.95</td></tr>
+            <tr><td>Weekday · off-peak (all other hours)</td><td>45.57</td><td>44.60</td><td>52.83</td></tr>
+            <tr><td>Weekend &amp; holiday</td><td><span class="peak">120.71</span> <span class="hr">17–21</span><br>45.57 <span class="hr">other hours</span></td><td>44.60 <span class="hr">all day</span></td><td>52.83 <span class="hr">all day</span></td></tr>
           </tbody>
         </table>
-        <div class="tnote">agorot/kWh, incl. VAT, 2025 · Winter = Jan, Feb, Dec · Transition = Mar–May, Oct, Nov · Summer = Jun–Sep. &nbsp;† In summer, hour 22 is peak, so off-peak is 00–16, 23 only.</div>
+        <div class="tnote">agorot/kWh, incl. VAT, 2025 · Winter = Jan, Feb, Dec · Transition = Mar–May, Oct, Nov · Summer = Jun–Sep · Weekend = Fri, Sat &amp; holidays.</div>
         <div class="ratios">
-          <div class="rb s"><b>×3.2</b><span>Summer peak ÷ off-peak</span></div>
+          <div class="rb s"><b>×3.2</b><span>Summer · weekday peak ÷ off-peak</span></div>
           <div class="rb w"><b>×2.6</b><span>Winter</span></div>
           <div class="rb t"><b>×1.1</b><span>Transition</span></div>
         </div>
-        <div class="cards g2">
-          <div class="rc blue"><h5>Priced by hour &amp; season</h5><p>Not a flat rate. The evening peak is 17–21 — and hour 22 too in summer.</p></div>
-          <div class="rc pine"><h5>Straight into the bill</h5><p>Each hour's purchase is billed at that hour's band price — the spread lives in the actual bill.</p></div>
-        </div>
-        <div class="strip">The spread is enormous: off-peak <b>~44.6–52.8</b> vs a summer peak of <b>168.95</b> agorot/kWh — up to <b>×3.2</b> within-season.</div>
       </div>
     </div></div></div></body></html>

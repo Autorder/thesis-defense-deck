@@ -1,4 +1,4 @@
-<!doctype html><html><head><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;800;900&display=swap"><meta charset="utf-8"><title>The median barely moves — only the edge max explodes</title><style>
+<!doctype html><html><head><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;800;900&display=swap"><meta charset="utf-8"><title>Median steady — only the sunset max jumps</title><style>
   :root{
     --page-bg:#e9ebe6;--panel:#fff;--page-fg:#1b2622;--cap-fg:#5b665f;--hair:#d3d8d0;
     --pine:#12514A;--teal:#1F7A5A;--gold:#9C6A15;--amber:#E8A310;--red:#B23A3A;--blue:#2a5a7a;
@@ -95,6 +95,7 @@
   .twocol{display:grid;grid-template-columns:1fr 1fr;gap:1.8cqw;margin-top:.6cqw;}
   .tblbox{background:#fff;border:1px solid var(--rowbd);border-radius:1.2cqw;padding:1.1cqw 1.3cqw;box-shadow:0 1px 3px rgba(0,0,0,.05);}
   .tblbox .th2{font-size:1.5cqw;font-weight:800;color:var(--pine);text-transform:uppercase;letter-spacing:.04em;margin-bottom:.5cqw;}
+  .tblbox .scale{font-size:1.6cqw;color:#33403a;margin:-.1cqw 0 .5cqw;} .tblbox .scale b{color:var(--pine);}
   .tblbox .th2 span{color:var(--mut);font-weight:700;text-transform:none;letter-spacing:0;}
 
   /* code layout (slide 9) */
@@ -118,11 +119,12 @@ html,body{margin:0;padding:0;width:1920px;height:1080px;overflow:hidden;backgrou
 #hud,.slidewrap>.lbl{display:none !important;}
 </style></head><body><div id="rstage"><div class="slide"><div class="pad">
       <div class="kick">Core daylight vs the edges</div><div class="snum">6</div>
-      <h1 class="ttl">The median barely moves — only the edge max explodes</h1>
+      <h1 class="ttl">Median steady — only the sunset max jumps</h1>
       <div class="body">
         <div class="twocol">
           <div class="tblbox">
-            <div class="th2">Beer Sheva · core daylight <span>· 10–15</span></div>
+            <div class="th2">Beer Sheva · midday <span>· 10:00&ndash;15:00</span></div>
+            <div class="scale">Cells of <b>4&ndash;17 kWh</b> &mdash; a 2.4% gap &asymp; 0.3 kWh</div>
             <table class="t tsm">
               <thead><tr><th>Pair</th><th>Median</th><th>Mean</th><th>Max</th></tr></thead>
               <tbody>
@@ -133,7 +135,8 @@ html,body{margin:0;padding:0;width:1920px;height:1080px;overflow:hidden;backgrou
             </table>
           </div>
           <div class="tblbox">
-            <div class="th2">Beer Sheva · all daylight hours</div>
+            <div class="th2">Beer Sheva · all daylight hours <span>· &ge; 1 kWh</span></div>
+            <div class="scale">Adds sunrise &amp; sunset cells of <b>~1&ndash;3 kWh</b></div>
             <table class="t tsm">
               <thead><tr><th>Pair</th><th>Median</th><th>Mean</th><th>Max</th></tr></thead>
               <tbody>
@@ -144,7 +147,7 @@ html,body{margin:0;padding:0;width:1920px;height:1080px;overflow:hidden;backgrou
             </table>
           </div>
         </div>
-        <div class="tnote">Edge-max cause: the discrete 24×12 grid fixes sunrise/sunset slightly differently per engine — a tiny shift on a near-zero value reads as a huge %, and barely moves annual energy.</div>
-        <div class="strip">The median tells the truth — <b>2–5%</b> agreement. The 58% "max" is an edge effect on near-zero values; it never touches the annual result.</div>
+        <div class="cards" style="grid-template-columns:1fr"><div class="rc gold"><h5>The 58% cell: April, 18:00 (sunset)</h5><p>Thesis <b>2.60</b> vs PVWatts <b>1.43</b> kWh &mdash; 1.2 kWh apart on a small base (noon &asymp; 17).</p></div></div>
+        <div class="strip">The median, <b>2&ndash;5%</b>, tells the truth; 58% is one sunset hour on ~2 kWh.</div>
       </div>
     </div></div></div></body></html>

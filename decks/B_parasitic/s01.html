@@ -94,5 +94,5 @@ html,body{margin:0;padding:0;width:1920px;height:1080px;overflow:hidden;backgrou
      <div class="ql">Examiner question</div>
      <p>How is the parasitic energy of storage-system cooling modelled, what are the exact values, and why was it formulated as a constant load rather than a haircut on battery efficiency?</p>
    </div></div>
-   <div class="brief"><div class="bl">In brief</div><p>A real battery bank needs active cooling to hold ~25&nbsp;&deg;C — a genuine, year-round HVAC load. We encode it transparently as a constant daily term plus a cooling-proportional term (<b>459 kWh/y at 12,000, &asymp;3.8% of load</b>), added to demand and independent of capacity; the round-trip losses are modelled separately, so nothing is double-counted.</p></div>
+   <div class="brief"><div class="bl">In brief</div><p>A conservative allowance for keeping the battery cool and powering its standby &amp; control — year-round, summer-heavy. We encode it transparently as a constant daily term plus a cooling-proportional term (<b>459 kWh/y at 12,000, &asymp;3.8% of load</b>), added to demand and independent of capacity; the round-trip losses are modelled separately, so nothing is double-counted.</p></div>
  </div></div></div></body></html>

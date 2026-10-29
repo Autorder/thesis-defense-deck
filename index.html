@@ -591,7 +591,14 @@
   function linkHref(L){
     var from = DECK === "main" ? SLIDES[idx].id : ORIGIN;
     return "index.html" + (q ? q + "&" : "?") + "deck=" + L.target +
-           (from ? "&from=" + encodeURIComponent(from) : "");
+           (from ? "&from=" + encodeURIComponent(from) : "") +
+           (L.at ? "#" + encodeURIComponent(L.at) : "");
+  }
+
+  /* a link may name the backup slide to open on ("at"); otherwise the deck opens on its first slide */
+  function linkStart(deck, at){
+    var k = at && DECKS[deck] ? DECKS[deck].slides.findIndex(function(s){ return s.id === at; }) : -1;
+    return k >= 0 ? k : 0;
   }
 
   function renderReview(s){
@@ -707,7 +714,7 @@
     var jw = document.getElementById("jumps");
     jw.innerHTML = (s.links || []).filter(function(L){ return DECKS[L.target]; })
       .map(function(L){
-        return '<a href="' + linkHref(L) + '" data-deck="' + L.target + '" title="' + L.label + '">' +
+        return '<a href="' + linkHref(L) + '" data-deck="' + L.target + '" data-at="' + (L.at || "") + '" title="' + L.label + '">' +
                "<b>" + (L.key || "\u2192") + "</b>" + L.label + "</a>";
       }).join("");
     jw.scrollLeft = 0;
@@ -814,7 +821,7 @@
     var a = ev.target.closest("a[data-deck]");
     if (!a || ev.metaKey || ev.ctrlKey || ev.shiftKey) return;   // modified clicks open a tab as before
     ev.preventDefault();
-    enterDeck(a.dataset.deck, 0);
+    enterDeck(a.dataset.deck, linkStart(a.dataset.deck, a.dataset.at));
   });
   document.getElementById("tomain").addEventListener("click", function(ev){
     if (ev.metaKey || ev.ctrlKey || ev.shiftKey) return;
@@ -849,7 +856,7 @@
     });
     if (mine.length){
       html += '<div class="cgrp">For this slide</div>';
-      mine.forEach(function(L){ html += row({ deck: L.target, key: L.key || "→", label: DECKS[L.target].label }); });
+      mine.forEach(function(L){ html += row({ deck: L.target, at: L.at, key: L.key || "→", label: DECKS[L.target].label }); });
     }
     html += '<div class="cgrp">' + (mine.length ? "All other backup decks" : "All backup decks") + "</div>";
     rest.forEach(function(dk){
@@ -886,7 +893,7 @@
     var r = chooser.rows[chooser.sel];
     closeChooser();
     if (!r) return;
-    if (r.home) toMain(); else enterDeck(r.deck, 0);
+    if (r.home) toMain(); else enterDeck(r.deck, linkStart(r.deck, r.at));
   }
 
   /* ---------- keys. A presentation clicker is a keyboard: › sends PageDown or →,

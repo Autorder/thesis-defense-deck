@@ -110,16 +110,16 @@ html,body{margin:0;padding:0;width:1920px;height:1080px;overflow:hidden;backgrou
   <h1 class="ttl">Battery initialization &amp; hourly update</h1>
   <div class="body">
     <div class="eqbox">
-      <div class="eq"><span class="cm">// end-of-year target</span><br>Q₁ = min( Q₀ , target )</div>
-      <div class="eq"><span class="cm">// hourly fade step (linear in-year)</span><br>ΔQ = ( Q₀ − Q₁ ) / <b>8760</b></div>
+      <div class="eq"><span class="cm">// Q_y = start-of-year capacity</span><br>Q₁ = min( Q_y , target )</div>
+      <div class="eq"><span class="cm">// hourly fade step (linear in-year)</span><br>ΔQ = ( Q_y − Q₁ ) / <b>8760</b></div>
       <div class="eq">Q_new = max( 0 , Q − ΔQ )</div>
-      <div class="eq"><span class="cm">// power scales with capacity</span><br>P_max = P₀ · ( Q / Q₀ )^ηP</div>
+      <div class="eq"><span class="cm">// power scales with capacity</span><br>P_max = P₀ · ( Q / Q_y )^ηP</div>
       <div class="eq"><span class="cm">// SOC bounds contract with Q</span><br>SOC ∈ [ f_min·Q , f_max·Q ]</div>
-      <div class="eq"><span class="cm">// end of life</span><br>EOL : Q_new ≤ eol_frac · Q₀</div>
+      <div class="eq"><span class="cm">// end of life (inactive in runs)</span><br>EOL : Q_new ≤ eol_frac · Q_y</div>
     </div>
     <div class="cards g3">
       <div class="rc pine"><h5>Linear in-year, geometric across years</h5><p>Inside a year, a constant linear step; the year-to-year targets follow a constant-fraction curve (60/70/80% at yr 9) → a <b>convex</b> decade, not a straight line.</p></div>
-      <div class="rc blue"><h5>Power &amp; SOC track capacity</h5><p>Max power drops by a power law P₀·(Q/Q₀)^ηP, and the SOC window contracts together with the current capacity.</p></div>
+      <div class="rc blue"><h5>Power &amp; SOC track capacity</h5><p>Max power tracks capacity in-year (2–5%), <b>reset yearly</b> (ηP = 1); the SOC window contracts with capacity.</p></div>
       <div class="rc gold"><h5>Counted, not used</h5><p>Equivalent full cycles (EFC) are recorded but don't drive the fade; temperature is retained but never enters the fade law.</p></div>
     </div>
     <div class="strip">The fade is <b>exogenous and transparent by design</b> — a warranty-style retention target, deliberately chosen over an uncalibrated cell-aging curve.</div>

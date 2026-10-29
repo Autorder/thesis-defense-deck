@@ -113,18 +113,18 @@ html,body{margin:0;padding:0;width:1920px;height:1080px;overflow:hidden;backgrou
       <table class="t">
         <thead><tr><th>Year-9 retention</th><th>Effective fade</th><th>Interpretation</th></tr></thead>
         <tbody>
-          <tr class="best"><td>80% capacity</td><td class="good">2.4%/yr</td><td>High-quality lithium</td></tr>
-          <tr><td>70% capacity</td><td class="mid">3.9%/yr</td><td>Medium</td></tr>
-          <tr class="worst"><td>60% capacity</td><td class="bad">5.5%/yr</td><td>Low quality / worn</td></tr>
-          <tr><td>Realistic cell</td><td>~0.85%/yr</td><td>Reference benchmark</td></tr>
+          <tr class="best"><td>80% capacity</td><td class="good">2.2%/yr</td><td>Mild scenario</td></tr>
+          <tr><td>70% capacity</td><td class="mid">3.5%/yr</td><td>Medium</td></tr>
+          <tr class="worst"><td>60% capacity</td><td class="bad">5.0%/yr</td><td>Harsh scenario</td></tr>
+          <tr><td>Yaniv &amp; Beck 2024</td><td>30% / 9 yr</td><td>Israeli reference ≈ Medium</td></tr>
         </tbody>
       </table>
       <div style="display:flex;flex-direction:column;gap:1cqw;">
-        <div class="rc red"><h5>Even the mildest ≫ realistic</h5><p>2.4%/yr is several× a real ~0.85%/yr cell — yet the decade savings gap stays <b>&lt;1.5%</b> (−1.4%, 109.3 → 107.8 k₪).</p></div>
-        <div class="rc gold"><h5>Labeling note</h5><p>Chapter demand rows read 12,000 kWh/y, but the runs &amp; all conclusions are at <b>20,000</b> (confirmed by C_base ≈ 12,277 ₪) — a labeling error; the computation is correct.</p></div>
+        <div class="rc red"><h5>A deliberately wide range</h5><p>60–80% brackets the Israeli reference; the spread between scenarios is <b>1.37%</b> (109.3 → 107.8 k₪).</p></div>
+        <div class="rc gold"><h5>Why ten steps</h5><p>The fade runs from Year 0 to the end of Year 9: <b>r^(1/10)</b> per year.</p></div>
       </div>
     </div>
-    <div class="rc pine" style="margin-top:1cqw"><h5>Limitations, stated honestly</h5><p>Single city (Beer-Sheva) · geometric constant-fraction fade rather than a cell-measured curve · single demand level (a lower demand would amplify the gap) · only three retention levels · no battery-replacement scenario.</p></div>
-    <div class="strip">Bottom line: degradation changes only the <b>size</b> of the decade decline, not the ranking; the financial effect is <b>below 1.5%</b>; the risk zone is 40–60 m² with a large battery — there a quality premium may be worth it.</div>
+    <div class="rc pine" style="margin-top:1cqw"><h5>Limitations, stated honestly</h5><p>Single city (Beer-Sheva) · geometric constant-fraction fade rather than a cell-measured curve · single demand level · only three retention levels · no battery-replacement scenario.</p></div>
+    <div class="strip">Bottom line: degradation changes only the <b>size</b> of the decade decline, not the ranking; the spread between scenarios is <b>below 1.4%</b>; the risk zone is 40–60 m² with a large battery — there a quality premium may be worth it.</div>
   </div>
 </div></div></div></body></html>

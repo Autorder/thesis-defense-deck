@@ -87,30 +87,33 @@ html,body{margin:0;padding:0;width:1920px;height:1080px;overflow:hidden;backgrou
 #rstage{width:1920px;height:1080px;position:relative;}
 #rstage .slide{width:1920px;height:1080px;border-radius:0;box-shadow:none;border:0;margin:0;}
 #hud,.slidewrap>.lbl{display:none !important;}
+.t.lg td{padding:.55cqw .7cqw;}.t.lg td:first-child{font-family:ui-monospace,Menlo,Consolas,monospace;color:var(--pine);white-space:nowrap;}.t.lg td:last-child,.t.lg th:last-child{text-align:left;color:var(--ink);font-weight:600;}
 </style></head><body><div id="rstage"><div class="slide"><div class="pad">
    <div class="kick">Encode the behaviour</div><div class="snum">3</div>
    <h1 class="ttl">A transparent, deterministic two-term rule</h1>
    <div class="body" style="justify-content:flex-start;">
-     <div style="display:grid;grid-template-columns:1.12fr .88fr;gap:1.8cqw;align-items:start;">
+     <div style="display:grid;grid-template-columns:.98fr 1.02fr;gap:1.8cqw;align-items:start;">
        <div>
          <div class="formula">
-           <div class="fl"><b>E<sub>par</sub>(t)</b> = E<sub>fixed,day</sub> / 24 <span class="c">+</span> k<sub>cool</sub> &middot; E<sub>cool,proxy</sub>(t)</div>
-           <div class="fl" style="font-size:1.6cqw"><b>E<sub>par,year</sub></b> = &Sigma; E<sub>par</sub>(t) <span class="cm">&nbsp;&nbsp;(t = 1 .. 8760)</span></div>
-           <div class="fl" style="font-size:1.6cqw"><b>E<sub>load,eff</sub></b>(t) = E<sub>load</sub>(t) <span class="c">+</span> E<sub>par</sub>(t)</div>
+           <div class="fl"><b>E<sub>par</sub>(t)</b> = E<sub>floor</sub>/24 <span class="c">+</span> k&middot;E<sub>cool</sub>(t)</div>
+           <div class="fl" style="font-size:1.6cqw"><b>E<sub>par,year</sub></b> = &Sigma;<sub>8760</sub> E<sub>par</sub>(t)</div>
+           <div class="fl" style="font-size:1.6cqw"><b>E<sub>sim</sub></b>(t) = E<sub>load</sub>(t) <span class="c">+</span> E<sub>par</sub>(t)</div>
          </div>
          <div class="splitbar">
            <div class="track"><div class="seg fix" style="width:47.7%">219</div><div class="seg cool" style="width:52.3%">240</div></div>
            <div class="lbls"><span>Fixed floor &nbsp;<b>0.6&times;365 = 219</b></span><span><b>0.05&times;4,800 = 240</b>&nbsp; Cooling</span></div>
          </div>
        </div>
-       <table class="t">
-         <thead><tr><th>Parameter</th><th>Value</th></tr></thead>
+       <table class="t lg">
+         <thead><tr><th>Symbol</th><th>Meaning</th></tr></thead>
          <tbody>
-           <tr><td>Daily constant &middot; E<sub>fixed,day</sub></td><td>0.6 kWh/day</td></tr>
-           <tr><td>Cooling coefficient &middot; k<sub>cool</sub></td><td>0.05</td></tr>
-           <tr><td>Fixed &middot; 0.6 &times; 365</td><td class="gold">219</td></tr>
-           <tr><td>Cooling &middot; 0.05 &times; 4,800</td><td class="teal">240</td></tr>
-           <tr class="totrow"><td>Annual total &middot; E<sub>par,year</sub></td><td>459 kWh/y</td></tr>
+           <tr><td>t</td><td>hour of the year (8,760)</td></tr>
+           <tr><td>E<sub>par</sub>(t)</td><td>battery&rsquo;s own use that hour</td></tr>
+           <tr><td>E<sub>floor</sub></td><td>0.6 kWh/day, standby &amp; control</td></tr>
+           <tr><td>k</td><td>0.05 = 5% of home cooling</td></tr>
+           <tr><td>E<sub>cool</sub>(t)</td><td>home cooling, only above 29&nbsp;&deg;C</td></tr>
+           <tr><td>E<sub>load</sub>(t)</td><td>home demand that hour (deck A)</td></tr>
+           <tr><td>E<sub>sim</sub>(t)</td><td>simulator input, battery cases only</td></tr>
          </tbody>
        </table>
      </div>

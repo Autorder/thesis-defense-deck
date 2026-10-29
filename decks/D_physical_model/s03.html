@@ -1,4 +1,4 @@
-<!doctype html><html><head><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;800;900&display=swap"><meta charset="utf-8"><title>Three sub-models — each worth 1–2%</title><style>
+<!doctype html><html><head><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;800;900&display=swap"><meta charset="utf-8"><title>The one-to-one check — cell by cell</title><style>
   :root{
     --page-bg:#e9ebe6;--panel:#fff;--page-fg:#1b2622;--cap-fg:#5b665f;--hair:#d3d8d0;
     --pine:#12514A;--teal:#1F7A5A;--gold:#9C6A15;--amber:#E8A310;--red:#B23A3A;--blue:#2a5a7a;
@@ -94,22 +94,29 @@ html,body{margin:0;padding:0;width:1920px;height:1080px;overflow:hidden;backgrou
 #rstage .slide{width:1920px;height:1080px;border-radius:0;box-shadow:none;border:0;margin:0;}
 #hud,.slidewrap>.lbl{display:none !important;}
 </style></head><body><div id="rstage"><div class="slide"><div class="pad">
-      <div class="kick">Why the thesis &amp; PVWatts differ</div><div class="snum">3</div>
-      <h1 class="ttl">Three sub-models &mdash; each worth 1&ndash;2%</h1>
+      <div class="kick">How the engines were compared</div><div class="snum">3</div>
+      <h1 class="ttl">The one-to-one check &mdash; cell by cell</h1>
       <div class="body">
-        <table class="t">
-          <thead><tr><th>Source of the gap</th><th>Thesis / pvlib</th><th>PVWatts adds</th></tr></thead>
-          <tbody>
-            <tr><td>Sky transposition</td><td class="flat">isotropic</td><td class="gold">Perez &middot; circumsolar + horizon</td></tr>
-            <tr><td>Cell temperature</td><td class="flat">NOCT linear</td><td class="gold">Sandia &middot; wind-cooled</td></tr>
-            <tr><td>AOI / spectral</td><td class="flat">none</td><td class="gold">Fresnel reflection + spectral</td></tr>
-          </tbody>
-        </table>
-        <div class="tnote">Contrast forms: Perez = isotropic <b>+ circumsolar + horizon</b> &middot; Sandia T<sub>cell</sub> = T<sub>amb</sub> + G<sub>POA</sub>&middot;e<sup>(a+b&middot;ws)</sup> + (G<sub>POA</sub>/1000)&middot;&Delta;T &middot; AOI = Fresnel + spectral.</div>
-        <div class="cards g2">
-          <div class="rc gold"><h5>Each adds ~1&ndash;2%</h5><p>In a sun-drenched Mediterranean climate, each sub-model contributes 1 to 2% of the annual DC energy (Sandia / NREL technical reports).</p></div>
-          <div class="rc pine"><h5>Together they explain it all</h5><p>Summed, the three fully account for the observed 0.6&ndash;2.0% gap &mdash; it is a modelling <b>choice</b>, not a bug.</p></div>
+        <div class="l4">
+          <div>
+            <div class="exlab">Worked example &middot; Beersheba &middot; June &middot; hourly DC [kWh]</div>
+            <table class="t">
+              <thead><tr><th>Hour</th><th>Thesis</th><th>pvlib</th><th>PVWatts</th><th>|&Delta;| mean</th></tr></thead>
+              <tbody>
+                <tr><td>08:00</td><td>8.93</td><td>9.47</td><td>9.47</td><td class="gold">6.1%</td></tr>
+                <tr><td>10:00</td><td>14.42</td><td>14.78</td><td>15.18</td><td class="flat">3.9%</td></tr>
+                <tr><td>12:00</td><td>17.08</td><td>17.05</td><td>17.96</td><td class="flat">2.7%</td></tr>
+                <tr><td>14:00</td><td>14.95</td><td>14.52</td><td>15.52</td><td class="flat">3.4%</td></tr>
+                <tr><td>16:00</td><td>10.63</td><td>9.92</td><td>10.33</td><td class="gold">4.8%</td></tr>
+              </tbody>
+            </table>
+            <div class="tnote">Selected daytime hours &middot; |&Delta;| mean = &frac12;(|Thesis&minus;pvlib| + |Thesis&minus;PVWatts|) &divide; Thesis. Each is one cell of a full <b>24&times;12</b> (hour &times; month) grid &mdash; tightest at noon, widest at the edges.</div>
+          </div>
+          <div class="side">
+            <div class="rc blue"><h5>Same input, three engines</h5><p>Identical TMY feeds all three; each builds a <b>24&times;12</b> grid (hour&times;month) &mdash; <b>288 cells</b> per city, compared one-to-one.</p></div>
+            <div class="rc teal"><h5>Traceable to the database</h5><p>Simulator re-run vs the stored DB: <b>4,608 rows</b>, max diff <b>0.0&nbsp;kWh</b> &mdash; bit-exact&nbsp;&#10003;.</p></div>
+          </div>
         </div>
-        <div class="strip">The gap is not error &mdash; it is the price of three deliberate simplifications. Sources: <b>Perez 1990 &middot; King 2004 &middot; Dobos 2014</b>.</div>
+        <div class="strip">In core daylight the three engines agree to <b>2&ndash;4%</b> per cell. Each month is <b>one representative day</b> (the 15th), scaled by its number of days &mdash; no day-to-day weather.</div>
       </div>
     </div></div></div></body></html>

@@ -1,4 +1,4 @@
-<!doctype html><html><head><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;800;900&display=swap"><meta charset="utf-8"><title>The one-to-one check — cell by cell</title><style>
+<!doctype html><html><head><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;800;900&display=swap"><meta charset="utf-8"><title>Three separate questions — three answers</title><style>
   :root{
     --page-bg:#e9ebe6;--panel:#fff;--page-fg:#1b2622;--cap-fg:#5b665f;--hair:#d3d8d0;
     --pine:#12514A;--teal:#1F7A5A;--gold:#9C6A15;--amber:#E8A310;--red:#B23A3A;--blue:#2a5a7a;
@@ -94,29 +94,15 @@ html,body{margin:0;padding:0;width:1920px;height:1080px;overflow:hidden;backgrou
 #rstage .slide{width:1920px;height:1080px;border-radius:0;box-shadow:none;border:0;margin:0;}
 #hud,.slidewrap>.lbl{display:none !important;}
 </style></head><body><div id="rstage"><div class="slide"><div class="pad">
-      <div class="kick">How the engines were compared</div><div class="snum">4</div>
-      <h1 class="ttl">The one-to-one check &mdash; cell by cell</h1>
+      <div class="kick">Absolute vs relative</div><div class="snum">4</div>
+      <h1 class="ttl">Three separate questions &mdash; three answers</h1>
       <div class="body">
-        <div class="l4">
-          <div>
-            <div class="exlab">Worked example &middot; Beersheba &middot; June &middot; hourly DC [kWh]</div>
-            <table class="t">
-              <thead><tr><th>Hour</th><th>Thesis</th><th>pvlib</th><th>PVWatts</th><th>|&Delta;| mean</th></tr></thead>
-              <tbody>
-                <tr><td>08:00</td><td>8.93</td><td>9.47</td><td>9.47</td><td class="gold">6.1%</td></tr>
-                <tr><td>10:00</td><td>14.42</td><td>14.78</td><td>15.18</td><td class="flat">3.9%</td></tr>
-                <tr><td>12:00</td><td>17.08</td><td>17.05</td><td>17.96</td><td class="flat">2.7%</td></tr>
-                <tr><td>14:00</td><td>14.95</td><td>14.52</td><td>15.52</td><td class="flat">3.4%</td></tr>
-                <tr><td>16:00</td><td>10.63</td><td>9.92</td><td>10.33</td><td class="gold">4.8%</td></tr>
-              </tbody>
-            </table>
-            <div class="tnote">Selected daytime hours &middot; |&Delta;| mean = &frac12;(|Thesis&minus;pvlib| + |Thesis&minus;PVWatts|) &divide; Thesis. Each is one cell of a full <b>24&times;12</b> (hour &times; month) grid &mdash; tightest at noon, widest at the edges.</div>
-          </div>
-          <div class="side">
-            <div class="rc blue"><h5>Same input, three engines</h5><p>Identical TMY feeds all three; each builds a <b>24&times;12</b> grid (hour&times;month) &mdash; <b>288 cells</b> per city, compared one-to-one.</p></div>
-            <div class="rc teal"><h5>Traceable to the database</h5><p>Simulator re-run vs the stored DB: <b>4,608 rows</b>, max diff <b>0.0&nbsp;kWh</b> &mdash; bit-exact&nbsp;&#10003;.</p></div>
-          </div>
+        <div class="cards g3">
+          <div class="rc teal"><h5>Is the code correct?</h5><p><b>Yes, at the annual level.</b> vs pvlib (shared sub-models) the annual gap is <b>below 0.4%</b> in every city.</p></div>
+          <div class="rc gold"><h5>Is the sub-model choice optimistic?</h5><p><b>Known &amp; quantified.</b> vs PVWatts <b>0.6&ndash;2.0%</b> &mdash; a deliberate simplification.</p></div>
+          <div class="rc red"><h5>Is it realistic in absolute terms?</h5><p><b>No &mdash; ideal DC.</b> No soiling / mismatch / wiring / inverter &rarr; optimistic by roughly <b>10&ndash;15%</b> (typical system losses, not modelled).</p></div>
         </div>
-        <div class="strip">In core daylight the three engines agree to <b>2&ndash;4%</b> per cell; the annual totals on the next slide are simply the <b>sum of 288 such cells</b>.</div>
+        <div class="tnote">Crucially, the ideal-DC assumption is applied <b>identically</b> in the validation stage and in every results chapter &mdash; a uniform bias, not a variable one.</div>
+        <div class="strip">A uniform DC bias acts like a <b>slightly smaller roof</b> (&asymp;34&nbsp;m&sup2; for 40): it shifts levels and break-even, but returns <b>diminish after 15&nbsp;kWh in all 48 study tables</b>.</div>
       </div>
     </div></div></div></body></html>

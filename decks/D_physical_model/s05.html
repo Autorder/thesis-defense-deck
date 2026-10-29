@@ -1,4 +1,4 @@
-<!doctype html><html><head><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;800;900&display=swap"><meta charset="utf-8"><title>Annual DC energy — three engines, four cities</title><style>
+<!doctype html><html><head><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;800;900&display=swap"><meta charset="utf-8"><title>Engine comparison &rarr; backup C</title><style>
   :root{
     --page-bg:#e9ebe6;--panel:#fff;--page-fg:#1b2622;--cap-fg:#5b665f;--hair:#d3d8d0;
     --pine:#12514A;--teal:#1F7A5A;--gold:#9C6A15;--amber:#E8A310;--red:#B23A3A;--blue:#2a5a7a;
@@ -94,23 +94,15 @@ html,body{margin:0;padding:0;width:1920px;height:1080px;overflow:hidden;backgrou
 #rstage .slide{width:1920px;height:1080px;border-radius:0;box-shadow:none;border:0;margin:0;}
 #hud,.slidewrap>.lbl{display:none !important;}
 </style></head><body><div id="rstage"><div class="slide"><div class="pad">
-      <div class="kick">The quantitative evidence</div><div class="snum">5</div>
-      <h1 class="ttl">Annual DC energy &mdash; three engines, four cities</h1>
+      <div class="kick">One source for every validation number</div><div class="snum">5</div>
+      <h1 class="ttl">Engine comparison &rarr; backup C</h1>
       <div class="body">
-        <table class="t">
-          <thead><tr><th>City</th><th>Thesis</th><th>pvlib</th><th>PVWatts</th><th>&Delta; pvlib</th><th>&Delta; PVWatts</th></tr></thead>
-          <tbody>
-            <tr><td>Beersheba</td><td>37,609</td><td>37,708</td><td>38,316</td><td class="flat">&minus;0.26%</td><td class="gold">&minus;1.85%</td></tr>
-            <tr><td>Tel Aviv</td><td>36,217</td><td>36,305</td><td>36,906</td><td class="flat">&minus;0.24%</td><td class="gold">&minus;1.87%</td></tr>
-            <tr><td>Haifa</td><td>35,383</td><td>35,506</td><td>36,113</td><td class="flat">&minus;0.35%</td><td class="gold">&minus;2.02%</td></tr>
-            <tr><td>Jerusalem</td><td>37,457</td><td>37,595</td><td>37,680</td><td class="flat">&minus;0.37%</td><td class="gold">&minus;0.59%</td></tr>
-          </tbody>
-        </table>
-        <div class="tnote">kWh/yr &middot; shared config: 21 kWp &middot; &eta; 0.21 &middot; tilt 25&deg; &middot; albedo 0.20 &middot; no losses &middot; <b>bit-exact same TMY input</b> for all three engines.</div>
-        <div class="ratios">
-          <div class="rb t"><b>&minus;0.31%</b><span>Mean &Delta; vs pvlib &rarr; implementation is correct</span></div>
-          <div class="rb g"><b>&minus;1.58%</b><span>Mean &Delta; vs PVWatts &rarr; price of the simplification</span></div>
+        <div class="cards g2">
+          <div class="rc teal"><h5>Annual gap, four cities &rarr; C-5</h5><p>Thesis vs pvlib <b>below 0.4%</b>; vs PVWatts <b>0.6&ndash;2.0%</b>.</p></div>
+          <div class="rc blue"><h5>Hour by hour &rarr; C-8</h5><p>Median <b>2&ndash;4%</b>; the extremes sit at sunrise / sunset, on near-zero values.</p></div>
+          <div class="rc gold"><h5>Why PVWatts differs &rarr; C-9</h5><p>Three sub-models &mdash; sky, temperature, angle of incidence &mdash; each about 1&ndash;2%.</p></div>
+          <div class="rc pine"><h5>Against the literature &rarr; C-10</h5><p>Engine vs engine, not vs measurement.</p></div>
         </div>
-        <div class="strip">The <b>0.4%</b> pvlib gap proves there is no bug in the formula; the <b>0.6&ndash;2.0%</b> PVWatts gap is the known cost of the simpler sub-models.</div>
+        <div class="strip">This deck keeps the <b>physics</b>; every comparison between engines lives in <b>backup C</b>.</div>
       </div>
     </div></div></div></body></html>

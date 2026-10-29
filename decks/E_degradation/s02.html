@@ -78,6 +78,8 @@
   .brief .bl{font-size:1.45cqw;font-weight:800;color:#f4cd78;text-transform:uppercase;letter-spacing:.06em;}
   .brief p{margin:.5cqw 0 0;font-size:1.8cqw;line-height:1.4;color:#eaf4f0;}
 
+  .lgwrap{display:grid;grid-template-columns:1fr 1fr;gap:1.8cqw;margin-top:1cqw;}
+  .t.lg th{font-size:1.4cqw;text-align:left;padding:.55cqw .7cqw;} .t.lg td{font-size:1.6cqw;padding:.45cqw .7cqw;text-align:left;font-weight:600;color:var(--ink);} .t.lg td:first-child{font-family:ui-monospace,Menlo,Consolas,monospace;color:var(--pine);white-space:nowrap;font-size:1.6cqw;font-weight:700;}
   /* slide 2 — top-align + slightly tighter so eqbox+3 cards+strip fit */
   #s2 .body{justify-content:flex-start;margin-top:.7cqw}
   #s2 .eqbox{padding:1.25cqw 1.8cqw;gap:.4cqw 2.2cqw}
@@ -110,18 +112,18 @@ html,body{margin:0;padding:0;width:1920px;height:1080px;overflow:hidden;backgrou
   <h1 class="ttl">Battery initialization &amp; hourly update</h1>
   <div class="body">
     <div class="eqbox">
-      <div class="eq"><span class="cm">// Q_y = start-of-year capacity</span><br>Q₁ = min( Q_y , target )</div>
-      <div class="eq"><span class="cm">// hourly fade step (linear in-year)</span><br>ΔQ = ( Q_y − Q₁ ) / <b>8760</b></div>
+      <div class="eq">Q₁ = min( Q_y , target )</div>
+      <div class="eq">ΔQ = ( Q_y − Q₁ ) / <b>8760</b></div>
       <div class="eq">Q_new = max( 0 , Q − ΔQ )</div>
-      <div class="eq"><span class="cm">// power scales with capacity</span><br>P_max = P₀ · ( Q / Q_y )^ηP</div>
-      <div class="eq"><span class="cm">// SOC bounds contract with Q</span><br>SOC ∈ [ f_min·Q , f_max·Q ]</div>
-      <div class="eq"><span class="cm">// end of life (inactive in runs)</span><br>EOL : Q_new ≤ eol_frac · Q_y</div>
+      <div class="eq">P_max = P₀ · ( Q / Q_y )^ηP</div>
+      <div class="eq">SOC ∈ [ f_min·Q , f_max·Q ]</div>
+      <div class="eq">EOL : Q_new ≤ eol_frac · Q_y</div>
     </div>
+    <div class="lgwrap"><table class="t lg"><thead><tr><th>Symbol</th><th>Meaning</th></tr></thead><tbody><tr><td>Q &middot; Q_new</td><td>capacity this hour &middot; after the step, kWh</td></tr><tr><td>Q_y</td><td>capacity at the start of the year</td></tr><tr><td>target</td><td>end-of-year capacity on the fade curve</td></tr><tr><td>Q&#8321;</td><td>this year&rsquo;s end point: the smaller of the two</td></tr><tr><td>&Delta;Q &middot; 8760</td><td>loss per hour &middot; hours in a year</td></tr></tbody></table><table class="t lg"><thead><tr><th>Symbol</th><th>Meaning</th></tr></thead><tbody><tr><td>P_max &middot; P&#8320;</td><td>max charge/discharge power &middot; rated</td></tr><tr><td>&eta;P</td><td>1 = power in proportion to capacity</td></tr><tr><td>SOC</td><td>energy stored in the battery</td></tr><tr><td>f_min &middot; f_max</td><td>allowed range: 30%&ndash;100% of Q</td></tr><tr><td>EOL &middot; eol_frac</td><td>end-of-life flag: never triggered</td></tr></tbody></table></div>
     <div class="cards g3">
-      <div class="rc pine"><h5>Linear in-year, geometric across years</h5><p>Inside a year, a constant linear step; the year-to-year targets follow a constant-fraction curve (60/70/80% at yr 9) → a <b>convex</b> decade, not a straight line.</p></div>
-      <div class="rc blue"><h5>Power &amp; SOC track capacity</h5><p>Max power tracks capacity in-year (2–5%), <b>reset yearly</b> (ηP = 1); the SOC window contracts with capacity.</p></div>
-      <div class="rc gold"><h5>Counted, not used</h5><p>Equivalent full cycles (EFC) are recorded but don't drive the fade; temperature is retained but never enters the fade law.</p></div>
+      <div class="rc pine"><h5>Within a year: linear</h5><p>The same small loss every hour (&Delta;Q).</p></div>
+      <div class="rc blue"><h5>Across years: geometric</h5><p>The same share kept each year &rarr; a curve, not a line.</p></div>
+      <div class="rc gold"><h5>Counted, not used</h5><p>Cycles and temperature don&rsquo;t drive the fade.</p></div>
     </div>
-    <div class="strip">The fade is <b>exogenous and transparent by design</b> — a warranty-style retention target, deliberately chosen over an uncalibrated cell-aging curve.</div>
   </div>
 </div></div></div></body></html>

@@ -92,7 +92,7 @@ html,body{margin:0;padding:0;width:1920px;height:1080px;overflow:hidden;backgrou
       <div class="rside">
         <div class="rc pine"><h5>1 kW VAWT, from TMY wind</h5><p>Power = curve × <b>monthly-mean hourly</b> wind speed (24 × 12) × turbine count, repeated over each month.</p></div>
         <div class="rc teal"><h5>The curve — 3 points, linear</h5><p>Cut-in 3 m/s; <b>0.05 → 0.4 → 1.0 kW</b> at 3 / 7 / 11 m/s; rated 1 kW at 11, flat above (no cut-out).</p></div>
-        <div class="rc gold"><h5>Hub height &amp; gusts not modeled</h5><p>Mean wind speed used directly, no height adjustment — likely conservative.</p></div>
+        <div class="rc gold"><h5>Monthly means, no hub height</h5><p>Averaging before the curve loses day-to-day variability — yield is underestimated, most in low-wind cities.</p></div>
       </div>
     </div>
     <div class="strip">The <b>same</b> 3-point curve drives every run — the city difference comes entirely from local wind speed, not from a different turbine.</div></div>

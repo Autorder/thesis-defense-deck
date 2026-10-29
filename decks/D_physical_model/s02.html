@@ -59,6 +59,9 @@
   .eqstage .eq small{color:var(--mut);font-size:1.35cqw;}
   .arrow{display:flex;align-items:center;color:var(--amber);font-size:2.4cqw;font-weight:800;}
 
+  .body{justify-content:flex-start;} .eqstage.s1{flex:1.55;} .eqstage.s2{flex:1.05;}
+  .lgwrap{display:grid;grid-template-columns:1fr 1fr;gap:1.8cqw;margin-top:1.2cqw;}
+  .t.lg th{font-size:1.4cqw;text-align:left;padding:.6cqw .7cqw;} .t.lg td{font-size:1.6cqw;padding:.45cqw .7cqw;text-align:left;font-weight:600;color:var(--ink);} .t.lg td:first-child{font-family:ui-monospace,Menlo,Consolas,monospace;color:var(--pine);white-space:nowrap;font-size:1.6cqw;font-weight:700;}
   .chips{display:flex;flex-wrap:wrap;gap:.7cqw;margin-top:1.3cqw;}
   .chip{background:#fff;border:1px solid var(--rowbd);border-radius:2cqw;padding:.55cqw 1.15cqw;font-size:1.6cqw;color:var(--ink);font-weight:700;}
   .chip b{color:var(--teal);} .chip.zero b{color:var(--red);}
@@ -99,26 +102,18 @@ html,body{margin:0;padding:0;width:1920px;height:1080px;overflow:hidden;backgrou
       <div class="body">
         <div class="eqflow">
           <div class="eqstage s1"><div class="lab">1 &middot; Plane-of-array irradiance</div>
-            <div class="eq">G<sub>POA</sub> = G<sub>dir</sub>&middot;cos&theta; + G<sub>dif</sub>&middot;(1+cos&alpha;)/2<br>&nbsp;&nbsp;+ &rho;&middot;GHI&middot;(1&minus;cos&alpha;)/2<br><small>isotropic sky &middot; GHI = G<sub>dir</sub>&middot;max(0,cos&theta;<sub>z</sub>) + G<sub>dif</sub></small></div>
+            <div class="eq">G<sub>POA</sub> = G<sub>dir</sub>&middot;cos&theta; + G<sub>dif</sub>&middot;(1+cos&alpha;)/2<br>&nbsp;&nbsp;+ &rho;&middot;GHI&middot;(1&minus;cos&alpha;)/2</div>
           </div>
           <div class="arrow">&rarr;</div>
           <div class="eqstage s2"><div class="lab">2 &middot; Cell temperature</div>
-            <div class="eq">T<sub>cell</sub> = T<sub>amb</sub> + (G<sub>POA</sub>/800)&middot;25<br><small>NOCT-equivalent 45 / 20 / 800 &middot; no wind term</small></div>
+            <div class="eq">T<sub>cell</sub> = T<sub>amb</sub> + (G<sub>POA</sub>/800)&middot;25</div>
           </div>
           <div class="arrow">&rarr;</div>
           <div class="eqstage s3"><div class="lab">3 &middot; DC power</div>
             <div class="eq">E<sub>PV</sub> = A&middot;&eta;&middot;G<sub>POA</sub>&middot;[1&minus;&beta;(T<sub>cell</sub>&minus;25)]/1000&middot;&Delta;t</div>
           </div>
         </div>
-        <div class="tnote">Exactly as implemented in <b>calculate_solar_production_hourly</b> &mdash; plane-of-array irradiance, linear cell temperature, ideal DC power.</div>
-        <div class="chips">
-          <span class="chip">Module efficiency &eta; <b>0.21</b></span>
-          <span class="chip">Tilt <b>25&deg;</b></span>
-          <span class="chip">Ground albedo &rho; <b>0.20</b></span>
-          <span class="chip">Temp. coeff. &beta; <b>0.0045&nbsp;&deg;C&#8315;&sup1;</b></span>
-          <span class="chip">Validation rig <b>21&nbsp;kWp</b> &middot; study homes <b>4.2&ndash;16.8</b></span>
-          <span class="chip">Azimuths <b>S / E / W / N</b></span>
-          <span class="chip zero">Losses &middot; soiling, mismatch, wiring <b>0</b></span>
-        </div>
+        <div class="lgwrap"><table class="t lg"><thead><tr><th>Symbol</th><th>Meaning</th></tr></thead><tbody><tr><td>G<sub>POA</sub></td><td>sunlight on the panel&rsquo;s plane, W/m&sup2;</td></tr><tr><td>G<sub>dir</sub> &middot; G<sub>dif</sub></td><td>direct (sun&rsquo;s disk) &middot; diffuse (sky)</td></tr><tr><td>GHI</td><td>flat ground: G<sub>dir</sub>&middot;cos&theta;<sub>z</sub> + G<sub>dif</sub></td></tr><tr><td>&theta; &middot; &theta;<sub>z</sub></td><td>sun&rsquo;s angle to the panel &middot; to straight up</td></tr><tr><td>&alpha;</td><td>panel tilt: 25&deg;</td></tr><tr><td>&rho;</td><td>ground reflection (albedo): 0.20</td></tr></tbody></table><table class="t lg"><thead><tr><th>Symbol</th><th>Meaning</th></tr></thead><tbody><tr><td>T<sub>amb</sub> &middot; T<sub>cell</sub></td><td>air &middot; panel temperature, &deg;C</td></tr><tr><td>800 &middot; 25</td><td>at 800 W/m&sup2; the panel is 25&deg; above air</td></tr><tr><td>A</td><td>panel area, m&sup2;</td></tr><tr><td>&eta;</td><td>module efficiency: 0.21</td></tr><tr><td>&beta;</td><td>power lost per &deg;C above 25: 0.0045</td></tr><tr><td>&Delta;t &middot; /1000</td><td>one hour &middot; W &rarr; kW</td></tr></tbody></table></div>
+        <div class="tnote">Isotropic sky &middot; no wind cooling &middot; S / E / W / N &middot; losses (soiling, mismatch, wiring) <b>= 0</b> &middot; homes 4.2&ndash;16.8 kWp.</div>
       </div>
     </div></div></div></body></html>

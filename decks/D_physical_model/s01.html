@@ -98,7 +98,7 @@ html,body{margin:0;padding:0;width:1920px;height:1080px;overflow:hidden;backgrou
       <h2>The physics of the PV engine</h2>
       <div class="qbox"><div class="q">?</div><div class="qt">
         <div class="ql">Examiner question</div>
-        <p>Which simplifications does the PV engine adopt, how much do they cost in energy, and how do you know the implementation is correct?</p>
+        <p>How does your simulator turn sunlight into electricity &mdash; and what did you deliberately leave out?</p>
       </div></div>
-      <div class="brief"><div class="bl">In brief</div><p>Three deliberate simplifications &mdash; <b>isotropic</b> sky (not Perez), <b>NOCT</b> thermal without wind-cooling, and <b>no AOI/spectral</b> corrections &mdash; producing an ideal DC power with no losses. Checked against <b>pvlib</b> &mdash; annual gap <b>below 0.4%</b> in every city &mdash; and <b>PVWatts 0.6&ndash;2.0%</b> (the price of the simplification); engine vs engine, not vs measurement.</p></div>
+      <div class="brief"><div class="bl">In brief</div><p>Three steps: the sunlight that reaches the panel, the panel&rsquo;s temperature, and the power it gives. Each step uses a simple, standard formula. A few refinements that industrial tools add are left out on purpose, and system losses (inverter, wiring, dirt) are not counted: the output is <b>ideal DC</b>, the same in every scenario. How close this gets to other tools is backup C.</p></div>
     </div></div></div></body></html>

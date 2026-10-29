@@ -89,31 +89,32 @@ html,body{margin:0;padding:0;width:1920px;height:1080px;overflow:hidden;backgrou
 #rstage{width:1920px;height:1080px;position:relative;}
 #rstage .slide{width:1920px;height:1080px;border-radius:0;box-shadow:none;border:0;margin:0;}
 #hud,.slidewrap>.lbl{display:none !important;}
+.t.lg td{padding:.42cqw .7cqw;}.t.lg td:first-child{font-family:ui-monospace,Menlo,Consolas,monospace;color:var(--pine);white-space:nowrap;}.t.lg th:last-child{text-align:left;}.t.lg td:last-child{text-align:left;color:var(--ink);font-weight:600;}
 </style></head><body><div id="rstage"><div class="slide"><div class="pad">
       <div class="kick">From behaviour to rules</div><div class="snum">4</div>
       <h1 class="ttl">Transparent, deterministic rules</h1>
-      <div class="split" style="grid-template-columns:1.05fr 1fr;">
+      <div class="split" style="grid-template-columns:1fr 1.12fr;">
         <div class="fbox">
           <div class="fh">The synthesis rule</div>
-          <div class="fl">E<sub>load</sub>(d,h) = E<sub>base</sub>&middot;<b>b&#770;<sub>h</sub></b> + E<sub>heat</sub>&middot;<b>v&#770;<sub>h</sub></b> + E<sub>cool</sub>&middot;<b>v&#770;<sub>h</sub><sup>cool</sup></b></div>
-          <div class="fl">&Delta;T<sub>heat</sub>(d) = &Sigma; max(0, <b>18</b> &minus; T)<br>&Delta;T<sub>cool</sub>(d) = &Sigma; max(0, T &minus; <b>29</b>)</div>
-          <div class="fl">E<sub>heat</sub>(d) = <b>&kappa;<sub>heat</sub></b>&middot;f<sub>day</sub>&middot;&alpha;&middot;&Delta;T<sub>heat</sub></div>
-          <div class="fl">&Sigma;<sub>t=1..8760</sub> E<sub>load</sub>(t) = <b>E<sub>total,year</sub></b></div>
+          <div class="fl">w<sub>base</sub>(t) = f<sub>day</sub>&middot;<b>S<sub>base</sub>(h)</b></div>
+          <div class="fl">w<sub>heat</sub>(t) = f<sub>day</sub>&middot;<b>S<sub>heat</sub>(h)</b>&middot;max(0, <b>18</b>&minus;T)<sup>&alpha;</sup></div>
+          <div class="fl">w<sub>cool</sub>(t) = f<sub>day</sub>&middot;<b>S<sub>cool</sub>(h)</b>&middot;max(0, T&minus;<b>29</b>)<sup>&alpha;</sup></div>
+          <div class="fl">E<sub>x</sub>(t) = <b>E<sub>x,year</sub></b>&middot;w<sub>x</sub>(t) / &Sigma;<sub>8760</sub> w<sub>x</sub></div>
+          <div class="fl">E<sub>load</sub>(t) = E<sub>base</sub> + E<sub>heat</sub> + E<sub>cool</sub></div>
         </div>
         <div class="col">
-          <table class="t">
-            <thead><tr><th>Parameter</th><th>Value</th></tr></thead>
+          <table class="t lg">
+            <thead><tr><th>Symbol</th><th>Meaning</th></tr></thead>
             <tbody>
-              <tr><td>Shares &middot; base / heat / cool</td><td>40 / 20 / 40 %</td></tr>
-              <tr><td>Thermal sensitivity &alpha;</td><td>1.0</td></tr>
-              <tr><td>Heating &middot; cooling threshold</td><td>18&deg;C &middot; 29&deg;C</td></tr>
-              <tr><td>Special-day factor</td><td>&times;1.2</td></tr>
-              <tr><td>Parasitic &middot; fixed + factor</td><td>0.6 + 0.05</td></tr>
-              <tr><td>Closure check</td><td>&Sigma; hours = budget</td></tr>
+              <tr><td>t &middot; h &middot; T</td><td>hour of year &middot; hour of day &middot; its temperature</td></tr>
+              <tr><td>S<sub>base</sub>, S<sub>heat</sub></td><td>24-h shape: day&rsquo;s share per hour, sum&nbsp;1</td></tr>
+              <tr><td>S<sub>cool</sub></td><td>S<sub>heat</sub> &times; g(h), rescaled; g peaks 12&ndash;16&nbsp;h</td></tr>
+              <tr><td>f<sub>day</sub></td><td>1.2 on Fri, Sat &amp; holidays; else 1</td></tr>
+              <tr><td>&alpha;</td><td>power on degree-hours = 1 (linear)</td></tr>
+              <tr><td>w<sub>x</sub> &middot; E<sub>x,year</sub></td><td>hour weight &middot; 40/20/40&nbsp;% of budget</td></tr>
             </tbody>
           </table>
-          <div class="tnote">Parasitic = <b>0.6&nbsp;kWh/day</b> + 5% of cooling &rarr; <b>459&nbsp;kWh/y</b> at 12,000; grows with load (379&nbsp;/&nbsp;459&nbsp;/&nbsp;619).</div>
         </div>
       </div>
-      <div class="strip">The load each hour is the <b>sum of three components</b> &mdash; base, heating, cooling &mdash; each with a normalized 24-h shape. Heating switches on only below <b>18&deg;C</b>, cooling only above <b>29&deg;C</b>, driven by degree-hours from each city's TMY; closure factors &kappa; rescale to an <b>exact annual budget</b>.</div>
+      <div class="strip">Every hour gets a <b>weight</b>: day factor &times; daily shape &times; (for heating and cooling) that hour&rsquo;s degree-hours. Dividing by the year&rsquo;s sum gives each part <b>exactly its share</b> of the budget.</div>
     </div></div></div></body></html>

@@ -1,4 +1,4 @@
-<!doctype html><html><head><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;800;900&display=swap"><meta charset="utf-8"><title>My gap sits inside the spread between two external engines</title><style>
+<!doctype html><html><head><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;800;900&display=swap"><meta charset="utf-8"><title>My gap: the same order as two other engines</title><style>
   :root{
     --page-bg:#e9ebe6;--panel:#fff;--page-fg:#1b2622;--cap-fg:#5b665f;--hair:#d3d8d0;
     --pine:#12514A;--teal:#1F7A5A;--gold:#9C6A15;--amber:#E8A310;--red:#B23A3A;--blue:#2a5a7a;
@@ -118,10 +118,11 @@ html,body{margin:0;padding:0;width:1920px;height:1080px;overflow:hidden;backgrou
 #hud,.slidewrap>.lbl{display:none !important;}
 </style></head><body><div id="rstage"><div class="slide"><div class="pad">
       <div class="kick">The external control</div><div class="snum">5</div>
-      <h1 class="ttl">My gap sits inside the spread between two external engines</h1>
+      <h1 class="ttl">My gap: the same order as two other engines</h1>
       <div class="body">
+        <div class="tnote" style="margin:0 0 .6cqw;font-size:1.75cqw;color:var(--pine);font-weight:700">Hourly gap, hour against hour &mdash; the median % over all midday cells (10:00&ndash;15:00, every month)</div>
         <table class="t">
-          <thead><tr><th>Engine pair · median %, 10–15h</th><th>Be'er Sheva</th><th>Tel Aviv</th><th>Haifa</th><th>Jerusalem</th></tr></thead>
+          <thead><tr><th>Engine pair</th><th>Be'er Sheva</th><th>Tel Aviv</th><th>Haifa</th><th>Jerusalem</th></tr></thead>
           <tbody>
             <tr><td>Thesis – pvlib</td><td>2.4</td><td>2.4</td><td>2.3</td><td>2.5</td></tr>
             <tr><td>Thesis – PVWatts</td><td>4.2</td><td>4.0</td><td>3.9</td><td>2.7</td></tr>
@@ -129,9 +130,9 @@ html,body{margin:0;padding:0;width:1920px;height:1080px;overflow:hidden;backgrou
           </tbody>
         </table>
         <div class="cards g2" style="margin-top:1.1cqw">
-          <div class="rc blue"><h5>Same order of disagreement</h5><p><b>pvlib vs PVWatts</b> differ by 1.8–3.2% — the same order as the thesis differs from them.</p></div>
-          <div class="rc gold"><h5>Edge maxima</h5><p>At sunrise/sunset the gap hits <b>55–65%</b> — an edge effect, not daytime (next slide).</p></div>
+          <div class="rc teal"><h5>What each number is</h5><p>One cell = one hour of one month. The gap in % per cell; shown is the typical (median) one at midday.</p></div>
+          <div class="rc blue"><h5>The control row</h5><p><b>pvlib vs PVWatts</b>, no thesis at all: <b>1.8–3.2%</b>. Me vs them: 2.3–4.2%.</p></div>
         </div>
-        <div class="strip">Two engines that never touched the thesis disagree by the same magnitude — my gap is within that spread.</div>
+        <div class="strip">Two engines that never touched the thesis differ by 2–3% &mdash; my gap is <b>the same order</b>.</div>
       </div>
     </div></div></div></body></html>

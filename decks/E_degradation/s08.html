@@ -110,14 +110,14 @@ html,body{margin:0;padding:0;width:1920px;height:1080px;overflow:hidden;backgrou
   <h1 class="ttl">Performance — 60 m² PV, 20 kWh battery</h1>
   <div class="body">
     <table class="t">
-      <thead><tr><th>Year-9 retention</th><th>Grid import (kWh)</th><th>Year-0 indep.</th><th>Annual savings (₪)</th><th>Year-9 indep.</th><th>Decade change</th><th>Cumulative (k₪)</th></tr></thead>
+      <thead><tr><th>Year-9 retention</th><th>Year-0 grid import (kWh)</th><th>Year-0 indep.</th><th>Year-0 annual savings (₪)</th><th>Year-9 grid import (kWh)</th><th>Year-9 indep.</th><th>Decade change</th><th>Cumulative (k₪)</th></tr></thead>
       <tbody>
-        <tr class="best"><td>80% capacity</td><td>6400</td><td class="good">69.0%</td><td>11040</td><td class="good">65.3%</td><td class="good">−3.61 pp</td><td class="good">109.3</td></tr>
-        <tr><td>70% capacity</td><td>6423</td><td>68.8%</td><td>11035</td><td class="mid">63.2%</td><td class="mid">−5.65 pp</td><td class="mid">108.5</td></tr>
-        <tr class="worst"><td>60% capacity</td><td>6422</td><td>68.9%</td><td>11035</td><td class="bad">61.0%</td><td class="bad">−7.81 pp</td><td class="bad">107.8</td></tr>
+        <tr class="best"><td>80% capacity</td><td>6400</td><td class="good">69.0%</td><td>11040</td><td>7145</td><td class="good">65.3%</td><td class="good">−3.6 pp</td><td class="good">109.3</td></tr>
+        <tr><td>70% capacity</td><td>6423</td><td>68.8%</td><td>11035</td><td>7589</td><td class="mid">63.2%</td><td class="mid">−5.7 pp</td><td class="mid">108.5</td></tr>
+        <tr class="worst"><td>60% capacity</td><td>6422</td><td>68.9%</td><td>11035</td><td>8032</td><td class="bad">61.0%</td><td class="bad">−7.8 pp</td><td class="bad">107.8</td></tr>
       </tbody>
     </table>
-    <div class="tnote">Rows ordered best → worst (80% = best), to avoid confusion with the graph's inverted axis. Units: grid import in kWh, annual savings in ₪, cumulative in thousands of ₪, decade change in percentage points.</div>
+    <div class="tnote">Rows ordered best → worst (80% = best), to avoid confusion with the graph's inverted axis. Units: grid import in kWh, annual savings in ₪, cumulative in thousands of ₪, decade change in percentage points, computed before rounding.</div>
     <div class="cards g2" style="margin-top:1cqw">
       <div class="rc teal"><h5>Year-0 is almost identical</h5><p>69.0 / 68.8 / 68.9% — the three retention levels start from the same point; only the first year's small step has acted.</p></div>
       <div class="rc red"><h5>The gap lives at Year-9</h5><p>Independence 65.3 → 61.0% and cumulative 109.3 → 107.8 k₪ — a spread of just <b>1.5 k₪ (−1.4%)</b> over ten years.</p></div>

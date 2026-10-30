@@ -44,7 +44,7 @@
   .confchip{flex:1;background:#fff;border:1px solid var(--rowbd);border-top:.5cqw solid var(--teal);border-radius:1cqw;padding:.9cqw .4cqw;text-align:center;}
   .confchip .cl{font-size:1.4cqw;font-weight:800;color:var(--teal);text-transform:uppercase;letter-spacing:.04em;}
   .confchip .cv{font-size:2.05cqw;font-weight:800;color:var(--pine);margin-top:.18cqw;line-height:1;}
-  .confchip .cw{font-size:1.45cqw;color:var(--mut);margin-top:.25cqw;}
+  .confchip .cw{font-size:1.8cqw;font-weight:800;color:var(--blue);margin-top:.35cqw;line-height:1;white-space:nowrap;}
   .confnote{font-size:1.42cqw;color:var(--mut);margin-top:.7cqw;line-height:1.32;}
   .confnote b{color:var(--red);}
 
@@ -99,18 +99,17 @@ html,body{margin:0;padding:0;width:1920px;height:1080px;overflow:hidden;backgrou
               <thead><tr><th>Dimension</th><th>Values</th><th>Count</th></tr></thead>
               <tbody>
                 <tr><td>Cities</td><td class="val">Beer-Sheva · Haifa · Jerusalem · Tel Aviv</td><td class="cnt">4</td></tr>
-                <tr><td>Generation config</td><td class="val">Conf.&nbsp;1–4 · PV area + bundled wind</td><td class="cnt">4</td></tr>
+                <tr><td>Generation config</td><td class="val">Conf.&nbsp;1–4 · PV area + 1&nbsp;kW turbines, same in every city</td><td class="cnt">4</td></tr>
                 <tr><td>Battery</td><td class="val">0 · 5 · 10 · 15 · 20 kWh</td><td class="cnt">5</td></tr>
                 <tr class="totrow"><td>Full-factorial</td><td class="val">4 × 4 × 5 =</td><td class="cnt">80</td></tr>
               </tbody>
             </table>
             <div class="confrow">
-              <div class="confchip"><div class="cl">Conf 1</div><div class="cv">20 m²</div><div class="cw">1 turbine</div></div>
-              <div class="confchip"><div class="cl">Conf 2</div><div class="cv">40 m²</div><div class="cw">2 turbines</div></div>
-              <div class="confchip"><div class="cl">Conf 3</div><div class="cv">60 m²</div><div class="cw">1 turbine</div></div>
-              <div class="confchip"><div class="cl">Conf 4</div><div class="cv">80 m²</div><div class="cw">3 turbines</div></div>
+              <div class="confchip"><div class="cl">Conf 1</div><div class="cv">20 m²</div><div class="cw">+ 1 turbine</div></div>
+              <div class="confchip"><div class="cl">Conf 2</div><div class="cv">40 m²</div><div class="cw">+ 2 turbines</div></div>
+              <div class="confchip"><div class="cl">Conf 3</div><div class="cv">60 m²</div><div class="cw">+ 1 turbine</div></div>
+              <div class="confchip"><div class="cl">Conf 4</div><div class="cv">80 m²</div><div class="cw">+ 3 turbines</div></div>
             </div>
-            <div class="confnote">1 kW turbines, bundled per config. <b></b></div>
           </div>
           <div class="cards">
             <div class="rc blue"><h5>Varied</h5><p>City, generation config and battery size are swept across the full grid — full-factorial.</p></div>

@@ -112,17 +112,15 @@ html,body{margin:0;padding:0;width:1920px;height:1080px;overflow:hidden;backgrou
   <h1 class="ttl">Battery initialization &amp; hourly update</h1>
   <div class="body">
     <div class="eqbox">
-      <div class="eq">Q₁ = min( Q_y , target )</div>
-      <div class="eq">ΔQ = ( Q_y − Q₁ ) / <b>8760</b></div>
-      <div class="eq">Q_new = max( 0 , Q − ΔQ )</div>
-      <div class="eq">P_max = P₀ · ( Q / Q_y )^ηP</div>
-      <div class="eq">SOC ∈ [ f_min·Q , f_max·Q ]</div>
-      <div class="eq">EOL : Q_new ≤ eol_frac · Q_y</div>
+      <div class="eq">Q_y+1 = r · Q_y</div>
+      <div class="eq">Q(h) = Q_y − (h/<b>8760</b>)·(Q_y − Q_y+1)</div>
+      <div class="eq">P_max = P₀ · Q / Q_y</div>
+      <div class="eq">SOC ∈ [ 30% , 100% ] · Q</div>
     </div>
-    <div class="lgwrap"><table class="t lg"><thead><tr><th>Symbol</th><th>Meaning</th></tr></thead><tbody><tr><td>Q &middot; Q_new</td><td>capacity this hour &middot; after the step, kWh</td></tr><tr><td>Q_y</td><td>capacity at the start of the year</td></tr><tr><td>target</td><td>end-of-year capacity on the fade curve</td></tr><tr><td>Q&#8321;</td><td>this year&rsquo;s end point: the smaller of the two</td></tr><tr><td>&Delta;Q &middot; 8760</td><td>loss per hour &middot; hours in a year</td></tr></tbody></table><table class="t lg"><thead><tr><th>Symbol</th><th>Meaning</th></tr></thead><tbody><tr><td>P_max &middot; P&#8320;</td><td>max charge/discharge power &middot; rated</td></tr><tr><td>&eta;P</td><td>1 = power in proportion to capacity</td></tr><tr><td>SOC</td><td>energy stored in the battery</td></tr><tr><td>f_min &middot; f_max</td><td>allowed range: 30%&ndash;100% of Q</td></tr><tr><td>EOL &middot; eol_frac</td><td>end-of-life flag: never triggered</td></tr></tbody></table></div>
+    <div class="lgwrap"><table class="t lg"><thead><tr><th>Symbol</th><th>Meaning</th></tr></thead><tbody><tr><td>Q_y</td><td>capacity at the start of year y, kWh</td></tr><tr><td>r</td><td>share kept each year: 97.8 / 96.5 / 95.0%</td></tr><tr><td>h</td><td>hour of the year, 0&ndash;8,760</td></tr></tbody></table><table class="t lg"><thead><tr><th>Symbol</th><th>Meaning</th></tr></thead><tbody><tr><td>Q</td><td>capacity this hour, kWh</td></tr><tr><td>P_max &middot; P&#8320;</td><td>max charge/discharge power &middot; at year start</td></tr><tr><td>SOC</td><td>energy stored in the battery</td></tr></tbody></table></div>
     <div class="cards g3">
-      <div class="rc pine"><h5>Within a year: linear</h5><p>The same small loss every hour (&Delta;Q).</p></div>
       <div class="rc blue"><h5>Across years: geometric</h5><p>The same share kept each year &rarr; a curve, not a line.</p></div>
+      <div class="rc pine"><h5>Within a year: linear</h5><p>The same small loss every hour.</p></div>
       <div class="rc gold"><h5>Anchored every year</h5><p>Each year starts on the warranty-style curve.</p></div>
     </div>
   </div>

@@ -91,20 +91,21 @@ html,body{margin:0;padding:0;width:1920px;height:1080px;overflow:hidden;backgrou
    <div class="kick">Fairness &amp; closing</div><div class="snum">7</div>
    <h1 class="ttl">Every scenario judged against its own load</h1>
    <div class="body" style="justify-content:flex-start;gap:0;">
-     <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.8cqw;align-items:start;">
+     <div style="display:grid;grid-template-columns:1.25fr 1fr;gap:1.8cqw;align-items:start;">
        <table class="t">
-         <thead><tr><th>Baseline</th><th>Load · kWh/y</th></tr></thead>
+         <thead><tr><th>Load &middot; kWh/y</th><th>8,000</th><th>12,000</th><th>20,000</th></tr></thead>
          <tbody>
-           <tr><td>Without storage &middot; BESS = 0</td><td>12,000</td></tr>
-           <tr><td>With storage &middot; BESS &gt; 0</td><td class="teal">12,459</td></tr>
-           <tr class="totrow"><td>Parasitic addition</td><td>459 &nbsp;&asymp;&nbsp;3.8%</td></tr>
+           <tr><td>No storage</td><td>8,000</td><td>12,000</td><td>20,000</td></tr>
+           <tr><td>With storage</td><td class="teal">8,379</td><td class="teal">12,459</td><td class="teal">20,619</td></tr>
+           <tr class="totrow"><td>Parasitic</td><td>379</td><td>459</td><td>619</td></tr>
+           <tr><td>Share of load</td><td>4.7%</td><td>3.8%</td><td>3.1%</td></tr>
          </tbody>
        </table>
        <div class="cards" style="grid-template-columns:1fr">
-         <div class="rc gold"><h5>Only the battery carries it</h5><p>The 459 lowers the battery&rsquo;s independence and savings &mdash; never the baseline&rsquo;s.</p></div>
+         <div class="rc gold"><h5>Only the battery carries it</h5><p>The parasitic load lowers the battery&rsquo;s independence and savings &mdash; never the baseline&rsquo;s.</p></div>
          <div class="rc blue"><h5>Big home, small battery</h5><p>Beer-Sheva, 40 m&sup2;, 20,000 kWh (parasitic 619): a 5 kWh battery &rarr; <b>&minus;32 &#8362;/yr</b>. Saves ~460 on purchases, gives up ~490 of export.</p></div>
        </div>
      </div>
-     <div class="strip">Deliberate and conservative: the 459 kWh is charged <b>only where it is physically incurred</b> — a battery covers its own cooling before net savings, so it never flatters storage.</div>
+     <div class="strip">Deliberate and conservative: the parasitic load is charged <b>only where it is physically incurred</b> — a battery covers its own cooling before net savings, so it never flatters storage.</div>
    </div>
  </div></div></div></body></html>

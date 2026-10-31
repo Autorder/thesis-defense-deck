@@ -112,6 +112,9 @@
     padding:8px max(16px, env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
     display:flex;align-items:center;gap:14px;}
   #remote[hidden]{display:none}
+  /* the relay refused or is running low: say so, and what to do instead */
+  #relaynote{flex:none;background:var(--bad);color:#fff;font-weight:800;text-align:center;padding:8px 16px;line-height:1.4}
+  #relaynote[hidden]{display:none}
   #remote .cap{font-size:.8rem;font-weight:800;color:var(--amber);white-space:nowrap}
   #remote button{flex:1;min-height:64px;border-radius:14px;border:0;background:var(--amber);color:#fff;
     font-size:1.25rem;font-weight:800;cursor:pointer;-webkit-tap-highlight-color:transparent;
@@ -159,6 +162,7 @@
   <div id="body"></div>
 </main>
 </div>
+<div id="relaynote" hidden></div>
 <div id="remote">
   <span class="cap">שליטה<br>במצגת</span>
   <button id="rprev" title="מזיז את המצגת המוקרנת שקף אחד אחורה">&rsaquo; הקודם</button>
@@ -315,12 +319,27 @@
     connt.textContent = on ? "מחובר" : "מנותק";
   }
 
+  /* the day's relay messages: checked on load and every five minutes, and on any refusal */
+  var relaynote = document.getElementById("relaynote");
+  var QUOTA = "המכסה היומית נגמרה — המצגת לא תעקוב. דפדף כאן ידנית ← / →, ובמחשב עם המקשים.";
+  var BADKEY = "המפתח של ntfy לא תקף — תקן אותו ב-key.html. בינתיים: דפדוף ידני ← / →.";
+  function note(t){ relaynote.textContent = t || ""; relaynote.hidden = !t; }
+  function allowance(){
+    SV.account().then(function(a){
+      var left = a && a.stats ? a.stats.messages_remaining : null;
+      if (left === 0) note(QUOTA);
+      else if (left !== null && left < 40) note("נשארו " + left + " הודעות היום — חסוך בדפדוף.");
+      else note("");
+    }).catch(function(){});
+  }
+
   /* the remote: moves the projected deck, not this page — the page follows when the deck answers */
   function remote(btn, msg){
     btn.onclick = function(){
       btn.classList.add("busy");
       SV.command(CODE, typeof msg === "function" ? msg() : msg).then(function(){ btn.classList.remove("busy"); },
-                                 function(){ btn.classList.remove("busy"); btn.classList.add("fail");
+                                 function(e){ btn.classList.remove("busy"); btn.classList.add("fail");
+                                             if (e && (e.quota || e.auth)) note(e.quota ? QUOTA : BADKEY);
                                              setTimeout(function(){ btn.classList.remove("fail"); }, 1500); });
     };
   }
@@ -362,6 +381,8 @@
   if (CODE){
     SV.listen(CODE, { since: "latest", onMsg: apply, onState: state });
     wake();
+    allowance();
+    setInterval(allowance, 300000);
   } else {
     document.getElementById("setup").hidden = false;
     document.getElementById("conn").hidden = true;

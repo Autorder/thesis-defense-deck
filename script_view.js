@@ -81,13 +81,46 @@
     return html;
   }
 
-  /* ---------- the relay: the deck tells ntfy.sh which slide is up, the iPad listens.
+  /* ---------- the relay: the deck tells our own ntfy server (Hetzner, behind the n8n Caddy) which
+     slide is up, the iPad listens. Self-hosted, so no daily quota (ntfy.sh capped us at 250).
      The topic is the shared secret, so it should be long and random. ---------- */
-  var NTFY = "https://ntfy.sh/";
+  var NTFY = "https://thesis-relay.ozhk.com/";
   function topicURL(code){ return NTFY + encodeURIComponent(code); }
 
+  /* the paid account's access token lives on each device only (key.html saves it), never in the
+     published site. With it, messages count against the account; without it, against the IP. */
+  var TOKEN_KEY = "ntfyToken";
+  function token(t){
+    try {
+      if (t === undefined) return localStorage.getItem(TOKEN_KEY) || "";
+      if (t) localStorage.setItem(TOKEN_KEY, t); else localStorage.removeItem(TOKEN_KEY);
+    } catch (e) {}
+    return t || "";
+  }
+  /* ?auth= instead of a header: no CORS preflight. ntfy reads it as raw-URL base64 of the header */
+  function authed(url){
+    var t = token();
+    if (!t) return url;
+    var a = btoa("Bearer " + t).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+    return url + (url.indexOf("?") < 0 ? "?" : "&") + "auth=" + a;
+  }
+  /* every publish goes through here; a refusal rejects with {quota:true} when the day's messages are spent */
+  function send(topic, body){
+    if (!window.fetch) return Promise.reject({});
+    return fetch(authed(topicURL(topic)), { method: "POST", body: body, keepalive: true }).then(function(r){
+      if (r.ok) return;
+      return r.json().catch(function(){ return {}; }).then(function(j){
+        throw { status: r.status, quota: r.status === 429 && j.code === 42908, auth: r.status === 401 };
+      });
+    });
+  }
+  /* what the relay says about this device's allowance: {limits, stats:{messages, messages_remaining, reset_at}} */
+  function account(){
+    return fetch(authed(NTFY + "v1/account")).then(function(r){ return r.json(); });
+  }
+
   /* fire-and-forget, after the slide settles: holding → through ten slides is one message,
-     not ten (ntfy.sh allows 60 at once, then one per 5 s, 250 a day) */
+     not ten */
   var last = "", wait = null, retry = null;
   function announce(code, msg){
     var body = JSON.stringify(msg);
@@ -98,10 +131,8 @@
   }
   function post(code, body, tries){
     if (!window.fetch || body !== last) return;
-    fetch(topicURL(code), { method: "POST", body: body, keepalive: true }).then(function(r){
-      if (!r.ok) throw 0;
-    }).catch(function(){
-      if (tries > 0) retry = setTimeout(function(){ post(code, body, tries - 1); }, 5000);
+    send(code, body).catch(function(e){
+      if (tries > 0 && !e.quota) retry = setTimeout(function(){ post(code, body, tries - 1); }, 5000);
       else if (body === last) last = "";
     });
   }
@@ -109,11 +140,7 @@
   /* the way back: the iPad's remote buttons publish to <code>-ctl, which only the deck reads */
   function ctlTopic(code){ return code + "-ctl"; }
   /* msg: {cmd:"next"} / {cmd:"prev"} / {cmd:"row", row:<a chooser row>} */
-  function command(code, msg){
-    if (!window.fetch) return Promise.reject();
-    return fetch(topicURL(ctlTopic(code)), { method: "POST", body: JSON.stringify(msg) })
-      .then(function(r){ if (!r.ok) throw 0; });
-  }
+  function command(code, msg){ return send(ctlTopic(code), JSON.stringify(msg)); }
 
   /* one subscription to a topic, kept alive: o.since ("latest" replays the last message),
      onMsg(payload, ntfyMessage) for each message, onState(true/false) as the line comes and goes.
@@ -150,5 +177,5 @@
   }
 
   window.ScriptView = { slideAt: slideAt, slideURL: slideURL, fit: fit, guard: guard, html: scriptHTML, topicURL: topicURL, announce: announce,
-                        ctlTopic: ctlTopic, command: command, listen: listen };
+                        ctlTopic: ctlTopic, command: command, listen: listen, token: token, account: account };
 })();

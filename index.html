@@ -805,7 +805,10 @@
     switchTo(name, i || 0);
   }
 
+  var LAST = null;   // the backup deck and slide we last left, so the chooser can lead back to it
+
   function toMain(i){
+    if (DECK !== "main") LAST = { deck: DECK, i: idx };
     if (i === undefined){
       i = SLIDES.length && DECK === "main" ? idx : 0;
       if (ORIGIN){
@@ -847,6 +850,9 @@
       var o = DECKS.main.slides.findIndex(function(s){ return s.id === ORIGIN; });
       html += row({ home: true, key: "↩",
                     label: "Back to the presentation" + (o >= 0 ? " · slide " + (o + 1) : "") });
+    } else if (LAST && DECKS[LAST.deck]){
+      html += row({ home: true, resume: true, key: "↪",
+                    label: "Back to " + DECKS[LAST.deck].label + " · slide " + (LAST.i + 1) });
     }
     var cur = DECK === "main" ? SLIDES[idx] : null;
     var mine = ((cur && cur.links) || []).filter(function(L){ return DECKS[L.target]; });
@@ -893,7 +899,9 @@
     var r = chooser.rows[chooser.sel];
     closeChooser();
     if (!r) return;
-    if (r.home) toMain(); else enterDeck(r.deck, linkStart(r.deck, r.at));
+    if (r.resume) enterDeck(LAST.deck, LAST.i);
+    else if (r.home) toMain();
+    else enterDeck(r.deck, linkStart(r.deck, r.at));
   }
 
   /* ---------- keys. A presentation clicker is a keyboard: › sends PageDown or →,

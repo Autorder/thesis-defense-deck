@@ -490,6 +490,9 @@
   /* ?sync=<topic>: every slide change is relayed to the iPad (script.html?follow=<topic>).
      It sends deck and slide only, so it works with the exam link too; without it nothing is sent. */
   var SYNC = P.get("sync") || "";
+  /* ?watch=<topic>: a second screen that mirrors the presenting laptop — it follows what ?sync
+     announces and sends nothing, so it never moves the iPad or the laptop */
+  var WATCH = SYNC ? "" : (P.get("watch") || "");
 
   var NOWARN  = P.get("warn") === "0";
   function modeQ(){
@@ -513,6 +516,7 @@
     if (NOWARN) p.push("warn=0");
     if (EXAM) p.push("exam=1");
     if (SYNC) p.push("sync=" + encodeURIComponent(SYNC));
+    if (WATCH) p.push("watch=" + encodeURIComponent(WATCH));
     if (DECK !== "main") p.push("deck=" + DECK);
     if (DECK !== "main" && ORIGIN) p.push("from=" + encodeURIComponent(ORIGIN));
     return p.length ? "?" + p.join("&") : "";
@@ -948,6 +952,16 @@
       did[d.id] = 1;
       if (m.cmd === "next" || m.cmd === "prev") step(m.cmd);
       else if (m.cmd === "row"){ closeChooser(); pickRow(m.row); }
+    } });
+  }
+
+  if (WATCH){
+    SV.listen(WATCH, { since: "latest", onMsg: function(m){
+      if (!DECKS[m.deck]) return;
+      var k = SV.slideAt(m.deck, m.id);
+      if (k < 0) k = +m.i || 0;
+      if (m.deck !== DECK) switchTo(m.deck, k);
+      else if (k !== idx) show(k);
     } });
   }
 

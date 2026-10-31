@@ -50,7 +50,7 @@
 
   /* the slide beside the script: left of it in landscape, above it in portrait */
   #split{flex:1 1 auto;min-height:0;display:flex;flex-direction:row-reverse}
-  #slidepane{flex:0 0 46%;padding:14px 0 14px max(14px, env(safe-area-inset-left));display:flex;align-items:flex-start;justify-content:center}
+  #slidepane{flex:0 0 var(--paneW, 46%);padding:14px 0 14px max(14px, env(safe-area-inset-left));display:flex;align-items:flex-start;justify-content:center}
   #slidebox{position:relative;width:100%;aspect-ratio:16/9;background:#fff;border-radius:8px;overflow:hidden;
     box-shadow:0 0 0 1px var(--line);pointer-events:none}
   #slidebox iframe{position:absolute;top:0;left:0;width:1920px;height:1080px;border:0;transform-origin:top left;
@@ -59,9 +59,15 @@
   @media (orientation: portrait){
     #split{flex-direction:column}
     #slidepane{flex:none;padding:12px max(16px, env(safe-area-inset-right)) 0 max(16px, env(safe-area-inset-left))}
-    #slidebox{width:min(100%, 38vh * 16 / 9)}
+    #slidebox{width:min(100%, var(--paneH, 38vh) * 16 / 9)}
+    #grip{flex:0 0 18px;cursor:row-resize}
+    #grip::after{width:56px;height:5px}
   }
-  body.noslide #slidepane{display:none}
+  /* drag to set how much room the slide gets */
+  #grip{flex:0 0 18px;cursor:col-resize;touch-action:none;display:flex;align-items:center;justify-content:center}
+  #grip::after{content:"";width:5px;height:56px;border-radius:3px;background:var(--line)}
+  #grip.drag::after{background:var(--amber)}
+  body.noslide #slidepane,body.noslide #grip{display:none}
   #slidebtn.off,#helpbtn.off{opacity:.55}
   body.nohelp .warn,body.nohelp details.qa{display:none}
   main{flex:1 1 auto;min-width:0;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;
@@ -143,6 +149,7 @@
 </div>
 <div id="split">
 <div id="slidepane"><div id="slidebox"><iframe tabindex="-1" scrolling="no"></iframe><iframe tabindex="-1" scrolling="no"></iframe></div></div>
+<div id="grip" title="גרירה: גודל השקף"></div>
 <main id="main">
   <div id="setup" hidden>
     <p>הדף הזה עוקב אחרי המצגת. פתח במחשב את המצגת עם <b dir="ltr">?sync=&lt;קוד&gt;</b>, והקלד כאן את אותו קוד.</p>
@@ -209,6 +216,41 @@
   }
   if (window.ResizeObserver) new ResizeObserver(fitAll).observe(box);
   addEventListener("resize", fitAll);
+
+  /* the grip between slide and script: landscape sets the slide's width, portrait its height */
+  var pane = document.getElementById("slidepane"), grip = document.getElementById("grip"), root = document.documentElement.style;
+  try {
+    if (localStorage.getItem("scriptPaneW")) root.setProperty("--paneW", localStorage.getItem("scriptPaneW"));
+    if (localStorage.getItem("scriptPaneH")) root.setProperty("--paneH", localStorage.getItem("scriptPaneH"));
+  } catch (e) {}
+  grip.addEventListener("pointerdown", function(ev){
+    ev.preventDefault();
+    try { grip.setPointerCapture(ev.pointerId); } catch (e) {}
+    grip.classList.add("drag");
+  });
+  grip.addEventListener("pointermove", function(ev){
+    if (!grip.classList.contains("drag")) return;
+    var r = pane.getBoundingClientRect(), portrait = innerHeight > innerWidth, v;
+    if (portrait){
+      v = Math.round(Math.max(.15, Math.min(.7, (ev.clientY - r.top) / innerHeight)) * 100) + "vh";
+      root.setProperty("--paneH", v);
+    } else {
+      var w = r.left < innerWidth / 2 ? ev.clientX - r.left : r.right - ev.clientX;
+      v = Math.round(Math.max(.2, Math.min(.75, w / innerWidth)) * 100) + "%";
+      root.setProperty("--paneW", v);
+    }
+    fitAll();
+  });
+  function endDrag(){
+    if (!grip.classList.contains("drag")) return;
+    grip.classList.remove("drag");
+    try {
+      localStorage.setItem("scriptPaneW", root.getPropertyValue("--paneW") || "");
+      localStorage.setItem("scriptPaneH", root.getPropertyValue("--paneH") || "");
+    } catch (e) {}
+  }
+  grip.addEventListener("pointerup", endDrag);
+  grip.addEventListener("pointercancel", endDrag);
   fitAll();
 
   var showSlide = true;

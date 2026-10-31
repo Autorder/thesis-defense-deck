@@ -465,7 +465,8 @@
 
 <!-- GitHub Pages caches pages for 10 minutes; deck.js carries the build stamp that versions
      every slide and script URL, so it is always fetched fresh -->
-<script>document.write('<script src="deck.js?t=' + Date.now() + '"><\/script>');</script>
+<script>document.write('<script src="deck.js?t=' + Date.now() + '"><\/script>' +
+                       '<script src="script_view.js?t=' + Date.now() + '"><\/script>');</script>
 <script>
 (function(){
   "use strict";
@@ -484,6 +485,11 @@
 
   function fail(msg){ document.body.innerHTML = '<div id="err">' + msg + "</div>"; }
   if (!window.DECKS){ return fail("deck.js לא נטען. הרץ python3 _build/build.py"); }
+  if (!window.ScriptView){ return fail("script_view.js לא נטען."); }
+  var SV = ScriptView;
+  /* ?sync=<topic>: every slide change is relayed to the iPad (script.html?follow=<topic>).
+     It sends deck and slide only, so it works with the exam link too; without it nothing is sent. */
+  var SYNC = P.get("sync") || "";
 
   var NOWARN  = P.get("warn") === "0";
   function modeQ(){
@@ -506,6 +512,7 @@
     if (REVIEW) p.push("script=1");
     if (NOWARN) p.push("warn=0");
     if (EXAM) p.push("exam=1");
+    if (SYNC) p.push("sync=" + encodeURIComponent(SYNC));
     if (DECK !== "main") p.push("deck=" + DECK);
     if (DECK !== "main" && ORIGIN) p.push("from=" + encodeURIComponent(ORIGIN));
     return p.length ? "?" + p.join("&") : "";
@@ -597,40 +604,14 @@
 
   /* a link may name the backup slide to open on ("at"); otherwise the deck opens on its first slide */
   function linkStart(deck, at){
-    var k = at && DECKS[deck] ? DECKS[deck].slides.findIndex(function(s){ return s.id === at; }) : -1;
+    var k = SV.slideAt(deck, at);
     return k >= 0 ? k : 0;
   }
 
   function renderReview(s){
-    if (!REVIEW){ review.innerHTML = ""; return; }
     /* the deck links used to be repeated here; the bar now carries them in both
        modes, and two identical strips stacked on top of each other read as clutter */
-    var html = "";
-    var sc = window.SCRIPTS && SCRIPTS[s.id];
-    if (sc){
-      html += '<details class="sc" open><summary>מה אני אומר בשקף הזה' +
-              '<span class="n">' + sc.lines.length + " שורות</span></summary>" +
-              '<div class="scbody">';
-      /* red is for what changes what he says. sc.notes (provenance, verification) stay in
-         scripts_source.json for the builder and are not shown — Avi doesn't use them. */
-      if (sc.warn && !READ) html += '<p class="warn"><b>שים לב:</b> ' + sc.warn + "</p>";
-      html += '<div class="lines">' +
-              sc.lines.map(function(l){ return "<p>" + l + "</p>"; }).join("") +
-              "</div></div></details>";
-      if (sc.qa && sc.qa.length && !READ){
-        html += '<details class="sc qa" open><summary>שאלות צפויות של הבוחנים' +
-                '<span class="n">' + sc.qa.length + " שאלות</span></summary>" +
-                '<div class="scbody">' +
-                sc.qa.map(function(x){
-                  return '<div class="qitem"><p class="q">' + x.q + '</p><p class="a">' + x.a + "</p>" +
-                         (x.go ? '<span class="go">' + x.go + "</span>" : "") + "</div>";
-                }).join("") + "</div></details>";
-      }
-    } else {
-      html += '<details class="sc"><summary>אין עדיין סקריפט לשקף הזה' +
-              '<span class="n">חסר</span></summary></details>';
-    }
-    review.innerHTML = html;
+    review.innerHTML = REVIEW ? SV.html(window.SCRIPTS && SCRIPTS[s.id], { read: READ }) : "";
   }
 
   /* ---------- the menu: decks on the right, that deck's slides on the left ---------- */
@@ -721,6 +702,7 @@
     jumpEdges();
     requestAnimationFrame(jumpEdges);   // widths settle a frame after innerHTML
     renderReview(s);
+    if (SYNC) SV.announce(SYNC, { deck: DECK, id: s.id, i: idx, rows: chooserRows() });
     markMenu();
     wake();
     if (idx + 1 < SLIDES.length){
@@ -812,7 +794,7 @@
     if (i === undefined){
       i = SLIDES.length && DECK === "main" ? idx : 0;
       if (ORIGIN){
-        var k = DECKS.main.slides.findIndex(function(s){ return s.id === ORIGIN; });
+        var k = SV.slideAt("main", ORIGIN);
         if (k >= 0) i = k;
       }
     }
@@ -838,21 +820,17 @@
 
   function chooserOpen(){ return document.body.classList.contains("chooseropen"); }
 
-  function openChooser(){
-    var rows = [], here = {}, html = "";
-    function row(r){
-      r.i = rows.length; rows.push(r);
-      return '<div class="crow' + (r.home ? " home" : "") + '" data-i="' + r.i + '"><span class="ck">' +
-             r.key + '</span><span>' + r.label + "</span>" +
-             (r.deck ? '<span class="cn">' + DECKS[r.deck].slides.length + "</span>" : "") + "</div>";
-    }
+  /* the rows, in order: the way home (or back into the deck just left), this slide's own
+     decks, then every other. The chooser draws them; with ?sync they also go to the iPad's menu. */
+  function chooserRows(){
+    var rows = [], here = {};
     if (DECK !== "main"){
-      var o = DECKS.main.slides.findIndex(function(s){ return s.id === ORIGIN; });
-      html += row({ home: true, key: "↩",
-                    label: "Back to the presentation" + (o >= 0 ? " · slide " + (o + 1) : "") });
+      var o = SV.slideAt("main", ORIGIN);
+      rows.push({ home: true, key: "↩",
+                  label: "Back to the presentation" + (o >= 0 ? " · slide " + (o + 1) : "") });
     } else if (LAST && DECKS[LAST.deck]){
-      html += row({ home: true, resume: true, key: "↪",
-                    label: "Back to " + DECKS[LAST.deck].label + " · slide " + (LAST.i + 1) });
+      rows.push({ home: true, resume: true, key: "↪",
+                  label: "Back to " + DECKS[LAST.deck].label + " · slide " + (LAST.i + 1) });
     }
     var cur = DECK === "main" ? SLIDES[idx] : null;
     var mine = ((cur && cur.links) || []).filter(function(L){ return DECKS[L.target]; });
@@ -860,13 +838,23 @@
     var rest = Object.keys(DECKS).filter(function(dk){
       return DECKS[dk].kind === "backup" && !here[dk] && dk !== DECK;
     });
-    if (mine.length){
-      html += '<div class="cgrp">For this slide</div>';
-      mine.forEach(function(L){ html += row({ deck: L.target, at: L.at, key: L.key || "→", label: DECKS[L.target].label }); });
-    }
-    html += '<div class="cgrp">' + (mine.length ? "All other backup decks" : "All backup decks") + "</div>";
-    rest.forEach(function(dk){
-      html += row({ deck: dk, key: dk.charAt(0), label: DECKS[dk].label });
+    mine.forEach(function(L, n){
+      rows.push({ grp: n ? "" : "For this slide", deck: L.target, at: L.at, key: L.key || "→", label: DECKS[L.target].label });
+    });
+    rest.forEach(function(dk, n){
+      rows.push({ grp: n ? "" : (mine.length ? "All other backup decks" : "All backup decks"),
+                  deck: dk, key: dk.charAt(0), label: DECKS[dk].label });
+    });
+    return rows;
+  }
+
+  function openChooser(){
+    var rows = chooserRows(), html = "";
+    rows.forEach(function(r, i){
+      if (r.grp) html += '<div class="cgrp">' + r.grp + "</div>";
+      html += '<div class="crow' + (r.home ? " home" : "") + '" data-i="' + i + '"><span class="ck">' +
+              r.key + '</span><span>' + r.label + "</span>" +
+              (r.deck ? '<span class="cn">' + DECKS[r.deck].slides.length + "</span>" : "") + "</div>";
     });
     clist.innerHTML = html;
     chooser.rows = rows;
@@ -898,10 +886,15 @@
   function pickChooser(){
     var r = chooser.rows[chooser.sel];
     closeChooser();
+    pickRow(r);
+  }
+
+  /* a chooser row, picked here or on the iPad */
+  function pickRow(r){
     if (!r) return;
-    if (r.resume) enterDeck(LAST.deck, LAST.i);
+    if (r.resume){ if (LAST && DECKS[LAST.deck]) enterDeck(LAST.deck, LAST.i); }
     else if (r.home) toMain();
-    else enterDeck(r.deck, linkStart(r.deck, r.at));
+    else if (DECKS[r.deck]) enterDeck(r.deck, linkStart(r.deck, r.at));
   }
 
   /* ---------- keys. A presentation clicker is a keyboard: › sends PageDown or →,
@@ -980,6 +973,18 @@
     }
   });
 
+  /* the iPad's remote (script.html) arrives on <sync>-ctl and steps like the clicker. Only
+     commands that are new on arrival count: one older than 10 s, or seen before, is a replay. */
+  if (SYNC){
+    var did = {};
+    SV.listen(SV.ctlTopic(SYNC), { onMsg: function(m, d){
+      if (did[d.id] || Math.abs(Date.now() / 1000 - d.time) > 10) return;
+      did[d.id] = 1;
+      if (m.cmd === "next" || m.cmd === "prev") step(m.cmd);
+      else if (m.cmd === "row"){ closeChooser(); pickRow(m.row); }
+    } });
+  }
+
   addEventListener("keyup", function(ev){
     var kind = navKind(ev.key);
     if (!kind || !held || held.kind !== kind) return;
@@ -997,7 +1002,7 @@
   var start = 0;
   var want = decodeURIComponent(location.hash.replace(/^#/, ""));
   if (want){
-    var k = SLIDES.findIndex(function(s){ return s.id === want; });
+    var k = SV.slideAt(DECK, want);
     if (k >= 0) start = k;
   }
 

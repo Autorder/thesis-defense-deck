@@ -11,6 +11,46 @@
     return -1;
   }
 
+  /* a slide's page, versioned by the build so GitHub Pages never serves a stale one */
+  function slideURL(s){ return s.path + (window.BUILD ? "?v=" + BUILD : ""); }
+
+  /* slides are drawn at 1920×1080 and scaled to the width they are given */
+  function fit(f, width){ f.style.transform = "scale(" + (width / 1920) + ")"; }
+
+  /* safety net: if a slide's text runs past the bottom (a wider font on another computer,
+     a long line), shrink that slide's content just enough to fit — never clip it */
+  function guard(f){
+    var d; try { d = f.contentDocument; } catch (e) { return; }   /* file:// — nothing to do */
+    var pad = d && d.querySelector(".pad");
+    if (!pad) return;
+    function measure(){
+      pad.style.transform = "";
+      var max = 0, w = d.createTreeWalker(d.body, NodeFilter.SHOW_TEXT), n, r = d.createRange();
+      while ((n = w.nextNode())){
+        if (!n.textContent.trim() || !n.parentElement || n.parentElement.closest("script,style")) continue;
+        r.selectNodeContents(n);
+        var rs = r.getClientRects();
+        for (var i = 0; i < rs.length; i++) if (rs[i].height > 0 && rs[i].bottom > max) max = rs[i].bottom;
+      }
+      /* painted boxes too (cards, strips, images) — their padding/border can pass the edge while the text still fits */
+      pad.querySelectorAll("*").forEach(function(e){
+        var cs = d.defaultView.getComputedStyle(e);
+        if (cs.position === "absolute" || cs.position === "fixed" || cs.display === "none" || cs.visibility === "hidden") return;
+        var painted = e.tagName === "IMG" || e.tagName.toLowerCase() === "svg" || cs.backgroundImage !== "none" ||
+                      (cs.backgroundColor !== "rgba(0, 0, 0, 0)" && cs.backgroundColor !== "transparent") || parseFloat(cs.borderBottomWidth) > 0;
+        if (!painted) return;
+        var b = e.getBoundingClientRect();
+        if (b.height > 0 && b.bottom + 8 > max) max = b.bottom + 8;
+      });
+      var limit = 1080 - 22;
+      if (max > limit){
+        pad.style.transformOrigin = "top center";
+        pad.style.transform = "scale(" + (limit / max).toFixed(4) + ")";
+      }
+    }
+    (d.fonts && d.fonts.ready ? d.fonts.ready : Promise.resolve()).then(measure);
+  }
+
   /* o.read: the reviewers' copy — lines only. o.qaOpen: false folds the prepared answers. */
   function scriptHTML(sc, o){
     o = o || {};
@@ -109,6 +149,6 @@
     });
   }
 
-  window.ScriptView = { slideAt: slideAt, html: scriptHTML, topicURL: topicURL, announce: announce,
+  window.ScriptView = { slideAt: slideAt, slideURL: slideURL, fit: fit, guard: guard, html: scriptHTML, topicURL: topicURL, announce: announce,
                         ctlTopic: ctlTopic, command: command, listen: listen };
 })();
